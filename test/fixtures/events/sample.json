@@ -1,0 +1,38 @@
+{
+    "event_type_id": 2,
+    "uid": "04d68abd",
+    "time": 1395173704,
+    "reporter_type": 1,
+    "software_installation_id": "the-id",
+    "board_firmware_version": "4.5.6",
+    "board_serial_number": "5723a",
+    "chassis_serial_number": "9730",
+    "primary_asset_number": "125",
+    "secondary_asset_numbers": "234,567,345",
+    "user_email": "example@example.com",
+    "region": "the-region",
+    "notes": "optional",
+    "job_number": "1342",
+    "run_number": "123",
+    "reporter_context": "debugger",
+    "hardware_version": "v1.2.3.4",
+    "memory_usage_level": "12%",
+    "max_temperature": 1.0,
+    "max_shock": 2.0,
+    "shock_count": 3,
+    "team_viewer_id": "TVID",
+    "team_viewer_password": "TVPASSWORD",
+    "assets": {
+        "main": "filename-version.hex",
+        "version1": "filename-version-1.hex",
+        "version2": "filename-version-2.hex"
+    },
+    "tags": {
+        "crossover": "true",
+        "shock": "4"
+    },
+    "configuration": {
+      "key": "value",
+      "second_key": "second_value"
+    }
+}

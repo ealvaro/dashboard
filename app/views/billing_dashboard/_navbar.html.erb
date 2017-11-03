@@ -1,0 +1,12 @@
+<% active_page(:billing) %>
+<ul class="nav nav-pills nav-justified" >
+  <li class="<%= "active" if controller_name == "invoices" %>"><%= link_to Invoice.model_name.human.pluralize, invoices_path  %></li>
+  <li class="<%= "active" if controller_name.include?( "clients" ) || controller_name.include?("customers") || controller_name.include?("pricing")%>"><%= link_to Client.model_name.human.pluralize, clients_path %></li>
+  <li class="<%= "active" if controller_name == "jobs" %>"><%= link_to Job.model_name.human.pluralize, jobs_path %></li>
+  <li class="<%= "active" if controller_name.include?( "run" ) %>"><%= link_to Run.model_name.human.pluralize, runs_path %></li>
+  <li class="<%= "active" if controller_name.include?('tools') %>"><%= link_to Tool.model_name.human.pluralize, billing_tools_path %></li>
+  <li class="<%= "active" if controller_name == "wells" %>"><%= link_to Well.model_name.human.pluralize, wells_path %></li>
+  <li class="<%= "active" if controller_name == "formations" %>"><%= link_to Formation.model_name.human.pluralize, formations_path %></li>
+  <li class="<%= "active" if controller_name == "imports" %>"><%= link_to Import.model_name.human.pluralize, imports_path %></li>
+</ul>
+<br/>

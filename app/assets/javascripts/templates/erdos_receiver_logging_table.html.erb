@@ -1,0 +1,103 @@
+<div>
+
+<ul class="nav nav-tabs active-white" id="table-2">
+    <li ng-class="{active: tab == 'Live'}"
+        ng-click="changeTab('Live')"><a>Live</a></li>
+    <li ng-class="{active: tab == 'History'}"
+        ng-click="changeTab('History'); fetchUpdatesHistory();"><a>History</a></li>
+    <a href="/report_requests/new" target="_blank" class="pull-right">
+        <button class="btn btn-orange">
+            <i class="zmdi zmdi-plus"></i> New Report Request
+        </button>
+    </a>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane"
+         ng-class="{active: tab == 'Live'}"
+         ng-if="tab == 'Live'">
+        <table class="table cell-headings grey-white enlarged-td">
+            <thead>
+                <tr>
+                    <th>
+                        <span ng-class="{ 'bisque-dot': logger_data.slips_out != 'Y',
+                                          'green-dot': logger_data.slips_out == 'Y' }">Slips Out</span>
+                    </th>
+                    <th>
+                        <span ng-class="{ 'bisque-dot': logger_data.on_bottom != 'Y',
+                                          'green-dot': logger_data.on_bottom == 'Y' }">On Bottom</span>
+                    </th>
+                    <th colspan="5">
+                        <span ng-class="{ 'bisque-dot': logger_data.pumps_off == 'off',
+                                          'green-dot': logger_data.pumps_off != 'off' }">Pumps On</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Block Height</th>
+                    <th>Hookload</th>
+                    <th>Pump Pressure</th>
+                    <th>Rotary RPM</th>
+                    <th>Bit Depth</th>
+                </tr>
+                <tr>
+                    <td>{{ (logger_data.block_height | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.hookload | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.pump_pressure | number: 2) || '-' }}</td>
+                    <td>{{ (logger_data.rotary_rpm | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.bit_depth | number: 1) || '-' }}</td>
+                </tr>
+                <tr>
+                    <th>WOB</th>
+                    <th>Hole Depth</th>
+                    <th>ROP</th>
+                    <th>Inclination</th>
+                    <th>Azimuth</th>
+                </tr>
+                <tr>
+                    <td>{{ (logger_data.weight_on_bit | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.hole_depth | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.rop | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.inc | number: 2) || '-' }}</td>
+                    <td>{{ (logger_data.azm | number: 2) || '-' }}</td>
+                </tr>
+                <tr>
+                    <th>API</th>
+                    <th>Dip Angle</th>
+                    <th>Survey MD</th>
+                    <th>Survey</th>
+                    <th>Survey VS</th>
+                </tr>
+                <tr>
+                    <td>{{ (logger_data.api | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.dipa | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.survey_md | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.survey_tvd | number: 1) || '-' }}</td>
+                    <td>{{ (logger_data.survey_vs | number: 1) || '-' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="tab == 'History'"
+         ng-class="{active: tab == 'History'}"
+         class="tab-pane">
+      <table class="table" style="width:570px; table-layout: fixed; background-color: white;">
+        <tbody style="display: block;
+                      height: 468px;
+                      overflow-y: auto;">
+          <tr ng-repeat-start="update in history"></tr>
+          <tr ng-repeat-start="(key, value) in update"
+              ng-if="keyContains(key)"
+              ng-show="!!value">
+            <td style="width:190px;">{{update.time | date: 'medium'}}</td>
+            <td style="width:190px;">{{dataPoints[key]}}</td>
+            <td style="width:190px;">{{value}}</td>
+          </tr>
+          <tr ng-repeat-end></tr>
+          <tr ng-repeat-end ng-hide="true"></tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+</div>

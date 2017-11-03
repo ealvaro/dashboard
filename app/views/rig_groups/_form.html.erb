@@ -1,0 +1,37 @@
+<div ng-controller="RigGroupsController"
+		 ng-init="init(<%= rig_group.to_json %>, <%= editing %>, <%= rigs.to_json %>)">
+	<div class="row" style="margin-left: 1em; margin-bottom: 0.5em;">
+		Name: <input type="text" ng-model="rigGroup.name">
+		<button ng-click="submit()">Save</button>
+	</div>
+  <div class="col-xs-6">
+    <table class="table grey-white">
+      <tr><th>{{tab}} Rigs
+      	<select ng-model="tab"
+      					ng-change="changeTab(tab)">
+      		<option value="Active">Active</option>
+      		<option value="All">All</option>
+				</select>
+      </th></tr>
+      <tr ng-repeat="rig in rigs">
+        <td>{{rig.name}}
+          <button class="btn btn-success pull-right" style="font-size: .5em;" ng-click="add(rig)">
+            <i class="zmdi zmdi-plus" style="font-size: 1.7em;"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-xs-6">
+    <table class="table grey-white">
+      <tr><th>Rigs in group</th></tr>
+      <tr ng-repeat="rig in groupRigs">
+        <td>{{rig.name}}
+          <button class="btn btn-danger pull-right" style="font-size: .5em;" ng-click="remove(rig)">
+            <i class="zmdi zmdi-minus" style="font-size: 1.7em;"></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

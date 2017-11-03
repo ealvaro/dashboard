@@ -1,0 +1,35 @@
+<div class="col-xs-6">
+  <div id="gv-configuration">
+    <%= render partial: '/mandates/configurations/gv_configuration', locals: { f: f }%>
+  </div>
+
+  <div id="logging-parameters">
+    <%= render partial: '/mandates/configurations/logging_parameters', locals: { f: f }%>
+  </div>
+
+  <div id="alg-parameters">
+    <%= render partial: '/mandates/configurations/alg_and_qbus_fields', locals: { f: f }%>
+  </div>
+
+  <div id="health-parameters">
+    <%= render partial: '/mandates/configurations/health_parameters', locals: { f: f }%>
+  </div>
+
+  <div id="dual-gamma-thresholds">
+    <%= render partial: '/mandates/configurations/dual_gamma_thresholds', locals: { f: f }%>
+  </div>
+</div>
+
+<div class="col-xs-6" style="padding-left:0;">
+  <div id="gamma-power-parameters">
+    <%= render partial: '/mandates/configurations/gamma_power_settings', locals: { f: f }%>
+  </div>
+
+  <div id="sif-settings-parameters">
+    <%= render partial: '/mandates/configurations/sif_settings', locals: { f: f }%>
+  </div>
+
+  <div id="sif-bin-parameters">
+    <%= render partial: '/mandates/configurations/sif_bins', locals: { f: f }%>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-xs-12 vert-margins">
+    <form class="form-horizontal margin-bottom">
+      <label for="template-new"
+             class="control-label col-xs-1 text-left thin">
+        Name
+      </label>
+      <div class="col-xs-3">
+        <input type="text"
+               ng-model="template.name"
+               class="form-control no-border"
+               id="template-name">
+      </div>
+
+      <button class="btn btn-orange" ng-click="submit()">
+        <i class="zmdi zmdi-save"></i> Save
+      </button>
+    </form>
+
+    <div class="col-xs-6 compact">
+      <table ng-if="!loading"
+             class="table white-grey">
+        <thead>
+          <tr>
+            <th>Jobs
+              <select class="no-border"
+                      ng-model="jobTab"
+                      ng-change="changeJobTab(jobTab)">
+                <option value="Active">Active</option>
+                <option value="All">All</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="job in jobs"
+              ng-class="{ 'notifier-selected': selectedJob(job) }">
+            <td ng-click="changeJob(job)">{{job.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table ng-if="loading"
+             class="table white-grey">
+        <thead>
+          <tr>
+            <th>Jobs
+              <select class="no-border"
+                      ng-model="jobTab"
+                      ng-change="changeJobTab(jobTab)">
+                <option value="Active">Active</option>
+                <option value="All">All</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Loading...</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav ng-if="jobTab == 'All'">
+        <ul class="pagination"
+            style="margin-top: 0;">
+          <li ng-class="{ disabled: jobPage === 1 }">
+            <a ng-click="changeJobPage(jobPage - 1)"
+               aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="disabled"><a>{{jobPage}}</a></li>
+          <li ng-class="{ disabled: jobPage === jobPages || jobPages == 0}">
+            <a ng-click="changeJobPage(jobPage + 1)"
+               aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

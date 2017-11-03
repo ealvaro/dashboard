@@ -1,0 +1,41 @@
+<div class="row top-row" ng-init="init()">
+  <div class="col-xs-2 compact" style="margin-top:15px;">
+    <div class="btn-group">
+      <button class="btn btn-default flat-select dropdown-toggle"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+        <span class="badge"
+              style="background-color: grey;">
+          {{results}}
+        </span>
+        {{filterName()}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li ng-click="setFilterType('')">
+          <a href="#">Overview</a>
+        </li>
+        <li ng-repeat="type in filter_types"
+            ng-click="setFilterType(type)">
+          <a href="#">
+            {{type}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <tools-table objects="filteredTools"
+               cols="15"
+               headers="headers"
+               search-text="searchText"
+               loading="loading"
+               export-column-keys="exportColumnKeys"
+               current-user="currentUser"
+               klass="'Tool'"
+               current-page="currentPage"
+               pages="pages"
+               results="results"
+               filter-type="filterType"></tools-table>
+</div>

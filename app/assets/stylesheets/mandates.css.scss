@@ -1,0 +1,21 @@
+.extra-padding {
+  padding-left: 30px;
+}
+
+.mandate-form-control {
+  @extend .form-control;
+  display: inline;
+  width: 70%;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  border: none;
+}
+
+.mandate-form-control-small {
+  @extend .form-control;
+  display: inline;
+  width: 30%;
+  margin-left: 1em;
+  margin-right: 1em;
+  border: none;
+}

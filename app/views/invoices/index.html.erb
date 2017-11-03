@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <%= render partial: 'billing_dashboard/navbar' %>
+  <div class="row" ng-controller="InvoicesController" ng-init="indexInit('<%= j @invoices_json %>')">
+    <div class="col-xs-8">
+      <div class="col-md-8">
+        <%= link_to "New " + Invoice.model_name.human, new_invoice_path, class: "btn btn-default" %>
+      </div>
+    </div>
+    <erdos-table objects="invoices"
+                 cols="6"
+                 headers="headers"
+                 klass="'Invoice'"
+                 loading="loading"
+                 search-text="searchText"
+                 no-actions="true"
+                 export-column-keys="exportColumnKeys"></erdos-table>
+  </div>
+</div>

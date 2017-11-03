@@ -1,0 +1,17 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div class="row">
+  <%= simple_form_for @import do |f| %>
+    <%= f.simple_fields_for :csv_files do |ff| %>
+      <div class="col-xs-2">
+        <%= ff.label :file %>
+      </div>
+      <div class="col-xs-4">
+        <%= ff.input :file, as: :file, label:false %>
+      </div>
+    <% end %>
+    <div class="col-xs-12">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

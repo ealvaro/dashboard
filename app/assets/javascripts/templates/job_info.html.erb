@@ -1,0 +1,114 @@
+<div>
+
+<erdos-receiver-pusher-listener></erdos-receiver-pusher-listener>
+<div class="col-md-6">
+  <table class="table bisque-transparent">
+    <tr>
+        <td>Job</td>
+        <td>{{job.name}}</td>
+    </tr>
+    <tr>
+        <td>Run</td>
+        <td>{{ job.run }}</td>
+    </tr>
+    <tr>
+        <td>Rig</td>
+        <td>{{ job.rig }}</td>
+    </tr>
+    <tr>
+        <td>Well</td>
+        <td>{{ job.well }}</td>
+    </tr>
+    <tr>
+        <td>Job Start Date</td>
+        <td>{{job.start_time | date:'medium' }}</td>
+    </tr>
+    <tr>
+        <td>Logger TV</td>
+        <td>{{ job.last_updates["LoggerUpdate"].team_viewer_id }}</td>
+    </tr>
+    <tr>
+        <td>Logger TV Password</td>
+        <td>{{ job.last_updates["LoggerUpdate"].team_viewer_password }}</td>
+    </tr>
+    <tr>
+        <td>Logger LConfig</td>
+        <td>{{ job.last_updates["LoggerUpdate"].reporter_version }}</td>
+    </tr>
+    <tr>
+        <td>Logger Last Update</td>
+        <td>{{ job.last_updates["LoggerUpdate"].time | date: 'medium' }}</td>
+    </tr>
+    <tr>
+      <td>Receiver PC (LRx) TV</td>
+      <td>{{ job.last_updates["LeamReceiverUpdate"].team_viewer_id }}</td>
+    </tr>
+    <tr>
+      <td>Receiver PC (LRx) TV Password</td>
+      <td>{{ job.last_updates["LeamReceiverUpdate"].team_viewer_password }}</td>
+    </tr>
+    <tr>
+      <td>Receiver PC (LRx) LConfig</td>
+      <td>{{ job.last_updates["LeamReceiverUpdate"].reporter_version }}</td>
+    </tr>
+    <tr>
+      <td>Receiver PC (LRx) Last Update</td>
+      <td>{{ job.last_updates["LeamReceiverUpdate"].time | date: 'medium' }}</td>
+    </tr>
+  </table>
+</div>
+
+<div class="col-md-6">
+  <table class="table bisque-transparent">
+  <tr>
+      <td>Receiver PC (BTR Monitor) TV</td>
+      <td>{{ job.last_updates["BtrReceiverUpdate"].team_viewer_id }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (BTR Monitor) TV Password</td>
+      <td>{{ job.last_updates["BtrReceiverUpdate"].team_viewer_password }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (BTR Monitor) LConfig</td>
+      <td>{{ job.last_updates["BtrReceiverUpdate"].reporter_version }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (BTR Monitor) Last Update</td>
+      <td>{{ job.last_updates["BtrReceiverUpdate"].time | date: 'medium' }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (BTR Control) TV</td>
+      <td>{{ job.last_updates["BtrControlUpdate"].team_viewer_id }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (BTR Control) TV Password</td>
+      <td>{{ job.last_updates["BtrControlUpdate"].team_viewer_password }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (BTR Control) LConfig</td>
+      <td>{{ job.last_updates["BtrControlUpdate"].reporter_version }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (BTR Control) Last Update</td>
+      <td>{{ job.last_updates["BtrControlUpdate"].time | date: 'medium' }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (APS EM) TV</td>
+      <td>{{ job.last_updates["EmReceiverUpdate"].team_viewer_id }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (APS EM) TV Password</td>
+      <td>{{ job.last_updates["EmReceiverUpdate"].team_viewer_password }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (APS EM) LConfig</td>
+      <td>{{ job.last_updates["EmReceiverUpdate"].reporter_version }}</td>
+  </tr>
+  <tr>
+      <td>Receiver PC (APS EM) Last Update</td>
+      <td>{{ job.last_updates["EmReceiverUpdate"].time | date: 'medium' }}</td>
+  </tr>
+  </table>
+</div>
+
+</div>

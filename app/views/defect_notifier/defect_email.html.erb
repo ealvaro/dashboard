@@ -1,0 +1,7 @@
+This is a bug reported from Internet Explorer 8/9.<br/>
+<br/>
+<u>Summary:</u> <%= @defect.summary %><br/>
+<u>Platform:</u> <%= @defect.try(:platform) %><br/>
+<u>Description:</u> <%= @defect.try(:description) %><br/>
+<u>Reporter Name:</u> <%= @defect.try(:user_name) %><br/>
+<u>Reporter Email:</u> <%= @defect.try(:user_email) %><br/>

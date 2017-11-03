@@ -1,0 +1,12 @@
+<div ng-init="init()" class="">
+  <div style="margin-top: 16px;">
+    <button data-toggle="collapse" data-target="#{{key}}"
+            class="btn btn-orange" ng-click="toggle = !toggle">
+      {{toggle && 'Hide' || 'Show'}} {{title}}
+    </button>
+  </div>
+  <div id="{{key}}" class="panel-collapse in">
+    <div id="{{channel}}-{{title}}" class="pulseChart"
+         style="width: 100%; height: 300px; margin-top: 8px;"></div>
+  </div>
+</div>

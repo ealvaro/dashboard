@@ -1,0 +1,104 @@
+{button, div, i, li, ul} = React.DOM
+
+EmReceiverCog = React.createClass
+  propTypes:
+    object: React.PropTypes.object
+    onMenuSelection: React.PropTypes.func.isRequired
+  # TODO: untangle this bit of state
+  getInitialState: ->
+    inactive: false
+    follows: false
+  componentDidMount: ->
+    this.setState inactive: this.props.object.inactive
+    this.getFollows()
+  getFollows: ->
+    $.ajax
+      url: '/follows'
+      dataType: 'json'
+      cache: false
+      success: ((data) ->
+        follows = this.props.object.name in data
+        this.setState follows: follows
+      ).bind this
+  postFollow: (url) ->
+    $.ajax
+      url: url
+      dataType: 'json'
+      type: 'POST'
+      data: user: job: this.props.object.name
+      success: ((data) ->
+        follows = this.props.object.name in data
+        this.setState follows: follows
+      ).bind this
+  markInactive: ->
+    $.ajax
+      url: "/push/jobs/#{this.props.object.id}/mark_inactive"
+      headers: this.header()
+      dataType: 'json'
+      cache: false
+      success: ((data) ->
+        this.props.object.inactive = data.inactive
+      ).bind this
+  header: ->
+    {"X-Auth-Token": '<%= ENV["auth_token"] %>'}
+  handleClick: (menuId) ->
+    switch menuId
+      when "follow-job"
+        this.postFollow '/follow'
+      when "unfollow-job"
+        this.postFollow '/unfollow'
+      when "mark-inactive"
+        this.markInactive()
+      else
+        this.props.onMenuSelection(menuId)
+  buttonAttrs: ->
+    attrs =
+      className: "btn btn-default btn-toggle"
+      type: "button"
+      id: "receiver-cog"
+    attrs["data-toggle"] = "dropdown"
+    attrs
+  ulAttrs: ->
+    attrs =
+      className: "dropdown-menu pull-right"
+      role: "menu"
+    attrs["aria-labelledby"] = "receiver-cog"
+    attrs
+  renderLink: (menuId, menuText) ->
+    React.createElement EmMenuItem,
+      menuId: menuId
+      key: menuId
+      onClick: this.handleClick,
+      menuText
+  renderTVLink: (data) ->
+    this.renderLink data.menuId, "Copy TV ID for #{data.name} PC"
+  renderTVLinks: ->
+    last_updates = this.props.object.last_updates
+    items = [
+      {name: "BTR monitor", menuId: "BtrReceiverUpdate", object: last_updates["BtrReceiverUpdate"]},
+      {name: "BTR control", menuId: "BtrControlUpdate", object: last_updates["BtrControlUpdate"]},
+      {name: "LEAM Receiver", menuId: "LeamReceiverUpdate", object: last_updates["LeamReceiverUpdate"]},
+      {name: "APS EM", menuId: "EmReceiverUpdate", object: last_updates["EmReceiverUpdate"]},
+      {name: "Logger", menuId: "LoggerUpdate", object: last_updates["LoggerUpdate"]}
+    ]
+    (this.renderTVLink(item) for item in items when item.object?.team_viewer_id?)
+  render: ->
+    div
+      className: "dropdown"
+      button this.buttonAttrs(),
+        i className: "zmdi zmdi-settings"
+      ul this.ulAttrs(),
+        li role: "presentation", key: "details",
+          this.renderLink "details", "Details"
+        li role: "presentation", key: "tvlinks",
+          this.renderTVLinks()
+        li role: "presentation", key: "follow",
+          if this.state.follows
+            this.renderLink "unfollow-job", "Unfollow"
+          else
+            this.renderLink "follow-job", "Follow"
+        li role: "presentation", key: "inactive",
+          this.renderLink "mark-inactive", "Mark Inactive"
+
+exports = this
+exports.EmReceiverCog = EmReceiverCog

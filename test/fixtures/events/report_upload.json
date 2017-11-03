@@ -1,0 +1,14 @@
+{
+  "event_type_id": 19,
+  "uid": "sampleuid",
+  "time": 1395173704,
+  "reporter_type": 2,
+  "user_email": "example@example.com",
+  "run_number": 1,
+  "job_number": "OK-1234",
+  "assets": {
+    "Document A": "sample_doc_a.pdf",
+    "Document B": "sample_doc_b.pdf",
+    "Document C": "sample_doc_c.pdf"
+  }
+}

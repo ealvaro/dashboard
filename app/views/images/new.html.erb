@@ -1,0 +1,8 @@
+<%= simple_form_for @image do |f| %>
+  <%= f.input :imageable_id, as: :hidden %>
+  <%= f.input :imageable_type, as: :hidden %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :file, as: :file %>
+  <%= f.submit %>
+<% end %>

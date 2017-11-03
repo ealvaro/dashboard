@@ -1,0 +1,10 @@
+{
+  "inc": 123.4,
+  "azm": 1.11,
+  "start_depth": 500,
+  "measured_depth": 1000,
+  "assets": {
+    "file1": "file1.txt",
+    "file2": "file2.txt"
+  }
+}

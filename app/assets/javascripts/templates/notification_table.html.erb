@@ -1,0 +1,110 @@
+<div>
+<div class="col-xs-4" style="position: absolute; right: 294px; top: 0;" ng-if="selectedNotifs.length">
+  <a href="#" ng-click="deleteNotifs( $event, selectedNotifs, 'Critical')">
+    <button class="btn btn-orange" style="margin-right: 7px;">Critical
+    </button>
+  </a>
+  <a href="#" ng-click="deleteNotifs( $event, selectedNotifs, 'False Alarm')">
+    <button class="btn btn-orange" style="margin-right: 7px;">False Alarm
+    </button>
+  </a>
+  <a href="#" ng-click="deleteNotifs( $event, selectedNotifs, 'Resolved')">
+    <button class="btn btn-orange" style="margin-right: 7px;">Resolved
+    </button>
+  </a>
+</div>
+
+<div class="pull-right col-xs-4" style="position: absolute; right: 0; top: 0;">
+  <form class="form-inline" role="form" ng-submit="search()">
+    <div class="form-group compact col-xs-12">
+      <div class="input-group col-xs-12">
+        <input class="form-control flat-select rounded-border"
+               name="keywords"
+               id="alert-search-content"
+               placeholder="Search">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="tab-pane" ng-if="loading">
+  <table class="table grey-white">
+    <tbody>
+      <tr>
+        <td>
+          <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: 100%"></div>
+          </div>
+          <small>loading...</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="tab-pane" ng-if="!loading">
+  <table class="table grey-white" ng-if="objects.length == 0">
+    <tbody>
+      <tr>
+        <td>No Alerts</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table white-grey" ng-if="objects.length > 0">
+    <thead>
+      <tr>
+        <th ng-repeat="header in headers">{{header.label}}</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="object in objects | orderBy:['completed', 'created_at']">
+        <td ng-repeat="header in headers">
+          <div ng-switch="header.key">
+            <div ng-switch-when="selected">
+              <input ng-if="status == 'Active'" type="checkbox" ng-click="selectNotif(object.id)" />
+            </div>
+            <div ng-switch-when="created_at">
+              {{ object.created_at | amDateFormat:'YYYY-MM-DD HH:mm:ss' }}
+            </div>
+            <div ng-switch-when="completed_at">
+              {{ object.completed_at | amDateFormat:'YYYY-MM-DD HH:mm:ss' }}
+              <div ng-if="object.completed">( took {{ object.created_at | amDurationFormat : 'seconds' }} <span am-time-ago="object.completed_at"> ago</span>)</div>
+            </div>
+            <div ng-switch-when="description" class="white-space-normal">
+              {{ object.notifier.name }} ({{ object.description}})
+            </div>
+            <div ng-switch-when="job_number">
+              {{ object[header.key] | uppercase }}
+            </div>
+            <div ng-switch-when="completed_by">
+              <div ng-if="object.completed">{{ object.completed_by }}</div>
+            </div>
+            <div ng-switch-when="completed_status">
+              <div ng-if="object.completed">{{ object.completed_status }}</div>
+            </div>
+            <div ng-switch-default>{{ object[header.key] }}</div>
+          </div>
+        </td>
+        <td width="5%"><alerts-cog ng-show="!object.completed" object="object"></alerts-cog></td>
+      </tr>
+    </tbody>
+  </table>
+  <nav>
+    <ul class="pagination" style="margin:0;">
+      <li ng-class="{disabled: page == 1}"><a href="#" ng-click="firstPage()">First</a></li>
+      <li ng-class="{disabled: page == 1}">
+        <a href="#" aria-label="Previous" ng-click="previousPage()">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="disabled"><a href="#">{{page}}</a></li>
+      <li ng-class="{disabled: page == pages || pages == 0}">
+        <a href="#" aria-label="Next" ng-click="nextPage()">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li ng-class="{disabled: page == pages || pages == 0}"><a href="#" ng-click="lastPage()">Last</a></li>
+    </ul>
+  </nav>
+</div>
+
+</div>

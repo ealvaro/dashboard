@@ -1,0 +1,29 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'Report Types')"></top-bar>
+
+<div class="container-fluid">
+  <%= link_to new_admin_report_type_path, class: "btn btn-orange vert-margins pull-right" do %>
+    <i class="zmdi zmdi-plus"></i> New Report Type
+  <% end %>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table grey-white">
+        <tr>
+          <th><%= ReportType.human_attribute_name :name %></th>
+          <th><%= ReportType.human_attribute_name :document_count %></th>
+          <th><%= ReportType.human_attribute_name :active %></th>
+          <th class="text-right">Actions</th>
+        </tr>
+        <% for report_type in @report_types %>
+          <tr>
+            <td><%= link_to report_type.name, admin_report_type_path(report_type) %></td>
+            <td><span class="badge"><%= report_type.documents.active.count %></span></td>
+            <td><%= report_type.active.to_s.titlecase %></td>
+            <td class="text-right"><a href="<%= edit_admin_report_type_path(report_type) %>" class="btn btn-default"><i class="zmdi zmdi-edit"></i></a></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

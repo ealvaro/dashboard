@@ -1,0 +1,9 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'New User')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <%= render partial: 'form', locals: {user: @user} %>
+  </div>
+</div>

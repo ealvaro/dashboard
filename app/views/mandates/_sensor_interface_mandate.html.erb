@@ -1,0 +1,31 @@
+<div class="col-xs-6">
+  <%= render partial: '/mandates/configurations/form',
+             locals: { f: f, div_id: "timeouts", title: 'Timeout Settings',
+               mandate_params: @mandate.class.timeout_params, klass: '', padding: 'padding-horizontal' } %>
+
+  <%= render partial: '/mandates/configurations/form',
+             locals: { f: f, div_id: "shock-counts", title: 'Shock Count Settings',
+               mandate_params: @mandate.class.shock_count_params, klass: '', padding: 'padding-horizontal' } %>
+
+  <%= render partial: '/mandates/configurations/form',
+             locals: { f: f, div_id: "delta-frequencies", title: 'Delta Frequency Settings',
+               mandate_params: @mandate.class.delta_frequency_params, klass: '', padding: 'padding-horizontal' } %>
+</div>
+
+<div class="col-xs-6" style="padding-left:0;">
+  <%= render partial: '/mandates/configurations/form',
+             locals: { f: f, div_id: "telemetries", title: 'Telemetry Settings',
+               mandate_params: @mandate.class.telemetry_params, klass: "row", padding: '' } %>
+
+  <%= render partial: '/mandates/configurations/form',
+             locals: { f: f, div_id: "sim-general", title: 'General Settings',
+               mandate_params: @mandate.class.general_params, klass: "row", padding: '' } %>
+
+  <%= render partial: '/mandates/configurations/form',
+             locals: { f: f, div_id: "sim-batteries", title: 'Battery Settings',
+               mandate_params: @mandate.class.battery_params, klass: "row", padding: '' } %>
+
+  <%= render partial: '/mandates/configurations/form',
+             locals: { f: f, div_id: "can-settings", title: 'CAN Settings',
+               mandate_params: @mandate.class.can_params, klass: "row", padding: '' } %>
+</div>

@@ -1,0 +1,41 @@
+<% active_page(:surveys) %>
+
+<top-bar ng-init="init('Surveys', '<%= @job.name.try(:upcase) %>')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 text-right vert-margins">
+      <%= link_to "Apply Corrections", corrections_surveys_path, class: "btn btn-default" %>
+      <%= link_to "Copy To Clipboard", clip_surveys_by_job_path(job_id: params[:job_id]), class: "btn btn-default"%>
+      <%= link_to "Export to CSV", export_surveys_by_job_path(job_id: params[:job_id], format: :csv ), class: 'btn btn-default'%>
+    </div>
+  </div>
+
+  <table class="table white-grey">
+    <thead>
+      <th>MD</th>
+      <th>Run</th>
+      <th>Side Track</th>
+      <th>Inclination</th>
+      <th>Azimuth</th>
+      <th>Corrected</th>
+      <th>Time</th>
+      <th>Details</th>
+    </thead>
+    <tbody>
+      <% @surveys.each do |s|%>
+        <% survey = s.versions.last %>
+        <tr>
+          <th><%= survey.measured_depth %></th>
+          <td><%= survey.run.number%></th>
+          <td><%= survey.side_track.try(:number)%></th>
+          <td><%= survey.inclination %></th>
+          <td><%= survey.azimuth %></th>
+          <td><%= survey.corrected? %></th>
+          <td><%= timeago_tag survey.created_at %></th>
+          <td><%= link_to "Details", survey %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

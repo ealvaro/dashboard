@@ -1,0 +1,103 @@
+class CreateReceiverSettings < ActiveRecord::Migration
+  def change
+    create_table :receiver_settings do |t|
+      t.string  :type
+      t.references :job, index: true
+      t.integer :rxdt
+      t.integer :txdt
+      t.float :sywf
+      t.integer :nsyp
+      t.integer :shsz
+      t.integer :thsz
+      t.string :hdck
+      t.string :dwnl
+      t.integer :dltp
+      t.string :dlty
+      t.string :dlsv
+      t.float :inct
+      t.string :evim
+      t.integer :modn
+      t.float :pw1
+      t.float :pw2
+      t.float :pw3
+      t.float :pw4
+      t.integer :ssn1
+      t.integer :ssn2
+      t.integer :ssn3
+      t.integer :ssn4
+      t.integer :tsn1
+      t.integer :tsn2
+      t.integer :tsn3
+      t.integer :tsn4
+      t.integer :aqt1
+      t.integer :aqt2
+      t.integer :aqt3
+      t.integer :aqt4
+      t.integer :tlt1
+      t.integer :tlt2
+      t.integer :tlt3
+      t.integer :tlt4
+      t.text :ssq1
+      t.text :ssq2
+      t.text :ssq3
+      t.text :ssq4
+      t.text :tsq1
+      t.text :tsq2
+      t.text :tsq3
+      t.text :tsq4
+      t.string :loc
+      t.float :ndip
+      t.float :dipt
+      t.float :nmag
+      t.float :magt
+      t.float :mdec
+      t.float :mxyt
+      t.float :ngrv
+      t.float :grvt
+      t.float :tmpt
+      t.string :cmtf
+      t.string :tmtf
+      t.string :dspc
+      t.string :suam
+      t.float :sudt
+      t.integer :susr
+      t.float :sust
+      t.integer :stsr
+      t.float :stst
+      t.integer :mtty
+      t.string :diaa
+      t.string :diaf
+      t.string :dfmt
+      t.string :gspc
+      t.float :gwut
+      t.integer :gmin
+      t.integer :gmax
+      t.float :gsf
+      t.float :sgsf
+      t.string :gaaa
+      t.integer :gupt
+      t.string :gaaf
+      t.string :gfmt
+      t.integer :bevt
+      t.float :bfs
+      t.float :bthr
+      t.integer :pmpt
+      t.integer :pevt
+      t.float :ptfs
+      t.float :ptg
+      t.string :fdm
+      t.integer :fevt
+      t.string :invf
+      t.integer :lopl
+      t.integer :hipl
+      t.string :ptyp
+      t.string :syty
+      t.float :pwin, array: true
+      t.string :emtx
+      t.string :resy
+      t.integer :nssq
+
+      t.timestamps
+    end
+  end
+end

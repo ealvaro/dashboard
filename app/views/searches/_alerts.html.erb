@@ -1,0 +1,23 @@
+<h3>Alerts</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Job</th>
+    <th>Description</th>
+    <th>Time</th>
+    <th>Time Cleared</th>
+    <th>User Cleared</th>
+    <th>Marked As</th>
+  </tr>
+  <% alerts.each do |a| %>
+    <tr>
+      <td><%= a.try(:job_number).try(:upcase) %></td>
+      <td><%= a.try(:description) %></td>
+      <td><%= a.try(:created_at) %></td>
+      <td><%= a.try(:completed_at) %></td>
+      <td><%= a.try(:user).try(:name) %></td>
+      <td><%= a.try(:completed_status) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate alerts, remote: true %>

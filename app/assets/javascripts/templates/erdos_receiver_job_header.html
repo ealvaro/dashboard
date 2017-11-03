@@ -1,0 +1,30 @@
+<div class="thumbnail box-shaddow-med light-grey">
+  <div class="row">
+    <div class="col-xs-2">Job</div>
+    <div class="col-xs-2">Run</div>
+    <div class="col-xs-2">Client</div>
+    <div class="col-xs-2">Rig</div>
+    <div class="col-xs-2">Well</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div ng-show="receiver_data.job_show_url">
+        <a ng-href="{{receiver_data.job_show_url}}">{{ receiver_data.job }}</a>
+      </div>
+      <div ng-hide="receiver_data.job_show_url">
+        <strong>{{ receiver_data.job }}</strong>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div ng-show="receiver_data.run_show_url">
+        <a ng-href="{{receiver_data.run_show_url}}">{{ receiver_data.run }}</a>
+      </div>
+      <div ng-hide="receiver_data.run_show_url">
+        <strong>{{ receiver_data.run }}</strong>
+      </div>
+    </div>
+    <div class="col-xs-2"><strong>{{ receiver_data.client }}</strong></div>
+    <div class="col-xs-2"><strong>{{ receiver_data.rig }}</strong></div>
+    <div class="col-xs-2"><strong>{{ receiver_data.well }}</strong></div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<%= simple_form_for run, url: url, html: { class: 'form-horizontal margin-top' } do |f| %>
+  <div class="form-group">
+    <%= f.label :number, class: 'col-xs-2 text-left' %>
+    <%= f.input_field :number, class: 'no-border custom-form-control' %>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <%= f.label :occurred, class: 'col-xs-2 text-left' %>
+        <%= f.text_field :occurred, class: "no-border custom-form-control",
+                                    id: 'customDTP',
+                                    "data-format"=>"YYYY-MM-DD hh:mm A" %>
+      </div>
+    </div>
+  </div>
+
+  <div style="color: red">
+    <% if @run.errors && !@run.errors[:occurred].empty? %>
+      <%= @run.errors[:occurred].to_s %>
+    <% end %>
+  </div>
+
+  <%= f.association :well, label_html: { class: 'text-left col-xs-2' },
+                           input_html: { class: 'no-border custom-form-control' } %>
+
+  <%= f.association :job, label_html: { class: 'text-left col-xs-2' },
+                           input_html: { class: 'no-border custom-form-control' } %>
+
+  <%= f.association :rig, label_html: { class: 'text-left col-xs-2' },
+                           input_html: { class: 'no-border custom-form-control' } %>
+
+  <%= f.submit class: "btn btn-orange", data: {disable_with: "saving..."} %>
+  <%= link_to runs_path do %>
+    <div class="btn btn-bisque">Cancel</div>
+  <% end %>
+<% end %>

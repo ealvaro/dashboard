@@ -1,0 +1,107 @@
+.notifier-table {
+  float: left;
+  width: 80%;
+}
+
+.group-notifiers {
+  float: left;
+  width: 60%;
+}
+
+.global-notifiers {
+  float: left;
+  width: 100%;
+}
+
+.left-list {
+  float: left;
+  width: 20%;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+.bg-orange {
+ background-color: orange !important;
+}
+
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+input.cmn-toggle-round-flat + label {
+  padding: 2px;
+  width: 120px;
+  height: 40px;
+  background-color: #dddddd;
+  border-radius: 40px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round-flat + label:before,
+input.cmn-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+input.cmn-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #fff;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round-flat + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 52px;
+  background-color: orange;
+  border-radius: 52px;
+  transition: margin 0.4s, background 0.4s;
+}
+input.cmn-toggle-round-flat:checked + label {
+  background-color: orange;
+}
+input.cmn-toggle-round-flat:checked + label:after {
+  margin-left: 60px;
+  background-color: orange;
+}
+
+.notifier-form {
+  margin-top: 1em;
+  .bold {
+    font-weight: bold;
+  }
+  .match-input {
+    margin-right: 4px;
+  }
+  .condition-input {
+    padding-left: 0;
+  }
+  input {
+    width: 11.8%;
+    border: none;
+  }
+  select {
+    width: 11.8%;
+    border: none;
+  }
+  .condition-btn {
+    color: #666666;
+    font-size: 2em;
+    border: none;
+    background-color: rgb(231, 228, 218);
+  }
+}

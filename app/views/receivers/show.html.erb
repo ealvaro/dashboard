@@ -1,0 +1,63 @@
+<% active_page(:receivers) %>
+
+<h1>Receiver Dashboard <small><%= @receiver.cache['job_number'].upcase %></small></h1>
+
+<div ng-app="erdos" ng-controller="ReceiverDashboardController" ng-init="init('<%= @receiver.uid %>')">
+  <erdos-receiver-pusher-listener object="receiver" job-number="<%= @receiver.cache['job_number'].upcase %>"></erdos-receiver-pusher-listener>
+
+  <% unless ENV['HOST_URL_FOR_MAILER'] == "http://leam.herokuapp.com/" %>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-default" ng-click="test()">Test</button>
+
+        <button class="btn btn-default" ng-click="startTestInterval()">
+          <i class="fa fa-refresh fa-spin" ng-show="testing"></i>
+          Start Test Stream
+        </button>
+
+        <button class="btn btn-danger" ng-click="stopTestInterval()" ng-show="testing">
+          Stop Test Stream
+        </button>
+
+        <input type="checkbox" ng-model="use_notify">
+          <label>BTR</label>
+        </input>
+      </div>
+    </div>
+  <% end  %>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-md-12">
+      <div erdos-receiver-job-header></div>
+    </div>
+  </div>
+
+  <h2>MWD</h2>
+  <div class="row" style="margin-top: 15px">
+    <div class="col-md-5">
+      <h3>Driller Display</h3>
+    </div>
+
+    <div class="col-md-7">
+      <h3>Receiver</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="radar-section">
+      <div erdos-receiver-radar-chart></div>
+    </div>
+
+    <div class="col-md-7">
+      <div erdos-receiver-table></div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-md-12">
+      <h3>Pulse Chart</h3>
+      <div erdos-receiver-pulse-chart></div>
+    </div>
+  </div>
+
+</div>

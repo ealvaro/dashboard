@@ -1,0 +1,12 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <%= link_to "Edit", invoice_to_draft_path(@invoice), class: "btn btn-primary"%>
+    <%= link_to "Print PDF", invoice_path(@invoice, format: "pdf"), class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div class="well">
+  <%= render partial: 'invoice', locals: {show: true} %>
+</div>

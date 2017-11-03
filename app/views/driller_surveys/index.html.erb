@@ -1,0 +1,61 @@
+<% active_page(:surveys) %>
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h2>Survey Info
+        <small>
+          <%= @job.name.upcase %>: Run <%= @run.number %>
+        </small>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>MD</th>
+        <th>INC</th>
+        <th>AZM</th>
+        <th>TVD</th>
+        <th>N-S</th>
+        <th>E-W</th>
+        <th>SECT</th>
+        <th>DLS</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <% @surveys.each do |s| %>
+          <% survey = s.versions.last %>
+          <tr>
+            <td><%= survey.measured_depth %></td>
+            <td><%= survey.inclination %></td>
+            <td><%= survey.azimuth %></td>
+            <td><%= survey.tvd %></td>
+            <td><%= survey.north %></td>
+            <td><%= survey.east %></td>
+            <td><%= survey.horizontal_section %></td>
+            <td><%= survey.dog_leg_severity %></td>
+            <td></td>
+          </tr>
+        <% end %>
+        <%= simple_form_for @survey, url: driller_surveys_path(@survey) do |f| %>
+          <tr>
+            <td><%= f.input :measured_depth, label: false %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <%= f.button :button, class: "btn btn-primary" do %>
+                <span class="glyphicon glyphicon-plus"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

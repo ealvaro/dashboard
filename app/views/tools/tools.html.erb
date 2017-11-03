@@ -1,0 +1,42 @@
+<% active_page(:tools) %>
+
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h1><%= @tool_type.name %> 
+        <small>Tool Tracking
+        </small>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<table class="table table-bordered table-zebra sorted">
+  <thead>
+    <tr>
+      <% ToolDecorator.tool_type_attributes.each do |attr| %>
+        <th><%= Tool.human_attribute_name attr %></th>
+      <% end %>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tools.each do |tool| %>
+      <% tool = tool.decorate %>
+      <tr>
+        <% ToolDecorator.tool_type_attributes.each do |attr| %>
+          <% if attr == :uid %>
+            <td><%= link_to tool.uid, tool_path( id: tool.id ) %></td>
+          <% else %>
+            <td><%= tool.send attr %></td>
+          <% end %>
+        <% end %>
+        <td>
+          <%= link_to "Events", events_path(id: tool.id), class: "btn btn-default" if tool.board_serial_number %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tools %>

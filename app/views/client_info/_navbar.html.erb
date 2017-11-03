@@ -1,0 +1,24 @@
+<% active_page(:client_info) %>
+
+<div class="col-xs-6 page-nav">
+  <nav>
+    <ul class="pagination"
+        style="margin: 0;">
+      <li class="<%= "active" if controller_name == "jobs" %>">
+        <%= link_to Job.model_name.human.pluralize, jobs_path %>
+      </li>
+      <li class="<%= "active" if controller_name.include?( "run" ) %>">
+        <%= link_to Run.model_name.human.pluralize, runs_path %>
+      </li>
+      <li class="<%= "active" if controller_name.include?( "clients" ) || controller_name.include?("customers") || controller_name.include?("pricing")%>">
+        <%= link_to Client.model_name.human.pluralize, clients_path %>
+      </li>
+      <li class="<%= "active" if controller_name == "wells" %>">
+        <%= link_to Well.model_name.human.pluralize, wells_path %>
+      </li>
+      <li class="<%= "active" if controller_name == "formations" %>">
+        <%= link_to Formation.model_name.human.pluralize, formations_path %>
+      </li>
+    </ul>
+  </nav>
+</div>

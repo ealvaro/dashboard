@@ -1,0 +1,63 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div ng-controller="PricingSchemesController" ng-init="showInit('<%= @pricing_scheme.id %>')">
+  <div class="row">
+    <div class="col-xs-9">
+      <form class="form-inline" role="form">
+        <div class="form-group">
+          <label class="sr-only" for="key_input">Key</label>
+          <select id="key_input" ng-model="new_value.key" ng-options="key as ( key | titlecase ) for key in pricing.customizable_attrs"></select>
+          <p style="color: red">{{new_value.errors.key}}</p>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="threshold">Threshold</label>
+          <input id="threshold" type="text" ng-model="new_value.threshold" placeholder="Threshold">
+          <p style="color: red">{{new_value.errors.threshold}}</p>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="amount">Amount</label>
+          <input id="amount" type="text" ng-model="new_value.amount" placeholder="Amount">
+          <p style="color: red">{{new_value.errors.amount}}</p>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="description">Description</label>
+          <input id="description" type="text" ng-model="new_value.description" placeholder="Description">
+          <p style="color: red">{{new_value.errors.description}}</p>
+        </div>
+        <button class="btn btn-default bt-xs" ng-click="addNewValue()">Add New</button>
+      </form>
+    </div>
+    <div class="col-xs-3" ng-show="changed">
+      <button class="btn btn-warn" ng-click="resetScheme()">Reset</button><button class="btn btn-success" ng-click="apply()">Submit Changes</button>
+    </div>
+  </div>
+  <div class="row">
+    <div ng-repeat="key in getKeys(pricing)">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{key | titlecase}}</h3>
+          </div>
+          <table class="table table-striped">
+            <col width="30%">
+            <col width="30%">
+            <col width="30%">
+            <col width="10%">
+            <tr>
+              <th><%= PricingScheme.human_attribute_name :threshold %></th>
+              <th><%= PricingScheme.human_attribute_name :amount %></th>
+              <th><%= PricingScheme.human_attribute_name :description %></th>
+              <th></th>
+            </tr>
+            <tr ng-repeat="thres in numericKeys(pricing[key])">
+              <td>{{ thres }}</td>
+              <td>{{ pricing[key][thres.toString()].amount / 100 | currency }}</td>
+              <td>{{ pricing[key][thres.toString()].description }}</td>
+              <td class="text-right"><a ng-click="deleteBracket(key, thres.toString())" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

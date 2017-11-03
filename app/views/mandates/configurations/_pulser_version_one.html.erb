@@ -1,0 +1,10 @@
+<% %i(vib_trip_hi vib_trip_lo vib_trip_hi_a vib_trip_lo_a).each do |sym|%>
+  <div class="row form-group">
+    <div class="col-xs-6 compact-label">
+      <%= f.label sym %>
+    </div>
+    <div class="col-xs-6">
+      <%= f.input_field sym, class: 'no-border' %>
+    </div>
+  </div>
+<% end %>

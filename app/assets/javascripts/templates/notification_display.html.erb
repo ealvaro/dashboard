@@ -1,0 +1,13 @@
+<div>
+  <ul class="nav nav-tabs active-grey" id="table-2">
+    <li ng-class="{active: tab == 'Following'}"><a ng-click="handleTabClick($event, 'Following')" href="#">Subscribed</a></li>
+    <li ng-class="{active: tab == 'Active'}"><a ng-click="handleTabClick($event, 'Active')" href="#">Active</a></li>
+    <li ng-class="{active: tab == 'Resolved'}"><a ng-click="handleTabClick($event, 'Resolved')" href="#">Resolved</a></li>
+    <li ng-class="{active: tab == 'All'}"><a ng-click="handleTabClick($event, 'All')" href="#">All</a></li>
+  </ul>
+  <div class="tab-content">
+    <notification-table status="tab"
+                        job-numbers="jobNumbers"
+                        headers="headers"></notification-table>
+  </div>
+</div>

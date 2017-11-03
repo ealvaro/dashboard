@@ -1,0 +1,2 @@
+class ClientAuthorizer < JobAuthorizer
+end

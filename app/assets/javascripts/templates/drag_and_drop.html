@@ -1,0 +1,30 @@
+<div class="col-xs-6">
+  <strong>Include Runs</strong>
+  <span class="badge">{{included.length}}</span>
+  <div class="thumbnail" data-drop="true" ng-model="included" data-jqyoui-options="{ accept:'.exclude-item'}" jqyoui-droppable="{multiple:true}" style="min-height: 50px">
+    <ul class="nav nav-pills">
+      <li class="active include-item"
+          ng-repeat="include in included"
+          data-drag="true"
+          data-jqyoui-options="{revert: 'invalid'}"
+          ng-model="include"
+          jqyoui-draggable
+          ng-if="included.indexOf(include) != -1"><a>{{include.number}}</a></li>
+    </ul>
+  </div>
+</div>
+<div class="col-xs-6">
+  <strong>Exclude Runs</strong>
+  <span class="badge">{{excluded.length}}</span>
+  <div class="thumbnail" data-drop="true" ng-model="excluded" data-jqyoui-options="{ accept:'.include-item'}" jqyoui-droppable="{multiple:true}" style="min-height: 50px">
+    <ul class="nav nav-pills">
+      <li class="active exclude-item"
+          ng-repeat="exclude in excluded"
+          data-drag="true"
+          data-jqyoui-options="{revert: 'invalid'}"
+          ng-model="exclude"
+          jqyoui-draggable
+          ng-if="excluded.indexOf(exclude) != -1"><a>{{exclude.number}}</a></li>
+    </ul>
+  </div>
+</div>

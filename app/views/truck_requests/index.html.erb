@@ -1,0 +1,51 @@
+<div ng-controller="TruckRequestsController">
+  <top-bar ng-init="init('Truck Request System')"></top-bar>
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <truck-requests-nav></truck-requests-nav>
+
+      <div class="col-xs-6 pull-right vert-margins">
+        <form class="form-inline pull-right"
+              ng-submit="search()">
+          <div class="form-group">
+              <input class="form-control no-border pull-right"
+                     placeholder="Search"
+                     ng-model="keyword">
+          </div>
+        </form>
+        <button class="btn btn-orange pull-right margin-right"
+                ng-click="export()">
+          <i class="zmdi zmdi-download"></i> CSV
+        </button>
+      </div>
+    </div>
+
+    <truck-requests-table ng-init="init()"></truck-requests-table>
+  </div>
+
+  <div class="page-nav col-xs-6">
+    <nav>
+      <ul class="pagination margin-none">
+        <li ng-class="{disabled: page == 1}"
+            ng-click="changePage(1)"><a href="#">First</a></li>
+        <li ng-class="{disabled: page == 1}"
+            ng-click="changePage(page - 1)">
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="disabled"><a href="#">{{page}}</a></li>
+        <li ng-class="{disabled: page == pages || pages == 0}"
+            ng-click="changePage(page + 1)">
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        <li ng-class="{disabled: page == pages || pages == 0}"
+            ng-click="changePage(pages)"><a href="#">Last</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,139 @@
+<div>
+
+<ul class="nav nav-tabs active-white" id="table-1">
+  <li ng-class="{active: tab == 'Live'}"
+      ng-click="changeTab('Live')"><a>Live</a></li>
+  <li ng-class="{active: tab == 'History'}"
+      ng-click="changeTab('History'); fetchUpdatesHistory();"><a>History</a></li>
+</ul>
+<div class="tab-content">
+  <div ng-if="tab == 'Live'"
+       ng-class="{active: tab == 'Live'}"
+       class="tab-pane">
+    <table class="table cell-headings white-grey enlarged-td">
+      <tbody>
+        <tr>
+          <th>Pumps On</th>
+          <th>Pumps Off</th>
+          <th>Pumps Total</th>
+          <th>Pumps Pressure</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.pump_on_time.value | pumpTime }}</td>
+          <td>{{ receiver_data.pump_off_time.value | pumpTime }}</td>
+          <td>{{ receiver_data.pump_total_time.value | pumpTime }}</td>
+          <td>{{ receiver_data.pump_pressure.value }}</td>
+        </tr>
+        <tr>
+          <th>Inclination</th>
+          <th>Azimuth</th>
+          <th>Tool Face</th>
+          <th>Gamma</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.inc.value }}
+            <span class="cell-caption">{{ receiver_data.inc.time | date: 'date24' }}</span>
+          </td>
+          <td>{{ receiver_data.azm.value }}
+            <span class="cell-caption">{{ receiver_data.azm.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.tf.value }}
+            <span class="cell-caption">{{ receiver_data.tf.time | date: 'date24' }}</span>
+          </td>
+          <td>{{ receiver_data.gama.value }}
+            <span class="cell-caption">{{ receiver_data.gama.time | date: 'date24' }}</span>
+          </td>
+        </tr>
+        <tr>
+            <th>Temp(&#8457;)</th>
+            <th>Decode Avg</th>
+            <th>Az</th>
+            <th>Gravity</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.temperature.value }}
+            <span class="cell-caption">
+              {{ receiver_data.temperature.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.decode_percentage.value }}</td>
+          <td>{{ receiver_data.az.value }}
+            <span class="cell-caption">{{ receiver_data.az.time | date: 'date24' }}</span>
+          </td>
+          <td>{{ receiver_data.gravity.value }}
+            <span class="cell-caption">
+              {{ receiver_data.gravity.time | date: 'date24' }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+            <th>MagF</th>
+            <th>Dip Angle</th>
+            <th>BatV</th>
+            <th>Avg Quality</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.magf.value }}
+            <span class="cell-caption">
+              {{ receiver_data.magf.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.dipa.value }}
+            <span class="cell-caption">
+              {{ receiver_data.dipa.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.batv.value }}
+            <span class="cell-caption">
+              {{ receiver_data.batv.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ (receiver_data.average_quality.value | number:1) }}
+            <span class="cell-caption">
+              {{ receiver_data.average_quality.time | date: 'date24' }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+            <th>Pulse Avg</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.average_pulse.value | number: 1 }}
+            <span class="cell-caption">
+              {{ receiver_data.average_pulse.time | date: 'date24' }}
+            </span>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div ng-if="tab == 'History'"
+       ng-class="{active: tab == 'History'}"
+       class="tab-pane">
+    <table class="table" style="width:570px; table-layout: fixed; background-color: white;">
+      <tbody style="display: block;
+                    height: 468px;
+                    overflow-y: auto;">
+        <tr ng-repeat-start="update in history"></tr>
+        <tr ng-repeat-start="(key, value) in update"
+            ng-if="keyContains(key)"
+            ng-show="!!value">
+          <td style="width:190px;">{{update.time | date: 'medium'}}</td>
+          <td style="width:190px;">{{dataPoints[key]}}</td>
+          <td style="width:190px;">{{value}}</td>
+        </tr>
+        <tr ng-repeat-end></tr>
+        <tr ng-repeat-end ng-hide="true"></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,108 @@
+// .nav-alert-interior {
+//   border-bottom: 1pt solid #DDD;
+//   margin-bottom: 6pt;
+// }
+
+// .nav-li {
+//   padding: 0 3px 0 3px;
+// }
+
+.erdos-alert-container {
+  // position: relative;
+}
+
+.erdos-alert {
+  display: none;
+  width: inherit;
+  position: fixed;
+  bottom: 0px;
+  opacity: 0.7;
+}
+
+.client-info-bar {
+  margin-top: 1em;
+  margin-left: .1em;
+  margin-right: .1em;
+}
+
+#admin-popup-menu {
+  li {
+    height: 2em;
+  }
+  a {
+    height: 2em;
+  }
+}
+
+// #main-nav {
+//   padding-left: 0;
+//   width: 7em;
+//   float: left;
+//   .side-bar {
+//     background-color: rgba(19, 38, 67, 1.0);
+//     border: 0;
+//     border-radius: 0;
+//     ul {
+//       div.nav-icon {
+//         margin-top: 1.2em;
+//         a {
+//           color: rgba(146, 144, 145, 1.0);
+//           margin-left: 1.9em;
+//           font-size: 1.4em;
+//           .expanded-text {
+//             font-size: 0.7em;
+//             padding-top: 0;
+//             margin-left: 0.5em;
+//           }
+//         }
+//       }
+//     }
+//     .edge-container {
+//       background-color: rgba(15, 30, 51, 1.0);
+//       height: 6em;
+//       width: 7em;
+//       .hamburger {
+//         margin-left: 37%;
+//         margin-top: 25%;
+//       }
+//     }
+//     .edge-container.bottom {
+//       padding-top: 13%;
+//     }
+//   }
+// }
+
+// #main-nav.expanded-nav {
+//   width: 17em;
+//   .side-bar {
+//     ul {
+//       .expanded-logo {
+//         position: absolute;
+//         margin-top: -2.8em;
+//         margin-left: 5em;
+//       }
+//       div.nav-icon.global-search-bar {
+//         margin-top: 6em;
+//         input {
+//           border: 1px solid lighten(rgba(19, 38, 67, 1.0), 10%);
+//           width: 7.5em;
+//           background-color: rgba(19, 38, 67, 1.0);
+//         }
+//       }
+//     }
+//     .edge-container {
+//       width: 17em;
+//       .ellipsis {
+//         font-size: 1.5em;
+//         margin-left: 10%;
+//         margin-top: 10%;
+//       }
+//     }
+//     .edge-container.bottom {
+//       padding-top: 13%;
+//       div.nav-icon {
+//         float: left;
+//       }
+//     }
+//   }
+// }

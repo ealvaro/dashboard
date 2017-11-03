@@ -1,0 +1,88 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Details</h2>
+  </div>
+  <% %i( agitator
+         art
+         bit_type
+         brt
+         chlorides
+         circulating_hrs
+         gpm
+         item_start_hrs
+         max_temperature
+         motor_bend
+         mud_weight
+         rotating_hours
+         rpm
+         sand
+         sliding_hours
+         total_drilling_hours ).each do |field| %>
+  <div class="col-xs-2">
+    <strong><%= RunRecord.human_attribute_name field %></strong>
+  </div>
+    <div class="col-xs-2">
+      <%= @run_record.send(field) %>
+    </div>
+  <% end %>
+  <div class="col-xs-2">
+    <strong><%= RunRecord.human_attribute_name :tool %></strong>
+  </div>
+  <div class="col-xs-2">
+    <%= link_to @run_record.tool, tools_path(@run_record.object.tool ) %>
+  </div>
+  <div class="col-xs-2">
+    <strong><%= RunRecord.human_attribute_name :tool_type %></strong>
+  </div>
+  <div class="col-xs-2">
+    <%= @run_record.tool_type %>
+  </div>
+  <div class="col-xs-2">
+    <strong><%= RunRecord.human_attribute_name :job %></strong>
+  </div>
+  <div class="col-xs-2">
+    <%= link_to @run_record.job, job_path( @run_record.object.run.job ) %>
+  </div>
+  <div class="col-xs-2">
+    <strong><%= RunRecord.human_attribute_name :run %></strong>
+  </div>
+  <div class="col-xs-2">
+    <%= link_to @run_record.run, run_path( @run_record.object.run ) %>
+  </div>
+  <% if current_user.has_role? :superuser  %>
+    <div class="col-xs-2">
+      <strong><%= RunRecord.human_attribute_name :updated_at %></strong>
+    </div>
+    <div class="col-xs-2">
+      <%= @run_record.updated_at %>
+    </div>
+    <div class="col-xs-2">
+      <strong><%= RunRecord.human_attribute_name :created_at %></strong>
+    </div>
+    <div class="col-xs-2">
+      <%= @run_record.created_at %>
+    </div>
+  <% end %>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-11">
+    <h2>Images <small><a href="<%= new_run_record_image_path(@run_record) %>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a></small></h2>
+  </div>
+  <div class="col-xs-1">
+  </div>
+
+  <% for image in @run_record.images %>
+    <div class="col-xs-4">
+      <div class="thumbnail">
+        <a href="<%= image.file.url %>"><%= image_tag image.file.to_s %></a>
+        <div class="caption">
+          <h3><a href="<%= image.file.url %>"><%= image.name %></a></h3>
+          <p><%= image.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

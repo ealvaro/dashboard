@@ -1,0 +1,173 @@
+<% invoice = @invoice.raw_invoice %>
+<% run = @invoice.runs.first %>
+<div class="row">
+  <div class="col-xs-10">
+    <address>
+      <strong>LEAM, LLC</strong><br>
+      1 Leam Drive<br>
+      Conroe, TX<br>
+      United States<br>
+      (123) 123-1234
+    </address>
+  </div>
+  <div class="col-xs-2">
+    <div class="text-right">
+      <%= wicked_pdf_image_tag "leam-logo.jpg", class: "img-responsive", style: "margin: 15px 0", size: "150x150" unless defined?(show)%>
+      <%= image_tag "leam-logo.jpg", class: "img-responsive", style: "margin: 15px 0", size: "150x150" if defined?(show)%>
+    </div>
+  </div>
+</div>
+<br/>
+<br/>
+<div class="row">
+  <div class="col-xs-6">
+    <address>
+      <strong><%= invoice["client"]["name"] %></strong><br>
+      <%= invoice["client"]["address_street"] %><br>
+      <%= invoice["client"]["address_city"] %><br>
+      <%= invoice["client"]["country"] %><br>
+    </address>
+  </div>
+  <div class="col-xs-offset-2 col-xs-4">
+    <table border="1pt solid black" style="float: right">
+      <tr>
+        <td bgcolor="#CFCFCF"><%= Invoice.human_attribute_name :number %></td>
+        <td class="text-right"><%= invoice["number"] %></td>
+      </tr>
+      <tr>
+        <td bgcolor="#CFCFCF"><%= Invoice.human_attribute_name :date_of_issue %></td>
+        <td class="text-right"><%= invoice["date_of_issue"] %></td>
+      </tr>
+      <% for run in invoice["runs"] %>
+          <tr>
+            <td>Run <%= run["number"] %> Subtotal</td>
+            <td class="text-right"><%= number_to_currency run["damages_as_billed"]["subtotal"] / 100.0 %></td>
+          </tr>
+      <% end %>
+      <% if invoice["discount"] && invoice["discount"] > 0 %>
+        <tr>
+          <td bgcolor="#CFCFCF"><b><%= Invoice.human_attribute_name :discount %></b></td>
+          <td class="text-right"><b><%= number_to_currency invoice["discount"] / 100.0 %></b></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td bgcolor="#CFCFCF"><b><%= Invoice.human_attribute_name :total %></b></td>
+        <td class="text-right"><b><%= number_to_currency invoice["total"] / 100.0 %></b></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<h3>Job Details</h3>
+<table width="100%">
+  <tr>
+    <td><b><%= Rig.model_name.human %></b></td>
+    <td><%= run["rig"]["name"] %></td>
+    <td><b><%= Well.model_name.human %></b></td>
+    <td><%= run["well"]["name"] %></td>
+    <td><b><%= Formation.model_name.human %></b></td>
+    <td><%= run["formation"]["name"] if run["formation"] %></td>
+  </tr>
+</table>
+
+<% for run in invoice["runs"] %>
+    <div style="margin-top: 30pt">
+      <h4><%= Run.model_name.human  + " #" %> <%= run["number"] %></h4>
+    </div>
+    <table style="width: 100%;">
+      <tr>
+        <td><b><%= Run.human_attribute_name :motor_bend %></b></td>
+        <td><%= run["motor_bend_as_billed"] %></td>
+        <td><b><%= Run.human_attribute_name :mud_type %></b></td>
+        <td><%= run["mud_type_as_billed"] %></td>
+        <td><b><%= Run.human_attribute_name :circulating_hrs %></b></td>
+        <td><%= run["circulating_hrs_as_billed"] %></td>
+      </tr>
+      <tr>
+        <td><b><%= Run.human_attribute_name :rpm %></b></td>
+        <td><%= run["rpm_as_billed"] %></td>
+        <td><b><%= Run.human_attribute_name :sand %></b></td>
+        <td><%= run["sand_as_billed"] %></td>
+        <td><b><%= Run.human_attribute_name :rotating_hours %></b></td>
+        <td><%= run["rotating_hours_as_billed"] %></td>
+      </tr>
+      <tr>
+        <td><b><%= Run.human_attribute_name :max_temperature %></b></td>
+        <td><%= run["max_temperature_as_billed"] %></td>
+        <td><b><%= Run.human_attribute_name :chlorides %></b></td>
+        <td><%= run["chlorides_as_billed"] %></td>
+        <td><b><%= Run.human_attribute_name :sliding_hours %></b></td>
+        <td><%= run["sliding_hours_as_billed"] %></td>
+      </tr>
+      <tr>
+        <td><b><%= Run.human_attribute_name :max_shock %></b></td>
+        <td><%= run["max_shock_as_billed"] %></td>
+        <td></td>
+        <td></td>
+        <td><b>DD Hours</b></td>
+        <td><%= run["dd_hours_as_billed"] %></td>
+      </tr>
+      <tr>
+        <td><b><%= Run.human_attribute_name :max_vibe %></b></td>
+        <td><%= run["max_vibe_as_billed"] %></td>
+        <td></td>
+        <td></td>
+        <td><b><%= Run.human_attribute_name :agitator_distance %></b></td>
+        <td><%= run["agitator_distance_as_billed"] %></td>
+      </tr>
+      <tr>
+        <td><b><%= Run.human_attribute_name :shock_warnings %></b></td>
+        <td><%= run["shock_warnings_as_billed"] %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <div>
+      <h5><%= RunRecord.model_name.human.pluralize %></h5>
+    </div>
+    <table class="table table-condensed">
+      <tr bgcolor="#CFCFCF">
+        <th>
+          <%= Tool.human_attribute_name :product_line %>
+        </th>
+        <th>
+          <%= Tool.human_attribute_name :resource_group %>
+        </th>
+        <th>
+          <%= Tool.human_attribute_name :serial_number %>
+        </th>
+      </tr>
+      <% for rr in run["run_records"] %>
+          <tr>
+            <td><%= rr["tool"]["tool_type"]["name"] %></td>
+            <td><%= rr["tool"]["tool_type"]["description"] %></td>
+            <td><%= rr["tool"]["serial_number"] %></td>
+          </tr>
+      <% end %>
+    </table>
+    <h5><%= RunRecord.human_attribute_name :damages_as_billed %></h5>
+    <table class="table table-condensed">
+      <thead>
+      <tr bgcolor="#CFCFCF">
+        <th style="width: 65%"><%= Run.human_attribute_name :description %> </th>
+        <th colspan="2"><%= Tool.human_attribute_name :amount %></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% for damage in run["damages_as_billed"] %>
+        <% if damage[1].is_a?( Hash ) && damage[1]["amount"] && damage[1]["amount"] > 0%>
+          <tr>
+            <td><%= damage[1]["description"] %></td>
+            <td colspan="2"><%= number_to_currency damage[1]["amount"] / 100.0 %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr>
+        <td style="border: 0"></td>
+        <td bgcolor="#CFCFCF"><b>Run Subtotal</b></td>
+        <td><b><%= number_to_currency run["damages_as_billed"]["subtotal"] / 100.0 %></b></td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>

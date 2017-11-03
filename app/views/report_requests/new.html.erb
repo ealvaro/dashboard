@@ -1,0 +1,92 @@
+<% active_page(:report_requests) %>
+
+<top-bar ng-init="init('New Report Request')"></top-bar>
+
+<div class="container-fluid margin-top"
+     ng-controller="ReportRequestFormController">
+  <%= simple_form_for @report_request do |f| %>
+
+    <div style="margin-left:-90px;">
+      <% if f.object.errors.any? %>
+        <ul class="alert alert-danger list-unstyled"
+            style="margin-bottom:1em;">
+          <% f.object.errors.full_messages.each do |e| %>
+            <%= content_tag :li, e, class: "" %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+    <div id="new_report_request_job">
+      <% if @from_survey && @report_request.job %>
+        <%= f.input :job_id, label_html: { class: 'text-left compact-label col-xs-2' },
+                             input_html: { class: 'no-border custom-form-control',
+                                           value: @report_request.job.id,
+                                           style: 'width: 33.33%' } %>
+      <% else %>
+        <%= f.input :job_id, label_html: { class: 'text-left compact-label col-xs-2' },
+                             input_html: { class: 'no-border custom-form-control',
+                                           style: 'width: 33.33%',
+                                           'ng-model' => 'job',
+                                           'ng-change' => 'updateJob(job)' },
+                             as: :select,
+                             collection: Job.active %>
+      <% end %>
+    </div>
+
+
+    <div class="row">
+      <div class="thumbnail col-md-6 white-font <%= f.object.request_survey == 'true' ?  'primary-blue-bg' : 'primary-bisque-bg' %>"
+           style="padding-left: 15px; padding-right: 15px; margin-left: 15px;"
+           id="new_survey">
+        <div class="row">
+          <div class="col-xs-12 checkbox_header">
+            <%= f.input :request_survey, as: :boolean, boolean_style: :nested,
+                label: false, inline_label: "New Survey",
+                checked_value: true, unchecked_value: false,
+                input_html: {
+                  onclick: "toggleShow('report-requests-survey'); toggleBackground('new_survey');",
+                  checked: f.object.request_survey === "true"
+                }
+            %>
+          </div>
+        </div>
+        <%= render partial: "report_requests/survey", locals: {f: f} %>
+      </div>
+
+      <div class="col-md-6">
+        <% if current_user %>
+          <%= f.input :requested_by_id, as: :hidden, input_html: {value: current_user.id} %>
+        <% else %>
+          <%= f.input :requested_by_id, as: :hidden %>
+        <% end %>
+      </div>
+
+      <div class="thumbnail col-md-6 white-font <%= f.object.request_reports == 'true' ? 'primary-blue-bg' : 'primary-bisque-bg' %>"
+           style="padding-left: 15px; padding-right: 15px; margin-left: 15px;"
+           id="new_report">
+        <div class="row">
+          <div class="col-xs-12 checkbox_header">
+            <%= f.input :request_reports,
+                        label: false,
+                        inline_label: "Reports",
+                        as: :boolean,
+                        boolean_style: :nested,
+                        checked_value: true, unchecked_value: false,
+                        input_html: {
+                                      onclick: "toggleShow('report-requests-reports'); toggleBackground('new_report');",
+                                      checked: f.object.request_reports === "true"
+                                     }
+            %>
+          </div>
+        </div>
+        <%= render partial: "report_requests/reports", locals: {f: f, headers: @headers, scales: @scales, report_request: @report_request} %>
+      </div>
+    </div>
+
+    <%= link_to report_requests_path do %>
+      <div class="btn btn-bisque">Cancel</div>
+    <% end %>
+    <%= f.submit "Submit", class: "btn btn-orange" %>
+  <% end %>
+</div>

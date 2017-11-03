@@ -1,0 +1,1 @@
+ToolType.create number: 7, klass: "SmartBattery", name: "Smart Battery", description: "Smart Battery"

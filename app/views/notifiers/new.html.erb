@@ -1,0 +1,15 @@
+<% active_page(:alerts) %>
+
+<%= render partial: 'header' %>
+
+<div class="container-fluid">
+  <div class="page-header">
+    <h3>New Alert</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <notifier-form type="tab" notifier="<%= j @notifier_json %>"></notifier-form>
+    </div>
+  </div>
+</div>

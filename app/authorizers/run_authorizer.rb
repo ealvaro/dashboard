@@ -1,0 +1,2 @@
+class RunAuthorizer < JobAuthorizer
+end

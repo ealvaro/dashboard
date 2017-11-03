@@ -1,0 +1,176 @@
+<% active_page(:tools) %>
+<div ng-controller="EventsController" ng-init="init('<%= @event_json %>')">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-xs-6">
+        <h1><%= @event.event_type %></h1>
+      </div>
+      <div class="col-xs-3">
+        <% if @event.primary_asset_number %>
+          <h3><small>ASSET </small><%= @event.primary_asset_number %></h3>
+        <% end %>
+      </div>
+      <div class="col-xs-3">
+        <% if @event.board_serial_number %>
+          <h3><small>SN </small><%= link_to @event.board_serial_number, tool_path(@event.tool) %></h3>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Reporter Information</h3>
+      <div class="row">
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :user_email%></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.user_email }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :reporter_type %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.reporter_type }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :reporter_context %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.reporter_context }}&nbsp;</span>
+        </div>
+        <div ng-if="event.reporter_version" class="col-xs-6">
+          <strong><%= Event.human_attribute_name :reporter_version %></strong>
+        </div>
+        <div ng-if="event.reporter_version" class="col-xs-6 text-right">
+          <span>{{ event.reporter_version }}&nbsp;</span>
+        </div>
+        <div ng-if="event.region" class="col-xs-6">
+          <strong><%= Event.human_attribute_name :region %></strong>
+        </div>
+        <div ng-if="event.region" class="col-xs-6 text-right">
+          <span>{{ event.region }}&nbsp;</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h3>Tool Information</h3>
+      <div class="row">
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :primary_asset_number %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.primary_asset_number }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :board_serial_number %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.board_serial_number }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :hardware_version %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.hardware_version }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :board_firmware_version %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.board_firmware_version }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Tool.human_attribute_name :tool_uid %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.tool_uid | uid}}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :memory_usage_level %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.memory_usage_level + "%" }}&nbsp;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Event Information</h3>
+      <div class="row">
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :job_number %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.job_number }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :run_number %></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.run_number }}&nbsp;</span>
+        </div>
+        <div class="col-xs-6">
+          <strong><%= Event.human_attribute_name :time%></strong>
+        </div>
+        <div class="col-xs-6 text-right">
+          <span>{{ event.time | date: 'medium' }}&nbsp;</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h3>Environmental Information</h3>
+      <div class="row">
+        <div ng-if="event.shock_count" class="col-xs-6">
+          <strong><%= Event.human_attribute_name :shock_count %></strong>
+        </div>
+        <div ng-if="event.shock_count" class="col-xs-6 text-right">
+          <span>{{ event.shock_count }}&nbsp;</span>
+        </div>
+      </div>
+      <div class="row">
+        <div ng-if="event.max_shock" class="col-xs-6">
+          <strong><%= Event.human_attribute_name :max_shock %></strong>
+        </div>
+        <div ng-if="event.max_shock" class="col-xs-6 text-right">
+          <span>{{ event.max_shock }}&nbsp;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>Attachments</h3>
+      <div class="row">
+        <div class="col-xs-6" ng-repeat="asset in event.event_assets">
+          <a href="{{asset.url}}">{{ asset.name }}&nbsp;</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <h3>Notes</h3>
+      <div class="row">
+        <div class="col-xs-12">
+          {{ event.notes || "No notes present" }}&nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="hasConfigs()">
+    <div class="col-xs-12">
+      <h3>Configurations</h3>
+      <div ng-repeat="(key, value) in event.configs">
+        <div class="col-xs-3">
+          <strong>{{key | humanize}}</strong>
+        </div>
+        <div class="col-xs-1 text-right">
+          {{value}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

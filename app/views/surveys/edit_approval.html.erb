@@ -1,0 +1,48 @@
+<% active_page(:surveys) %>
+<div class="page-header">
+  <h2>Approve Survey <small><%= @job.name.upcase %>: Run <%= @run.number %></small></h2>
+</div>
+
+<%= simple_form_for @survey, url: update_approval_survey_path, method: :post do |f| %>
+  <div class="row">
+    <div class="col-xs-3">
+      <%= f.label :measured_depth, disabled: true %>
+    </div>
+    <div class="col-xs-3">
+      <%= f.input :measured_depth, disabled: true, label: false %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-3">
+      <%= f.label :inclination, disabled: true %>
+    </div>
+    <div class="col-xs-3">
+      <%= f.input :inclination, disabled: true, label: false %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-3">
+      <%= f.label :azimuth, disabled: true %>
+    </div>
+    <div class="col-xs-3">
+      <%= f.input :azimuth, disabled: true, label: false %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-3">
+      <%= f.label :accept, label: 'Approve?' %>
+    </div>
+    <div class="col-xs-3">
+      <%= f.input :accept, as: :radio_buttons, label: false %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 text-right">
+      <%= f.submit "Save Choice", class: "btn btn-primary", data: {disable_with: "saving..."} %>
+    </div>
+  </div>
+<% end %>

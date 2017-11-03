@@ -1,0 +1,76 @@
+<%= simple_form_for [:admin, user], html: { class: 'form-horizontal margin-top' } do |f| %>
+
+  <div class="col-xs-3">
+    <div class="row form-group">
+      <div class="col-xs-3">
+        <%= f.label :roles, class: 'text-left' %>
+      </div>
+      <div class="col-xs-9">
+        <%= f.input_field :roles, class: 'no-border',
+                          as: :check_boxes,
+                          collection: Role.all %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-4">
+    <div class="row form-group">
+      <div class="col-xs-4">
+        <%= f.label :name, class: 'text-left' %>
+      </div>
+      <div class="col-xs-8">
+        <%= f.input_field :name, class: 'no-border' %>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-xs-4">
+        <%= f.label :email, class: 'text-left' %>
+      </div>
+      <div class="col-xs-8">
+        <%= f.input_field :email, class: 'no-border' %>
+      </div>
+    </div>
+
+    <% if current_user.can? :update_password, user: user %>
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <%= f.label :password, class: 'text-left' %>
+        </div>
+        <div class="col-xs-8">
+          <%= f.input_field :password, class: 'no-border' %>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <%= f.label :password_confirmation, class: 'text-left' %>
+        </div>
+        <div class="col-xs-8">
+          <%= f.input_field :password_confirmation, class: 'no-border' %>
+        </div>
+      </div>
+    <% else %>
+      <span style="margin-bottom: 16px" class="text-muted">You can't change the password of an Admin user</span>
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <%= f.label :password, class: 'text-left' %>
+        </div>
+        <div class="col-xs-8">
+          <%= f.input_field :password, class: 'no-border',
+                                       disabled: true %>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <%= f.label :password_confirmation, class: 'text-left' %>
+        </div>
+        <div class="col-xs-8">
+          <%= f.input_field :password_confirmation, class: 'no-border',
+                                                    disabled: true %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= f.submit class: "btn btn-orange", data: {disable_with: "saving..."} %>
+  </div>
+<% end %>

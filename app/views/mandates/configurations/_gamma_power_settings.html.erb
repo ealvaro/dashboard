@@ -1,0 +1,24 @@
+<h3 class="row" style="margin-top:0;">Gamma Power Settings</h3>
+
+<div class="row form-group">
+  <div class="col-xs-6 compact-label">
+    <%= f.label :power_off_timeout, DualGammaMandate.human_attribute_name(:power_off_timeout),
+                                    class: 'text-left' %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input_field :power_off_timeout, class: 'no-border' %>
+  </div>
+</div>
+
+<div class="row form-group">
+  <div class="col-xs-6 compact-label">
+    <%= f.label :power_off_max_temp, DualGammaMandate.human_attribute_name(:power_off_max_temp),
+                                     class: 'text-left' %>
+  </div>
+  <div class="col-xs-5">
+    <%= f.input_field :power_off_max_temp, class: 'no-border' %>
+  </div>
+  <div class="col-xs-1 compact"
+       style="font-size:1.5em;">&deg;F
+  </div>
+</div>

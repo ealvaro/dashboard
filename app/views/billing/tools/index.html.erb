@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <%= render partial: 'billing_dashboard/navbar' %>
+
+  <div class="row" ng-controller="BillingToolsController" ng-init="init('<%= @tools_json %>')">
+
+    <div class="col-xs-8"></div>
+    <erdos-table objects="tools"
+                 cols="3"
+                 headers="headers"
+                 klass="'Tool'"
+                 loading="loading"
+                 search-text="searchText"
+                 no-actions="true"
+                 export-column-keys="exportColumnKeys"></erdos-table>
+  </div>
+</div>

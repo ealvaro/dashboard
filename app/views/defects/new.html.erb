@@ -1,0 +1,86 @@
+<div id="defects_new">
+  <div class="page-header">
+    <h1>Report a Bug</h1>
+  </div>
+  <%= simple_form_for @defect do |f| %>
+    <div class="row">
+      <div class="col-xs-12">
+        <% if f.object.errors.any? %>
+          <ul class="alert alert-danger list-unstyled">
+            <% f.object.errors.full_messages.each do |e| %>
+              <%= content_tag :li, e, class: "" %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        Please let us know what's not working so we can fix it A.S.A.P.
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-xs-2">
+        <%= f.label :summary %>
+      </div>
+      <div class="col-xs-10">
+        <%= f.input :summary, label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2">
+        <%= f.label :platform, label: "LEAM - Platform" %>
+      </div>
+      <div class="col-xs-10">
+        <%= f.input :platform, as: :select, collection: @platforms, label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2">
+        <%= f.label :description %>
+      </div>
+      <div class="col-xs-10">
+        <%= f.input :description, as: :text, input_html: {rows: 10}, label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2">
+        <%= f.label :attachment, label: "Attach file" %>
+      </div>
+      <div class="col-xs-10">
+        <%= f.input :attachment, as: :file, label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2">
+        <%= f.label :user_name, label: "Name" %>
+      </div>
+      <div class="col-xs-10">
+        <%= f.input :user_name, label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2">
+        <%= f.label :user_email, label: "Email" %>
+      </div>
+      <div class="col-xs-10">
+        <%= f.input :user_email, label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-10">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      </div>
+    </div>
+
+    <% end %>
+  </div>
+</div>

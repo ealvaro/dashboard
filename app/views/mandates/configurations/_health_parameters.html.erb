@@ -1,0 +1,25 @@
+<h3 style="margin-top:0;">Health Parameters</h3>
+<div class="row form-group padding-horizontal">
+  <div class="col-xs-6 compact-label">
+    <%= f.label :health_algorithm, DualGammaMandate.human_attribute_name(:health_algorithm),
+                                   class: 'text-left' %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input_field :health_algorithm, collection: [["Threshold Algorithm","threshold_algorithm"],["DGHA", "dgha"]],
+                                         include_blank: false,
+                                         class: 'no-border' %>
+  </div>
+</div>
+<div id="health-parameters-type" style="display: none">
+  <% (@mandate.class.available_health_params.reject{|str| str == "health_algorithm"}).each do |sym| %>
+    <div class="row form-group padding-horizontal">
+      <div class="col-xs-6 compact-label">
+        <%= f.label sym, DualGammaMandate.human_attribute_name( sym.to_sym ),
+                         class: 'text-left' %>
+      </div>
+      <div class="col-xs-6">
+        <%= f.input_field sym, class: 'no-border' %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,30 @@
+<h3>Firmware Updates</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Tool Type</th>
+    <th>Firmware Version</th>
+    <th>Summary</th>
+    <th>Date Uploaded</th>
+    <th>Min HW Version</th>
+    <th>Actions</th>
+  </tr>
+  <% firmware_updates.each do |u| %>
+    <tr>
+      <td><% if u && u.tool_type %><%= u.tool_type %><% end %></td>
+      <td><% if u && u.version %><%= u.version %><% end %></td>
+      <td><% if u && u.summary %><%= truncate u.summary, length: 50 %><% end %></td>
+      <td><%= u.created_at.strftime("%m/%d/%Y")%></td>
+      <td><%= u.hardware_version%></td>
+      <td>
+        <%= link_to u.binary.url, target: '_blank' do%>
+          <span class="fa fa-cloud-download"></span>
+        <% end %>
+        <%= link_to [:edit, u], target: '_blank'  do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate firmware_updates, remote: true %>

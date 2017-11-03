@@ -1,0 +1,140 @@
+<div style="color:grey">
+
+<div class="row">
+  <div class="col-xs-11">
+    <h4>Installation Details</h4>
+  </div>
+  <div class="col-md-1 text-right">
+    <a class="btn btn-danger" ng-show="installs.length > 0" ng-click="hide(install)">Hide</a>
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :version %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.version }}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :ip_address %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    <a href="http://www.iplocation.net/?query={{install.ip_address}}"><i class="fa fa-globe">&nbsp;{{ install.ip_address }}</i></a>
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :key %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.key }}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :dell_service_number %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.dell_service_number }}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :reporter_context %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.reporter_context | reporterContextFilter }}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :team_viewer_id %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.team_viewer_id}}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :team_viewer_password %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.team_viewer_password}}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :job_number %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.job_number}}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :run_number %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.run_number}}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :region %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.region }}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :computer_category %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.computer_category }}&nbsp;
+  </div>
+  <div class="col-xs-3">
+    <strong>
+      <%= Install.human_attribute_name :email %>
+    </strong>
+  </div>
+  <div class="col-xs-3">
+    {{ install.user_email }}&nbsp;
+  </div>
+</div>
+<br/>
+<br/>
+<div class="row" ng-if="tools.length > 0">
+  <div class="col-xs-11">
+    <h4>Recent Tool Activity</h4>
+  </div>
+  <div class="col-xs-1 text-right">
+    <a class="btn btn-default" ng-click="fetchToolData()" href="#"><i class="zmdi zmdi-refresh"></i></a>
+  </div>
+  <div class="col-xs-12">
+    <table class="table table-condensed grey-white">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Asset Number</th>
+          <th>User</th>
+          <th>Last Connected</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="tool in tools">
+          <td>{{ tool.cache.tool_type_name }}</td>
+          <td>
+            <a ng-href="{{tool.show_url}}">{{ tool.cache.primary_asset_number.length > 0 ? tool.cache.primary_asset_number : (tool.uid | uid)  }}</a>
+          </td>
+          <td>{{ tool.cache.user_email }}</td>
+          <td><span am-time-ago="{{ getDate( tool.cache, 'time' ) }}"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>

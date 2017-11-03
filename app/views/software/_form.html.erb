@@ -1,0 +1,23 @@
+<%= simple_form_for software, url: url do |f| %>
+  <%= f.association :software_type, label_html: { class: 'text-left compact-label col-xs-2' },
+                                    input_html: { class: 'no-border custom-form-control' } %>
+
+  <%= f.input :version, label_html: { class: 'text-left compact-label col-xs-2' },
+                        input_html: { class: 'no-border custom-form-control' },
+                        hint: "major.minor.patch (all required)",
+                        hint_html: { style: 'display: inline;' } %>
+
+  <%= f.input :summary, label_html: { class: 'text-left compact-label col-xs-2' },
+                        input_html: { class: 'no-border custom-form-control', style: 'height: 10em;' } %>
+
+  <%= f.input :installer_name, label_html: { class: 'text-left compact-label col-xs-2' },
+                               input_html: { class: 'no-border custom-form-control' },
+                               label: "Software Installer",
+                               hint: "(S3 Filename, without Bucket Name)",
+                               hint_html: { style: 'display: inline;' } %>
+
+  <div style="margin-top: 3em;">
+    <%= link_to "Cancel", overview_software_index_path, class: "btn btn-bisque" %>
+    <%= f.submit "Save", class: "btn btn-orange" %>
+  </div>
+<% end %>

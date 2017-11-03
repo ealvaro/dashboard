@@ -1,0 +1,9 @@
+<top-bar ng-init="init('Formations', 'Edit Formation')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+  </div>
+
+  <%= render partial: 'form', locals: {formation: @formation, url: formation_url( @formation, action: :update ) } %>
+</div>

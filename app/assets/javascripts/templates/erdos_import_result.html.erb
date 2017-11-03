@@ -1,0 +1,36 @@
+<div ng-init="init()">
+  <div id="importResult" style="margin-top: 16px">
+    <div class="row">
+      <div class="col-xs-12 text-right">
+        <select ng-model="log_level">
+          <option value="ERROR">Error</option>
+          <option value="VERBOSE">Verbose</option>
+        </select>
+      </div>
+    </div>
+    <table class="table grey-white" style="margin-top: 16px">
+      <tr>
+        <th>
+          Message Descripiton
+        </th>
+        <th>
+          Message Type
+        </th>
+        <th>
+          Message Created At
+        </th>
+      </tr>
+      <tr ng-repeat="update in updates | logLevel:log_level">
+        <td>
+          {{ update.description }}
+        </td>
+        <td>
+          {{ update.update_type }}
+        </td>
+        <td>
+          {{ update.created_at | date:'yyyy-MM-dd HH:mm:ss' }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

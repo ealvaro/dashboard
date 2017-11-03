@@ -1,0 +1,187 @@
+<div>
+
+<ul class="nav nav-tabs active-white" id="table-1">
+  <li ng-class="{active: tab == 'Live'}"
+      ng-click="changeTab('Live')"><a>Live</a></li>
+  <li ng-class="{active: tab == 'History'}"
+      ng-click="changeTab('History'); fetchUpdatesHistory();"><a>History</a></li>
+</ul>
+<div class="tab-content">
+  <div ng-if="tab == 'Live'"
+       ng-class="{active: tab == 'Live'}"
+       class="tab-pane">
+    <table class="table cell-headings white-grey enlarged-td">
+      <tbody>
+        <tr>
+          <th>Frequency(Hz)</th>
+          <th>Signal(mV)</th>
+          <th>Noise</th>
+          <th>S:N Ratio</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.frequency.value }}
+            <span class="cell-caption">{{ receiver_data.frequency.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.signal.value }}
+            <span class="cell-caption">{{ receiver_data.signal.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ (receiver_data.noise.value | number:2) }}
+            <span class="cell-caption">{{ receiver_data.noise.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.s_n_ratio.value }}
+            <span class="cell-caption">{{ receiver_data.s_n_ratio.time | date: 'date24' }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <th>Inclination</th>
+          <th>Azimuth</th>
+          <th>Tool Face</th>
+          <th>Mag. Dec.</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.inc.value }}
+            <span class="cell-caption">{{ receiver_data.inc.time | date: 'date24' }}</span>
+          </td>
+          <td>{{ receiver_data.azm.value }}
+            <span class="cell-caption">{{ receiver_data.azm.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.tf.value }}
+            <span class="cell-caption">{{ receiver_data.tf.time | date: 'date24' }}</span>
+          </td>
+          <td>{{ receiver_data.mag_dec.value }}
+            <span class="cell-caption">{{ receiver_data.mag_dec.time | date: 'date24' }}</span>
+          </td>
+        </tr>
+        <tr>
+          <th>Temp(&#8451;)</th>
+          <th>Gamma</th>
+          <th>Az</th>
+          <th>Gravity</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.temperature.value }}
+            <span class="cell-caption">
+              {{ receiver_data.temperature.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.gama.value }}
+            <span class="cell-caption">{{ receiver_data.gama.time | date: 'date24' }}</span>
+          </td>
+          <td>{{ receiver_data.az.value }}
+            <span class="cell-caption">{{ receiver_data.az.time | date: 'date24' }}</span>
+          </td>
+          <td>{{ receiver_data.gravity.value }}
+            <span class="cell-caption">
+              {{ receiver_data.gravity.time | date: 'date24' }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+            <th>MagF</th>
+            <th>Dip Angle</th>
+            <th>Battery</th>
+            <th>Power</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.magf.value }}
+            <span class="cell-caption">
+              {{ receiver_data.magf.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.dipa.value }}
+            <span class="cell-caption">
+              {{ receiver_data.dipa.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.battery_number.value }}
+            <span class="cell-caption">
+              {{ receiver_data.battery_number.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ (receiver_data.power.value | number:1) }}
+            <span class="cell-caption">
+              {{ receiver_data.power.time | date: 'date24' }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+            <th>Annular Pressure</th>
+            <th>Bore Pressure</th>
+            <th>Delta MTF</th>
+            <th>Gravity Roll</th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.annular_pressure.value }}
+            <span class="cell-caption">
+              {{ receiver_data.annular_pressure.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.bore_pressure.value }}
+            <span class="cell-caption">
+              {{ receiver_data.bore_pressure.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ receiver_data.delta_mtf.value }}
+            <span class="cell-caption">
+              {{ receiver_data.delta_mtf.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ (receiver_data.grav_roll.value | number:2) }}
+            <span class="cell-caption">
+              {{ receiver_data.grav_roll.time | date: 'date24' }}
+            </span>
+          </td>
+        </tr>
+        <tr>
+            <th>Mag Roll</th>
+            <th>Gamma Shock (g)</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+          <td>{{ receiver_data.mag_roll.value }}
+            <span class="cell-caption">
+              {{ receiver_data.mag_roll.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>{{ (receiver_data.gamma_shock.value | number:2) }}
+            <span class="cell-caption">
+              {{ receiver_data.gamma_shock.time | date: 'date24' }}
+            </span>
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div ng-if="tab == 'History'"
+       ng-class="{active: tab == 'History'}"
+       class="tab-pane">
+    <table class="table" style="width:570px; table-layout: fixed; background-color: white;">
+      <tbody style="display: block;
+                    height: 468px;
+                    overflow-y: auto;">
+        <tr ng-repeat-start="update in history"></tr>
+        <tr ng-repeat-start="(key, value) in update"
+            ng-if="keyContains(key)"
+            ng-show="!!value">
+          <td style="width:190px;">{{update.time | date: 'medium'}}</td>
+          <td style="width:190px;">{{dataPoints[key]}}</td>
+          <td style="width:190px;">{{value}}</td>
+        </tr>
+        <tr ng-repeat-end></tr>
+        <tr ng-repeat-end ng-hide="true"></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>

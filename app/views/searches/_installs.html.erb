@@ -1,0 +1,27 @@
+<h3>Installations</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Application</th>
+    <th>Version</th>
+    <th>TeamViewer ID</th>
+    <th>Email</th>
+    <th>Region</th>
+    <th>Job</th>
+    <th>Run</th>
+    <th>Last Updated</th>
+  </tr>
+  <% installs.each do |i| %>
+    <tr>
+      <td><% if i && i.application_name %><%= i.application_name %><% end %></td>
+      <td><% if i && i.version %><%= i.version %><% end %></td>
+      <td><% if i && i.team_viewer_id %><%= i.team_viewer_id %><% end %></td>
+      <td><% if i && i.user_email %><%= i.user_email %><% end %></td>
+      <td><% if i && i.region %><%= i.region %><% end %></td>
+      <td><% if i && i.job_number %><%= i.job_number %><% end %></td>
+      <td><% if i && i.run_number %><%= i.run_number %><% end %></td>
+      <td><% if i %><%= time_ago_in_words i.updated_at %> ago<% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate installs, remote: true %>

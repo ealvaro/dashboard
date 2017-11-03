@@ -1,0 +1,13 @@
+<div class="row">
+  <h3 style="margin-top:0;">Shock</h3>
+</div>
+<% (@mandate.class.shock_params).each do |sym| %>
+    <div class="row form-group">
+      <div class="col-xs-6 compact-label">
+        <%= f.label sym %>
+      </div>
+      <div class="col-xs-6">
+        <%= f.input_field sym, class: 'no-border' %>
+      </div>
+    </div>
+<% end %>

@@ -1,0 +1,9 @@
+<top-bar ng-init="init('Runs', 'New Run')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+  </div>
+
+  <%= render partial: 'form', locals: {run: @run, url: runs_url( @run, action: :create ) } %>
+</div>

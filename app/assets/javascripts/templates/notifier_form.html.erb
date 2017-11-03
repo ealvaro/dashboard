@@ -1,0 +1,94 @@
+<form name="notifierForm"
+      ng-class="{submitted:notifierForm.submitted}"
+      ng-init="init()"
+      novalidate>
+  <div class="form-group">
+    <span class="col-1 bold">Alert Name</span>
+    <input name="name"
+    type="text"
+    class="form-control alert-inline-control"
+    ng-model="notifier.name"
+    placeholder="Enter name"
+    required>
+    <div ng-show="showRequired('name')">
+      <span class="alert-required help-block">must be filled in</span>
+    </div>
+  </div>
+
+  <notifier-group group="notifier.configuration"
+                  options="data.matcherSelect.options"
+                  uniquify="uniquify"
+                  show-required="showRequired"></notifier-group>
+
+  <div class="form-group alert-indent condition-input"
+       ng-repeat="condition in notifier.configuration.conditions">
+    <notifier-condition condition="condition"
+                        add-condition="add_condition(notifier.configuration.conditions, $index)"
+                        add-grouping="add_grouping(notifier.configuration.conditions, $index)"
+                        remove="remove(notifier.configuration.conditions, $index)"
+                        uniquify="uniquify"
+                        show-required="showRequired"
+                        can-add-groups=true>
+    </notifier-condition>
+
+    <notifier-group group="condition"
+                    options="data.matcherSelect.options"
+                    uniquify="uniquify"
+                    show-required="showRequired"></notifier-group>
+
+    <div class="form-group alert-indent"
+         ng-repeat="subcondition in condition.conditions">
+      <notifier-condition condition="subcondition"
+                          add-condition="add_condition(condition.conditions, $index)"
+                          add-grouping="add_grouping(condition.conditions, $index)"
+                          remove="remove(condition.conditions, $index, notifier.configuration.conditions, $parent.$index)"
+                          uniquify="uniquify"
+                          show-required="showRequired"
+                          can-add-groups=true>
+      </notifier-condition>
+
+      <notifier-group group="subcondition"
+                      options="data.matcherSelect.options"
+                      uniquify="uniquify"
+                      show-required="showRequired">
+      </notifier-group>
+
+      <div class="form-group alert-indent"
+           ng-repeat="subsubcondition in subcondition.conditions">
+        <notifier-condition condition="subsubcondition"
+                            add-condition="add_condition(subcondition.conditions, $index)"
+                            add-grouping="add_grouping(subcondition.conditions, $index)"
+                            remove="remove(subcondition.conditions, $index, condition.conditions, $parent.$index)"
+                            uniquify="uniquify"
+                            show-required="showRequired"
+                            can-add-groups=true>
+        </notifier-condition>
+
+        <notifier-group group="subsubcondition"
+                        options="data.matcherSelect.options"
+                        uniquify="uniquify"
+                        show-required="showRequired">
+        </notifier-group>
+
+        <div class="form-group alert-indent"
+             ng-repeat="subsubsubcondition in subsubcondition.conditions">
+          <notifier-condition condition="subsubsubcondition"
+                              add-condition="add_condition(subsubcondition.conditions, $index)"
+                              add-grouping="add_grouping(subsubcondition.conditions, $index)"
+                              remove="remove(subsubcondition.conditions, $index, subcondition.conditions, $parent.$index)"
+                              uniquify="uniquify"
+                              show-required="showRequired"
+                              can-add-groups=false>
+          </notifier-condition>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input class="btn btn-orange"
+         type="submit"
+         value="{{submitText}}"
+         ng-click="submitFunction()"/>
+  <input class="btn btn-default" type="button"
+         value="Cancel" ng-click="cancel()"/>
+</form>

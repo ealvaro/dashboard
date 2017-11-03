@@ -1,0 +1,45 @@
+<top-bar ng-init="init('Clients')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="row vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+
+    <div class="pull-right margin-right">
+      <%= link_to new_client_path, class: "btn btn-orange pull-right" do %>
+        <i class="zmdi zmdi-plus"></i> <%= "New #{Client.model_name.human}" %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-4 pull-right">
+      <%= render partial: 'searches/client_info_search_form', locals: { type: 'clients' } %>
+    </div>
+  </div>
+
+  <table class="table white-grey">
+    <thead>
+    <tr>
+      <th>
+        <%= Client.model_name.human %>
+      </th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for client in @clients %>
+      <tr>
+        <td>
+          <%= link_to client.name, client_path(client) %>
+        </td>
+        <td class="text-right">
+          <a href="<%= edit_client_path(client) %>" class="btn btn-default">
+            <i class="zmdi zmdi-edit"></i>
+          </a>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @clients %>
+</div>

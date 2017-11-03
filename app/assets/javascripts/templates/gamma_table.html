@@ -1,0 +1,13 @@
+<div>
+
+<div ng-if="loading">
+  <div class="progress progress-striped active">
+    <div class="progress-bar" style="width: 100%"></div>
+  </div>
+  <small>loading...</small>
+</div>
+<div ng-if="!loading">
+  <em-gamma-table gammas="objects" height="380"></em-gamma-table>
+</div>
+
+</div>

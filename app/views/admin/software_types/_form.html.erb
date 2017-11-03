@@ -1,0 +1,25 @@
+<%= simple_form_for [:admin, software_type], html: { class: 'form-horizontal margin-top' } do |f| %>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <%= f.label :name, class: 'text-left' %>
+        </div>
+        <div class="col-xs-8">
+          <%= f.input_field :name, class: 'no-border' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 compact">
+      <%= f.button :button, class: "btn btn-primary ",
+                            data: {disable_with: "saving..."} do %>
+        <i class="zmdi zmdi-save"></i>
+      <% end %>
+      <%= link_to [:admin, software_type], method: :delete,
+                                           data: {confirm: "Positive you want to destroy?", disable: "destroying.."},
+                                           class: "btn btn-danger" do %>
+        <i class="zmdi zmdi-delete"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %>

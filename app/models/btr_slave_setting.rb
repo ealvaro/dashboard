@@ -1,0 +1,2 @@
+class BtrSlaveSetting < ReceiverSetting
+end

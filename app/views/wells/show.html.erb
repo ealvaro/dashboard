@@ -1,0 +1,64 @@
+<top-bar ng-init="init('Wells', '<%= @well.name.try(:capitalize) %>')"></top-bar>
+
+<div class="row">
+  <div class="col-xs-12 vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+
+    <div class="btn-group pull-right margin-right">
+      <%= link_to edit_well_path( @well ), class: "btn btn-primary" do %>
+        <i class="zmdi zmdi-edit"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="col-xs-12 thumbnail">
+        <div class="col-xs-3">
+          <strong><%= Well.human_attribute_name(:name) %></strong>
+        </div>
+        <div class="col-xs-3">
+          <%= @well.name %>
+        </div>
+        <% unless @well.formation.blank? %>
+          <div class="col-xs-3">
+            <strong><%= Well.human_attribute_name(:formation) %></strong>
+          </div>
+          <div class="col-xs-3">
+            <%= @well.formation %>
+          </div>
+        <% end %>
+        <div class="col-xs-3">
+          <strong><%= Well.human_attribute_name(:rig) %></strong>
+        </div>
+        <div class="col-xs-3">
+          <table>
+            <% for rig in @well.rigs %>
+              <tr>
+                <td>
+                  <%= rig.name %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+        <% if current_user.has_role? :superuser %>
+          <div class="col-xs-3">
+            <strong><%= Well.human_attribute_name(:created_at) %></strong>
+          </div>
+          <div class="col-xs-3">
+            <%= @well.created_at %>
+          </div>
+          <div class="col-xs-3">
+            <strong><%= Well.human_attribute_name(:updated_at) %></strong>
+          </div>
+          <div class="col-xs-3">
+            <%= @well.updated_at %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<h3>Tool Types</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+  <% tool_types.each do |t| %>
+    <tr>
+      <td><% if t && t.klass %><%= link_to t.name, t, target: '_blank' %><% end %></td>
+      <td><% if t && t.description %><%= t.description %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate tool_types, remote: true %>

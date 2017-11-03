@@ -1,0 +1,157 @@
+<% active_page(:surveys) %>
+
+<top-bar ng-init="init('Recent Surveys', 'Import or Apply Corrections')"></top-bar>
+
+<div class="container-fluid">
+
+  <%= simple_form_for @form, url: apply_corrections_surveys_path, html: { class: 'form-horizontal margin-top' } do |f| %>
+
+    <div class="form-group">
+      <%= f.label :job_id, class: 'col-xs-2 text-left' %>
+      <div class="col-xs-4">
+        <%= f.input_field :job_id, as: :select, collection: Job.all, class: 'no-border' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :run_id, class: 'col-xs-2 text-left' %>
+      <div class="col-xs-4">
+        <%= f.input_field :run_id, as: :select, label_method: :number, collection: (@runs || []), class: 'no-border' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :side_track_number, class: 'col-xs-2 text-left' %>
+      <div class="col-xs-4">
+        <%= f.input_field :side_track_number, class: 'no-border' %>
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <% if @form.data.present? %>
+        <%= @form.applied_records(@run).count %> Applied.<br/>
+        <%= @form.created_count(@run)%> Created.<br/>
+      <% end %>
+    </div>
+    <div class="col-sm-2">
+      <% if @form.data.present? %>
+        <%= f.submit "Apply", class: "btn btn-lg btn-success" %>
+      <% end %>
+    </div>
+
+    <% if @form.data.present? %>
+      <div class="row">
+        <div class="col-xs-12">
+          <h5>Preview of Records</h5>
+          <table class="table table-ordered table-striped">
+            <thead>
+              <tr>
+                <th>MD</th>
+                <th>Inclination</th>
+                <th>Azimuth</th>
+                <th>DipA</th>
+                <th>Gx</th>
+                <th>Gy</th>
+                <th>Gz</th>
+                <th>Hx</th>
+                <th>Hy</th>
+                <th>Hz</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @form.data.each do |h|%>
+                <tr>
+                  <td><%= h[:md] %></td>
+                  <td><%= h[:inc] %></td>
+                  <td><%= h[:azi] %></td>
+                  <td><%= h[:dipa] %></td>
+                  <td><%= h[:gx] %></td>
+                  <td><%= h[:gy] %></td>
+                  <td><%= h[:gz] %></td>
+                  <td><%= h[:hx] %></td>
+                  <td><%= h[:hy] %></td>
+                  <td><%= h[:hz] %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row vert-margins">
+      <div class="col-xs-12 thin"
+           style="font-size: 1.2em;">
+        Select Columns for Import
+      </div>
+    </div>
+
+    <div class="row col-xs-12">
+      <% [:order_md, :order_inc, :order_azi, :order_dipa, :order_gx, :order_gy].each do |field| %>
+
+        <div class="col-xs-2 compact-label">
+          <%= f.label field, field.to_s.upcase[6..-1], class: 'col-xs-3 text-left compact-label' %>
+          <div class="col-xs-9">
+            <%= f.input_field field, as: :select, collection: 1..12, class: 'no-border' %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+
+    <div class="row col-xs-12 pull-left">
+      <% [:order_gz, :order_hx, :order_hy, :order_hz].each do |field| %>
+
+        <div class="col-xs-2 compact-label">
+          <%= f.label field, field.to_s.upcase[6..-1], class: 'col-xs-3 text-left compact-label' %>
+          <div class="col-xs-9">
+            <%= f.input_field field, as: :select, collection: 1..12, class: 'no-border' %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <div class="col-xs-2 compact-label">
+        <%= f.label :col_sep, "Column Separator", class: 'text-left compact-label' %>
+      </div>
+      <div class="col-xs-2 compact-label">
+        <div class="col-xs-9 pull-right">
+          <%= f.input_field :col_sep, as: :select, collection: ["," , "|" , "Tab"], class: 'no-border' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 vert-margins">
+        <%= f.label :data_file, class: 'col-xs-2 text-left compact-label' %>
+        <div class="col-xs-4">
+          <%= f.input_field :data_file, as: :file, class: 'no-border' %>
+        </div>
+        <div class="compact-label thin">
+          CSV, XLS, or XLSX File. Or use the pasted data below
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= f.label :pasted_data, style: 'padding-bottom: 0.5em;' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= f.input_field :pasted_data, as: :text, rows: 10 %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 vert-margins">
+        <%= f.submit "Load and Preview Data", class: "btn btn-orange" %>
+        <%= link_to surveys_path do %>
+          <div class="btn btn-bisque">Cancel</div>
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

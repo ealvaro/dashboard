@@ -1,0 +1,9 @@
+<% active_page(:tools) %>
+
+<top-bar ng-init="init('Tool', '<%= @tool.tool_type.try(:name) %> <%= @tool.uid %> Events')"></top-bar>
+
+<div ng-controller="ToolEventHistoryController"
+     ng-init="init('<%= @tool.object.uid %>')"
+     class="container-fluid margin-top">
+  <events-table loading="loading" events="events" uid="tool_uid"></events-table>
+</div>

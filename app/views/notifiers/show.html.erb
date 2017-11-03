@@ -1,0 +1,18 @@
+<% active_page(:alerts) %>
+
+<%= render partial: 'header' %>
+
+<div class="container-fluid" style="padding-top: 15px">
+  <div class="row">
+    <div class="col-md-12">
+      <dl class="dl-horizontal">
+        <dt>Alert <%= UpdateNotifier.human_attribute_name :name %></dt>
+        <dd><%= @notifier.name %></dd>
+        <dt><%= UpdateNotifier.human_attribute_name :configuration %></dt>
+        <dd><%= @notifier.pretty_configuration %></dd>
+        <dt>Type</dt>
+        <dd><%= @notifier.display_type %></dd>
+      </dl>
+    </div>
+  </div>
+</div>

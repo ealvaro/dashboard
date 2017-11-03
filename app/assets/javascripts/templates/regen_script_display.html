@@ -1,0 +1,19 @@
+<table fixed-header class="table table-striped" style="width: 100%; height: 200px;">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Progress</th>
+      <th>Step</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-if="objects.length === 0">
+      <td></td><td></td><td></td>
+    </tr>
+    <tr ng-repeat="object in objects">
+      <td>{{ scriptStatus(object) }}</td>
+      <td><fillbar static-color="true" attribute="object.current_step / object.step_count * 100 | number:0"></fillbar></td>
+      <td>{{ object.current_step_name }}</td>
+    </tr>
+  </tbody>
+</table>

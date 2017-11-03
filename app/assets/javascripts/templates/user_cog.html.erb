@@ -1,0 +1,10 @@
+<div class="text-right" style="width: 80px">
+  <div class="btn-group">
+    <a class="btn btn-default" ng-href="{{user.edit_url}}">
+      <i class="zmdi zmdi-edit"></i>
+    </a>
+    <a ng-if="user.destroy_url" class="btn btn-danger" ng-click="destroy(user)">
+      <i class="zmdi zmdi-delete"></i>
+    </a>
+  </div>
+</div>

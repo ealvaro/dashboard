@@ -1,0 +1,56 @@
+<div class="row report-requests-reports">
+  <div class="col-xs-12">
+    <table class="table table-bordered">
+      <tr>
+        <th></th>
+        <% headers.each do |header| %>
+        <th class="<%= 'white-font' unless action_name == 'show' %>"> <%= header %> </th>
+        <% end %>
+      </tr>
+      <% scales.each do |scale,report_request_types| %>
+      <tr>
+        <td><%= scale %></td>
+        <% report_request_types.each do |report_request_type| %>
+        <td>
+          <%= check_box_tag "report_request[report_request_type_ids][]", report_request_type.id, report_request.report_request_type_ids.include?(report_request_type.id) %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<div class="row report-requests-reports">
+  <div class="col-xs-12">
+    <%= f.input :las_export, as: :boolean, boolean_style: :nested,
+        checked_value: true, unchecked_value: false,
+        label: false, inline_label: "LAS Export",
+        html: { class: "report-request-input" },
+        input_html: { class: 'flat-select' }
+        %>
+    <hr/>
+  </div>
+</div>
+
+<div class="row report-requests-reports">
+  <div class="col-xs-6">
+    <%= f.label :start_depth %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input :start_depth, label: false,
+                              input_html: { "ng-model" => "data.start_depth",
+                                            class: 'flat-select' } %>
+  </div>
+</div>
+
+<div class="row report-requests-reports">
+  <div class="col-xs-6">
+    <%= f.label :end_depth, label: "End Depth" %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input :end_depth, label: false,
+                            input_html: { "ng-model" => "data.end_depth",
+                                          class: 'flat-select' } %>
+  </div>
+</div>

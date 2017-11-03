@@ -1,0 +1,64 @@
+<% active_page(:surveys) %>
+
+<top-bar ng-init="init('Recent Surveys')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="vert-margins text-right">
+
+    <a href="/surveys/corrections">
+      <button class="btn btn-orange">
+      Import or Apply Corrections
+      </button>
+    </a>
+
+    <a href="/surveys/new">
+      <button class="btn btn-orange">
+        Add By Hand
+      </button>
+    </a>
+
+    <a href="/survey_imports">
+      <button class="btn btn-orange">
+        Survey Imports
+      </button>
+    </a>
+
+  </div>
+
+  <table class="table white-grey">
+    <thead>
+      <th>Job</th>
+      <th>Run</th>
+      <th>MeasuredDepth</th>
+      <th>Side-Track</th>
+      <th>Inclination</th>
+      <th>Azimuth</th>
+      <th>Corrected</th>
+      <th>Time</th>
+      <th>Details</th>
+    </thead>
+    <tbody>
+      <% @surveys.each do |s|%>
+        <% survey = s.versions.last %>
+        <tr>
+          <td><% if survey.job.present? %><%= link_to survey.job.name, surveys_by_job_path(survey.job) %><% end %></th>
+          <td><% if survey.run.present? %><%= survey.run.number%><% end %></th>
+          <th><%= survey.measured_depth %></th>
+          <td><%= survey.side_track ? survey.side_track.number : nil %></th>
+          <td><%= survey.inclination %></th>
+          <td><%= survey.azimuth %></th>
+          <td><%= survey.corrected? %></th>
+          <td><%= timeago_tag survey.created_at %></th>
+          <td>
+            <%= link_to survey do %>
+              <button class="btn btn-default"><i class="zmdi zmdi-assignment"></i></button>
+            <% end %>
+          </th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @surveys %>
+</div>

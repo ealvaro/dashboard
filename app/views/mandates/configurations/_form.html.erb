@@ -1,0 +1,13 @@
+<div id=<%= div_id %>>
+  <h3 class=<%= klass %> style="margin-top:0;"><%= title %></h3>
+  <% mandate_params.each do |sym| %>
+    <div class="row form-group <%= padding %>">
+      <div class="col-xs-6 compact-label">
+        <%= f.label sym, class: 'text-left' %>
+      </div>
+      <div class="col-xs-6">
+        <%= f.input_field sym, class: 'no-border' %>
+      </div>
+    </div>
+  <% end %>
+</div>

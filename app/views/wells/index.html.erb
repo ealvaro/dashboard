@@ -1,0 +1,50 @@
+<top-bar ng-init="init('Wells')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="row vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+
+    <div class="pull-right margin-right">
+      <%= link_to new_well_path, class: "btn btn-orange pull-right" do %>
+        <i class="zmdi zmdi-plus"></i> <%= "New #{Well.model_name.human}" %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-4 pull-right">
+      <%= render partial: 'searches/client_info_search_form', locals: { type: 'wells' } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <table class="table white-grey">
+        <thead>
+        <tr>
+          <th>
+            <%= Well.model_name.human %>
+          </th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for well in @wells %>
+          <tr>
+            <td>
+              <%= link_to well.name, well_path(well) %>
+            </td>
+            <td class="text-right">
+              <a href="<%= edit_well_path(well) %>" class="btn btn-default">
+                <i class="zmdi zmdi-edit"></i>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <%= paginate @wells %>
+    </div>
+  </div>
+</div>

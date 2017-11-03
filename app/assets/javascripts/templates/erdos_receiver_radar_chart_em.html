@@ -1,0 +1,68 @@
+<div ng-init="init()" class="panel">
+    <div class="panel-body pie-chart">
+        <div class="radar-chart {{channel}}">
+            <div id="circle0">
+                <div id="circle_inner0">
+                    <div id="circle1">
+                        <div id="circle_inner1">
+                            <div id="circle2">
+                                <div id="circle_inner2">
+                                    <div id="circle3">
+                                        <div id="circle_inner3">
+                                            <div id="circle4">
+                                                <div id="circle_inner4">
+                                                    <div id="circle5">
+                                                        <div id="circle_inner5">
+                                                            <div id="circle6">
+                                                                <div id="ball0" class="ball" ng-show="balls[0] != undefined"></div>
+                                                                <div id="ball1" class="ball" ng-show="balls[1] != undefined"></div>
+                                                                <div id="ball2" class="ball" ng-show="balls[2] != undefined"></div>
+                                                                <div id="ball3" class="ball" ng-show="balls[3] != undefined"></div>
+                                                                <div id="ball4" class="ball" ng-show="balls[4] != undefined"></div>
+                                                                <div id="ball5" class="ball" ng-show="balls[5] != undefined"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pie-chart-info">
+            <div class="pos-center-top">
+                Last Update
+                <span class="orange-text">
+                {{ receiver_data.time.value | date: 'date24' }}
+            </span>
+            </div>
+            <div class="pos-left-top">
+                <span class="block bold">TF</span>
+                <span class="big-bold block">{{ receiver_data.tf.value || "0.00" }}</span>
+                <span class="block">{{ receiver_data.tf.time | date: 'date24' }}</span>
+            </div>
+            <div class="pos-right-top">
+                <span class="block bold">TFO</span>
+                <span class="big-bold block">{{ receiver_data.tfo.value || "0.00" }}</span>
+                <span class="block">{{ receiver_data.tfo.time | date: 'date24' }}</span>
+            </div>
+            <div class="pos-left-bottom">
+                <span class="block bold">INC</span>
+                <span class="big-bold block">{{ receiver_data.inc.value || "0.00" }}</span>
+                <span class="block">{{ receiver_data.inc.time | date: 'date24' }}</span>
+            </div>
+            <div class="pos-right-bottom">
+                <span class="block bold">AZM</span>
+                <span class="big-bold block">{{ receiver_data.azm.value || "0.00" }}</span>
+                <span class="block">{{ receiver_data.azm.time | date: 'date24' }}</span>
+            </div>
+        </div>
+        <div class="row triangle-alerts">
+        </div>
+    </div>
+</div>

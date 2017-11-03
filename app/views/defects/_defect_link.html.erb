@@ -1,0 +1,9 @@
+<% if request.env["HTTP_USER_AGENT"] =~ /MSIE 8.0/ || request.env["HTTP_USER_AGENT"] =~ /MSIE 9.0/ %>
+  <%= link_to new_defect_path, data: {toggle: "tooltip", placement: 'top'}, title: "Bug Report" do %>
+    <i class="icon zmdi-bug"></i>
+  <% end %>
+<% else %>
+  <a class="bug-report-element" href="#" data-toggle="tooltip" data-placement="top" title="Bug Report">
+    <i class="icon zmdi-bug"></i>
+  </a>
+<% end %>

@@ -1,0 +1,22 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'Users')"></top-bar>
+
+<div ng-controller="AdminUsersController" ng-init="init('<%= j @users_json %>')" class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 vert-margins">
+      <%= link_to new_admin_user_path, class: "btn btn-primary" do %>
+        <i class="zmdi zmdi-plus"></i> New User
+      <% end %>
+    </div>
+
+    <erdos-table objects="users"
+                 cols="2"
+                 headers="headers"
+                 klass="'User'"
+                 loading="loading"
+                 search-text="searchText"
+                 export-column-keys="exportColumnKeys"></erdos-table>
+
+  </div>
+</div>

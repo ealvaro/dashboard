@@ -1,0 +1,84 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div ng-controller="InvoicesController" ng-model="invoice" ng-init="newInit()">
+  <div class="row">
+    <div class="col-md-12">
+      <table style="width: 100%">
+        <colgroup>
+          <col style="width: 25%">
+          <col style="width: 25%">
+          <col style="width: 25%">
+          <col style="width: 25%">
+        </colgroup>
+        <tr>
+          <td>
+            <strong><%= Client.model_name.human %></strong>
+          </td>
+          <td>
+            <select ng-if="!invoice.client" ng-model="invoice.client" ng-options="client as client.name for client in clients"></select>
+            <span ng-if="invoice.client" ng-bind="invoice.client.name"></span>
+          </td>
+          <td>
+            <strong><div ng-show="invoice.runs.length > 0"><%= Invoice.human_attribute_name :discount_percent %></div></strong>
+          </td>
+          <td>
+            <div ng-show="invoice.runs.length > 0"><input style="width: 50%" type="number" min="0.0" max="100.0" ng-model="invoice.discount_percent_as_billed"></div>
+            <div ng-if="invoice.errors.discount_percent_as_billed" style="color: red">Percentage {{invoice.errors.discount_percent_as_billed[0]}}</div>
+          </td>
+        </tr>
+        <br/>
+        <tr>
+          <td>
+            <strong><%= Job.model_name.human %></strong>
+          </td>
+          <td>
+            <select ng-if="!invoice.job" ng-show="invoice.client" ng-model="invoice.job" ng-options="job as job.name for job in invoice.client.jobs" ng-change="jobSelected()"></select>
+            <span ng-if="invoice.job" ng-bind="invoice.job.name"></span>
+          </td>
+          <td>
+            <strong><div ng-show="invoice.runs.length > 0"><%= Invoice.human_attribute_name :multiplier %></div></strong>
+          </td>
+          <td>
+            <div ng-show="invoice.runs.length > 0"><input style="width: 50%" type="number" min="0.0" ng-model="invoice.multiplier_as_billed"></div>
+            <div ng-if="invoice.errors.multiplier_as_billed" style="color: red">Multiplier {{invoice.errors.multiplier_as_billed[0]}}</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+            <strong><div ng-show="invoice.runs.length > 0"><%= Invoice.human_attribute_name :number %></div></strong>
+          </td>
+          <td>
+            <div ng-show="invoice.runs.length > 0"><input style="width: 50%" ng-model="invoice.number"></div>
+            <div ng-if="invoice.errors.number" style="color: red">Number {{invoice.errors.number[0]}}</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+            <strong><div ng-show="invoice.runs.length > 0"><%= Invoice.human_attribute_name :date_of_issue %></div></strong>
+          </td>
+          <td>
+            <div ng-show="invoice.runs.length > 0">
+              <div class="form-group">
+                <div class='input-group date datetimepicker' id='datetimepicker1'>
+                  <input id="date_of_issue" class="form-control" data-format="MM-DD-YYYY">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+              </div>
+            </div>
+            <div ng-if="invoice.errors.date_of_issue" style="color: red">Date of Issue {{invoice.errors.date_of_issue[0]}}</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <drag-and-drop included="invoice.runs" excluded="availableRuns"></drag-and-drop>
+  </div>
+  <invoice-form invoice="invoice" edit="edit"></invoice-form>
+</div>

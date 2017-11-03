@@ -1,0 +1,2 @@
+class GlobalNotifier < UpdateNotifier
+end

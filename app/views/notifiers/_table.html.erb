@@ -1,0 +1,39 @@
+<% if show_buttons %>
+  <div class="alerts_action_block text-right">
+    <%= link_to notifiers_path, target: '_blank' do %>
+        <button class="btn btn-orange"><i class="zmdi zmdi-wrench"></i>Customize Alerts</button>
+    <% end %>
+  </div>
+<% end %>
+
+<table class="table white-grey">
+  <thead>
+  <tr class="light-grey-bg">
+    <th>Name</th>
+    <th>Configuration</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% notifiers.each do |notifier| %>
+      <tr>
+        <td><%= notifier.name %></td>
+        <td><%= truncate notifier.pretty_configuration, length:60 %></td>
+        <td width="5%">
+          <div class="dropdown">
+            <a href="#" id="notifier_cog" data-toggle="dropdown"><i class="icon zmdi-settings"></i></a>
+            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="notifier_cog">
+              <li role="presentation"><%= link_to 'Details', notifier_path(notifier) %></li>
+              <% if current_user.can_update?(Notifier) %>
+                <li role="presentation"><%= link_to 'Edit', edit_notifier_path(notifier) %></li>
+              <% end %>
+              <% if current_user.can_delete?(Notifier) %>
+                <li role="presentation"><%= link_to 'Delete', notifier_path(notifier.id), method: :delete %></li>
+              <% end %>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

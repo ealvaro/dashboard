@@ -1,0 +1,2 @@
+class EmReceiver < Receiver
+end

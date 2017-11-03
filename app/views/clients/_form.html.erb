@@ -1,0 +1,20 @@
+<%= simple_form_for client, url: url do |f| %>
+  <%= f.input :name, label_html: { class: 'text-left compact-label col-xs-2' },
+                     input_html: { class: 'no-border custom-form-control' } %>
+  <%= f.input :address_street, label_html: { class: 'text-left compact-label col-xs-2' },
+                     input_html: { class: 'no-border custom-form-control' } %>
+  <%= f.input :address_city, label_html: { class: 'text-left compact-label col-xs-2' },
+                     input_html: { class: 'no-border custom-form-control' } %>
+  <%= f.input :address_state, label_html: { class: 'text-left compact-label col-xs-2' },
+                     input_html: { class: 'no-border custom-form-control' } %>
+  <%= f.input :zip_code, label_html: { class: 'text-left compact-label col-xs-2' },
+                     input_html: { class: 'no-border custom-form-control' } %>
+  <%= f.input :country, as: :string, label_html: { class: 'text-left compact-label col-xs-2' },
+                     input_html: { class: 'no-border custom-form-control' } %>
+
+  <%= f.submit class: "btn btn-orange", data: {disable_with: "saving..."} %>
+  <%= link_to "Ignore Client", ignore_client_path(client), method: :put, class: "btn btn-blue"%>
+  <%= link_to clients_path do %>
+    <div class="btn btn-bisque">Cancel</div>
+  <% end %>
+<% end %>

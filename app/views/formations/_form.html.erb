@@ -1,0 +1,8 @@
+<%= simple_form_for formation, url: url do |f| %>
+  <%= f.input :name, label_html: { class: 'text-left compact-label col-xs-2' },
+                     input_html: { class: 'no-border custom-form-control' } %>
+  <%= f.submit class: "btn btn-orange", data: {disable_with: "saving..."} %>
+  <%= link_to formations_path do %>
+    <div class="btn btn-bisque">Cancel</div>
+  <% end %>
+<% end %>

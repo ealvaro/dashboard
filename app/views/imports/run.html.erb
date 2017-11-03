@@ -1,0 +1,16 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div ng-controller="ImportResultController" ng-init="importId='<%= @import.id %>'">
+  <div erdos-import-pusher-listener import-id="<%= @import.id %>"></div>
+  <div class="row">
+    <div class="col-md-9">
+      <h1><%= "Running " + Import.model_name.human %></h1>
+    </div>
+    <div class="col-md-3 text-right">
+      <%= link_to "New " + Invoice.model_name.human, new_invoice_path, class: "btn btn-default" %>
+    </div>
+    <div class="col-md-12">
+      <div erdos-import-result></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,170 @@
+<div>
+  <div ng-if="tab == 'Group'" class="left-list">
+    <table class="table grey-white"
+           style="margin-bottom: 0.5em;">
+      <thead>
+        <tr>
+          <th colspan="3">Rig Groups</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="group in rigGroups"
+            ng-class="{ 'bg-orange': selectedGroup(group) }"
+            ng-click="changeRigGroup(group)">
+          <td>
+            <a href="#">
+              {{group.name.substring(0, 9)}}
+            </a>
+          </td>
+          <td>
+            <a href="#"
+               ng-click="editGroupClicked(group); newClicked();"
+               ng-if="canEditGroup"
+               tooltip="Edit">
+              <i class="zmdi zmdi-edit"></i>
+            </a>
+          </td>
+          <td>
+            <a href="#"
+               ng-click="deleteGroup(group)"
+               ng-if="canDeleteGroup"
+               tooltip="Delete">
+              <i class="zmdi zmdi-delete"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ng-if="tab == 'Group'" class="left-list">
+    <table class="table white-grey"
+           style="margin-bottom: 0.5em;">
+      <thead>
+        <tr>
+          <th>Rigs in {{rigGroup.name.substring(0, 9)}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="rig in rigGroup.rigs">
+          <td>{{rig.name.substring(0, 9)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ng-if="tab == 'User Template'" class="left-list">
+    <table class="table grey-white"
+           style="margin-bottom: 0.5em;">
+      <thead>
+        <tr>
+          <th colspan="4">Templates</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="template in templates"
+            ng-class="{ 'bg-orange': selectedTemplate(template) }"
+            ng-click="changeTemplate(template)">
+          <td>
+            <a href="#" tooltip="{{template.name}}: {{template.job.name}}">
+              {{template.name.substring(0, 6)}}: {{template.job.name}}
+            </a>
+          </td>
+          <td>
+            <a href="#"
+               ng-click="cloneTemplate(template)"
+               tooltip="Create clone">
+              <i class="zmdi zmdi-copy"></i>
+            </a>
+          </td>
+          <td>
+            <a href="#"
+               ng-click="editTemplate(template); newClicked();"
+               tooltip="Edit">
+              <i class="zmdi zmdi-edit"></i>
+            </a>
+          </td>
+          <td>
+            <a href="#"
+               ng-click="deleteTemplate(template)"
+               tooltip="Delete">
+              <i class="zmdi zmdi-delete"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ng-if="tab == 'Rig'" class="left-list">
+    <table class="table white-grey"
+           style="margin-bottom: 0.5em;">
+      <thead>
+        <tr>
+          <th>Rigs
+            <select ng-model="rigTab"
+                    ng-change="changeRigTab(rigTab)"
+                    class="flat-select">
+              <option value="Active">Active</option>
+              <option value="All">All</option>
+            </select>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="rig in rigs"
+            ng-click="changeRig(rig)">
+          <td ng-class="{ 'bg-orange': selectedRig(rig) }">
+            <a href="#">
+              {{rig.name}}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notifier-table"
+       ng-class="{ 'global-notifiers': tab == 'Global',
+                   'group-notifiers': tab == 'Group' }">
+    <table class="table grey-white">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Configuration</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="notifier in notifiers">
+          <td ng-if="notifier.details" colspan="3">
+            <div class="row">
+              <div class="col-md-10">
+                <dl class="dl-horizontal">
+                  <dt>Alert name</dt>
+                  <dd>{{notifier.name}}</dd>
+                  <dt>Configuration</dt>
+                  <dd class="white-space-normal">{{notifier.display_configuration}}</dd>
+                  <dt>Type</dt>
+                  <dd>{{notifier.type}}</dd>
+                </dl>
+              </div>
+              <div class="col-md-2 text-right">
+                <a class="btn btn-orange" ng-click="notifier.details=false">Hide</a>
+              </div>
+            </div>
+          </td>
+
+          <td ng-if="!notifier.details">{{ notifier.name }}</td>
+          <td ng-if="!notifier.details" class="alert-ellipsis">
+            {{ notifier.display_configuration }}
+          </td>
+          <td ng-if="!notifier.details" width="5%">
+            <notifier-cog notifier="notifier" notifiers="notifiers">
+            </notifier-cog>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

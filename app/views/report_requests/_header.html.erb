@@ -1,0 +1,7 @@
+<div class="page-header">
+  <h2>
+    <% if show_job && job %>
+    <small><%= job.name.upcase %><% if run %>: Run <%= run.number %><% end %></small>
+    <% end %>
+  </h2>
+</div>

@@ -1,0 +1,23 @@
+<h3>Tools</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Type</th>
+    <th>Job</th>
+    <th>Asset Number</th>
+    <th>UID</th>
+    <th>Serial Number</th>
+    <th>Last Connected</th>
+  </tr>
+  <% tools.each do |t| %>
+    <tr>
+      <td><% if t && t.tool_type.name %><%= link_to t.tool_type.name, t.tool_type, target: '_blank' %><% end %></td>
+      <td><% if t.cache && t.cache["job_number"] %><%= link_to t.cache["job_number"], get_job(t.cache["job_number"]), target: '_blank' %><% end %></td>
+      <td><% if t && t.primary_asset_number %><%= link_to t.primary_asset_number, t, target: '_blank' %><% end %></td>
+      <td><% if t && t.uid_display %><%= link_to t.uid_display, t, target: '_blank' %><% end %></td>
+      <td><% if t && t.board_serial_number %><%= link_to t.board_serial_number, t, target: '_blank' %><% end %></td>
+      <td><% if t %><%= time_ago_in_words(t.updated_at) %> ago<% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate tools, remote: true %>

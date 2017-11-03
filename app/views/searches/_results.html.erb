@@ -1,0 +1,18 @@
+<div class="global-search container-fluid">
+  <h1 class="page-header">Results <small>for "<%= keywords %>"</small></h1>
+  <% unless @tools.blank? %><%= render partial: 'searches/tools', locals: { tools: @tools } %><% end %>
+  <% unless @events.blank? %><%= render partial: 'searches/events', locals: { events: @events } %><% end %>
+  <% unless @jobs.blank? %><%= render partial: 'searches/jobs', locals: { jobs: @jobs } %><% end %>
+  <% unless @alerts.blank? %><%= render partial: 'searches/alerts', locals: { alerts: @alerts } %><% end %>
+  <% unless @tool_types.blank? %><%= render partial: 'searches/tool_types', locals: { tool_types: @tool_types } %><% end %>
+  <% unless @surveys.blank? %><%= render partial: 'searches/surveys', locals: { surveys: @surveys } %><% end %>
+  <% unless @installs.blank? %><%= render partial: 'searches/installs', locals: { installs: @installs } %><% end %>
+  <% unless @software.blank? %><%= render partial: 'searches/software', locals: { software: @software } %><% end %>
+  <% unless @report_requests.blank? %><%= render partial: 'searches/report_requests', locals: { report_requests: @report_requests } %><% end %>
+  <% unless @firmware_updates.blank? %><%= render partial: 'searches/firmware_updates', locals: { firmware_updates: @firmware_updates } %><% end %>
+  <% unless @clients.blank? %><%= render partial: 'searches/clients', locals: { clients: @clients } %><% end %>
+  <% unless @runs.blank? %><%= render partial: 'searches/runs', locals: { runs: @runs } %><% end %>
+  <% unless @wells.blank? %><%= render partial: 'searches/wells', locals: { wells: @wells } %><% end %>
+  <% unless @formations.blank? %><%= render partial: 'searches/formations', locals: { formations: @formations } %><% end %>
+  <% unless @rigs.blank? %><%= render partial: 'searches/rigs', locals: { rigs: @rigs } %><% end %>
+</div>

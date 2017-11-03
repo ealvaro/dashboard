@@ -1,0 +1,77 @@
+<div class="well">
+  <div class="row">
+    <div class="col-xs-12 text-right" ng-show="invoice.runs.length > 0">
+      <div class="btn-group">
+        <a id="destroy_button" ng-if="invoice.status == 'draft' && invoice.id" ng-click="destroy()" class="btn btn-danger">Destroy</a>
+        <a id="draft_button"  ng-click="submit('draft')" class="btn btn-default">Save as Draft</a>
+        <a id="submit_button" ng-click="submit('complete')" class="btn btn-success">Submit</a>
+      </div>
+    </div>
+    <div class="col-xs-10">
+      <address>
+        <strong>Leam</strong><br>
+        1 Leam Drive<br>
+        Conroe, TX<br>
+        United States<br>
+        (269) 123-1234
+      </address>
+    </div>
+    <div class="col-xs-2">
+      <div class="text-right">
+        <%= image_tag "leam-logo.jpg", class: "img-responsive", style: "margin: 15px 0", size: "150x150"%>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <div class="row">
+    <div class="col-xs-6">
+      <address>
+        <strong>{{ invoice.client.name }}</strong><br>
+        {{ invoice.client.address_street }}<br>
+        {{ invoice.client.address_city }}<br>
+        {{ invoice.client.country }}<br>
+      </address>
+    </div>
+    <div class="col-xs-offset-3 col-xs-3">
+      <table border="1pt solid black">
+        <tr>
+          <td bgcolor="#CFCFCF"><%= Invoice.human_attribute_name :number %></td>
+          <td class="text-right">
+            <span ng-bind="invoice.number"></span>
+          </td>
+        </tr>
+        <tr>
+          <td bgcolor="#CFCFCF"><%= Invoice.human_attribute_name :date_of_issue %></td>
+          <td class="text-right">{{ invoice.date_of_issue }}</td>
+        </tr>
+        <tr ng-repeat="run in invoice.runs | orderBy : 'number'">
+          <td>Run {{ run.number }} Subtotal</td>
+          <td class="text-right">{{ run.damages_as_billed.subtotal / 100.0 | currency }}</td>
+        </tr>
+        <tr>
+          <td bgcolor="#CFCFCF"><b><%= Invoice.human_attribute_name :discount %></b></td>
+          <td class="text-right"><b>{{ discount() / 100.0 | currency }}</b></td>
+        </tr>
+        <tr>
+          <td bgcolor="#CFCFCF"><b><%= Invoice.human_attribute_name :total %></b></td>
+          <td class="text-right"><b>{{ invoiceTotal() / 100.0 | currency }}</b></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!-- -->
+  <h3>Job Details</h3>
+  <table width="100%">
+    <tr>
+      <td><b><%= Rig.model_name.human %></b></td>
+      <td>{{ invoice.runs[0].rig.name }}</td>
+      <td><b><%= Well.model_name.human %></b></td>
+      <td>{{ invoice.runs[0].well.name }}</td>
+      <td><b><%= Formation.model_name.human %></b></td>
+      <td>{{ invoice.runs[0].formation.name }}</td>
+    </tr>
+  </table>
+
+  <invoice-run ng-repeat="run in invoice.runs | orderBy : 'number'" invoice="invoice" run="run" mud_types="mud_types"></invoice-run>
+</div>

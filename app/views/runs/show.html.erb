@@ -1,0 +1,96 @@
+<top-bar ng-init="init('Runs', '[Run: <%= @run.number %>] [Job: <%= @run.job %>] [Rig: <%= @run.rig %>]')"></top-bar>
+
+<div class="row">
+  <div class="col-xs-12 vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+    <div class="btn-group pull-right margin-right">
+      <%= link_to edit_run_path( @run ), class: "btn btn-primary no-border" do %>
+        <i class="zmdi zmdi-edit"></i>
+      <% end %>
+      <% if Run.deletable_by? current_user %>
+        <%= link_to run_path( @run ), method: :delete, data: {confirm: "Positive you want to destroy?", disable: "destroying.."}, class: "btn btn-primary no-border", style: "background-color: #CC0000" do %>
+          <i class="zmdi zmdi-delete"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <% if @run.report_requests.count > 0 %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Reports</h2>
+      </div>
+      <div class="col-xs-12">
+        <table class="table grey-white">
+          <tr>
+            <th>Result</th>
+            <th>Description</th>
+            <th>Assets</th>
+            <th>When</th>
+          </tr>
+          <% for report in @run.report_requests.order(created_at: :desc) %>
+            <tr>
+              <td><%= report.succeeded? ? "Succeeded" : "Failed" %></td>
+              <td><%= report.succeeded? ? "N/A" : report.description %></td>
+              <td>
+                <% for asset in report.report_request_assets %>
+                  <table>
+                    <tr>
+                      <td>
+                        <a href="<%= asset.file.url %>"><%= asset.name %></a>
+                      </td>
+                    </tr>
+                  </table>
+                <% end %>
+              </td>
+              <td><%= report.created_at.to_s(:db) %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Events</h2>
+    </div>
+    <div class="col-xs-12">
+      <table class="table grey-white">
+        <tr>
+          <th>Event Type</th>
+          <th>HW</th>
+          <th>FW</th>
+          <th>Board Serial Number</th>
+          <th>Asset Number</th>
+          <th>Email</th>
+          <th>Region</th>
+          <th>Memory Lvl</th>
+          <th>Files</th>
+          <th>Time</th>
+        </tr>
+        <% for event in @events %>
+          <tr>
+            <td><%= event.event_type %></td>
+            <td><%= event.hardware_version %></td>
+            <td><%= event.board_firmware_version %></td>
+            <td><%= event.board_serial_number %></td>
+            <td><%= event.primary_asset_number %></td>
+            <td><%= event.user_email %></td>
+            <td><%= event.region %></td>
+            <td><%= event.memory_usage_level %></td>
+            <td>
+              <% for asset in event.event_assets %>
+                <a href="<%= asset.file.url %>"><%= asset.name %></a>
+              <% end %>
+            </td>
+            <td><%= event.time.try(:to_s, :db) %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <%= paginate @events %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'Regions')"></top-bar>
+
+<div class="container-fluid">
+  <%= link_to new_admin_region_path, class: "btn btn-orange vert-margins" do %>
+    <i class="zmdi zmdi-plus"></i> New Region
+  <% end %>
+
+  <table class="table grey-white">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @regions.each do |region| %>
+        <tr>
+          <td><%= region.id %></td>
+          <td><%= region.name %></td>
+          <td class="text-right">
+            <%= link_to [:edit, :admin, region] do %>
+              <button class="btn btn-default">
+                <i class="zmdi zmdi-edit"></i>
+              </button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,159 @@
+<p class="vert-margins" style="font-size: 1.2em;">
+  <strong>Location Info <span class="required">Required</span></strong>
+</p>
+
+<div class="form-group">
+  <%= f.label :job_id, class: 'col-xs-2 text-left' %>
+  <div class="col-xs-4">
+    <%= f.input_field :job_id, as: :select, collection: Job.all, class: 'no-border' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :run_id, class: 'col-xs-2 text-left' %>
+  <div class="col-xs-4">
+    <%= f.input_field :run_id, as: :select, label_method: :number, collection: (@runs || []), class: 'no-border' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :side_track_number, class: 'col-xs-2 text-left' %>
+  <div class="col-xs-4">
+    <%= f.input_field :side_track_number, class: 'no-border' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :measured_depth, class: 'col-xs-2 text-left' %>
+  <div class="col-xs-4">
+    <%= f.input_field :measured_depth, class: 'no-border' %>
+  </div>
+
+  <div class="col-sm-2">
+    <%= f.input_field :selected_depth_units, as: :select, collection: ["feet", "meters"], class: 'no-border' %>
+  </div>
+</div>
+
+<p class="vert-margins" style="font-size: 1.2em;">
+  <strong>Sensor Readings<span class="required">Required</span></strong>
+</p>
+
+<div class="row">
+  <div class="col-xs-12">
+    <% [:gx, :gy, :gz].each do |field| %>
+
+      <div class="col-xs-2 compact-label">
+        <%= f.label field, class: 'col-xs-4 text-left compact-label' %>
+        <div class="col-xs-8">
+          <%= f.input_field field, class: 'no-border' %>
+        </div>
+      </div>
+
+    <% end %>
+
+    <div class="col-xs-4 thin compact"
+         style="margin-top: 1em;">
+      Gees (1.0)
+    </div>
+
+    <div class="col-xs-2 compact-label">
+      <%= f.label :g_total, class: 'col-xs-4 text-left compact-label' %>
+      <div class="col-xs-8">
+        <%= f.input_field :g_total, class: 'no-border' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <% [:hx, :hy, :hz].each do |field| %>
+
+      <div class="col-xs-2 compact-label">
+        <%= f.label field, class: 'col-xs-4 text-left compact-label' %>
+        <div class="col-xs-8">
+          <%= f.input_field field, class: 'no-border' %>
+        </div>
+      </div>
+
+    <% end %>
+
+    <div class="col-xs-2 compact-label">
+      <%= f.label :magnetic_units, class: 'text-left compact-label' %>
+    </div>
+    <div class="col-xs-2 compact-label"
+         style="padding-right: 1em;">
+      <%= f.input_field :magnetic_units, as: :select, collection: ["NanoTesla", "MicroTesla"], class: 'no-border' %>
+    </div>
+
+    <div class="col-xs-2 compact-label">
+      <%= f.label :h_total, class: 'col-xs-4 text-left compact-label' %>
+      <div class="col-xs-8">
+        <%= f.input_field :h_total, class: 'no-border' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="vert-margins" style="font-size: 1.2em;">
+  <strong>Calculated Measurements<span class="success">Optional</span></strong>
+</p>
+
+<div class="form-group">
+  <%= f.label :inclination, class: 'col-xs-2 text-left' %>
+  <div class="col-xs-4">
+    <%= f.input_field :inclination, class: 'no-border' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :azimuth, class: 'col-xs-2 text-left' %>
+  <div class="col-xs-4">
+    <%= f.input_field :azimuth, class: 'no-border' %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :dip_angle, class: 'col-xs-2 text-left' %>
+  <div class="col-xs-4">
+    <%= f.input_field :dip_angle, class: 'no-border' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+
+    <div class="col-xs-2 compact-label">
+      <%= f.label :tvd, "TVD", class: 'col-xs-4 text-left compact-label' %>
+      <div class="col-xs-8">
+        <%= f.input_field :tvd, class: 'no-border' %>
+      </div>
+    </div>
+
+    <% [:north, :east].each do |field| %>
+
+      <div class="col-xs-2 compact-label">
+        <%= f.label field, class: 'col-xs-4 text-left compact-label' %>
+        <div class="col-xs-8">
+          <%= f.input_field field, class: 'no-border' %>
+        </div>
+      </div>
+
+    <% end %>
+
+    <div class="col-xs-2 compact-label">
+      <%= f.label :horizontal_section, "SECT", class: 'col-xs-4 text-left compact-label' %>
+      <div class="col-xs-8">
+        <%= f.input_field :horizontal_section, class: 'no-border' %>
+      </div>
+    </div>
+
+    <div class="col-xs-2 compact-label">
+      <%= f.label :dog_leg_severity, "DLS", class: 'col-xs-4 text-left compact-label' %>
+      <div class="col-xs-8">
+        <%= f.input_field :dog_leg_severity, class: 'no-border' %>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<h3>Jobs</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Job</th>
+    <th>Client</th>
+  </tr>
+  <% jobs.each do |j| %>
+    <tr>
+      <td><% if j && j.name %><%= link_to j.name, j, target: '_blank' %><% end %></td>
+      <td><% if j.client && j.client.name %><%= link_to j.client.name, j.client, target: '_blank' %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate jobs, remote: true %>

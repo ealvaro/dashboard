@@ -1,0 +1,20 @@
+<% active_page(:software) %>
+
+<top-bar ng-init="init('Software Upload')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="page-nav col-xs-6">
+      <nav>
+        <ul class="pagination vert-margins">
+          <%= content_tag(:li, link_to("Overview", overview_software_index_path)) %>
+          <%= content_tag(:li, link_to("Upload", new_software_path), class: 'active') %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <%= render partial: 'form', locals: {software: @software, url: software_index_path } %>
+
+</div>

@@ -1,0 +1,17 @@
+<% active_page(:surveys) %>
+<div class="page-header">
+  <h2>Copy to Clipboard <small><%= @job.name %></small></h2>
+</div>
+<p class="text-right"><%= link_to "Back to Surveys by Job", surveys_by_job_path(@surveys.first.job) %></p>
+
+<p class="lead">Press Ctlr+C to Copy to the Clipboard -- make sure all of the text below is highlighted</p>
+
+
+<%= simple_form_for @form, url: apply_clip_surveys_by_job_path(@job.id) do |f| %>
+  <div class="row">
+    <div class="col-sm-12">
+      <%= f.input :pasted_data, as: :text, input_html: {rows: 20, cols: 100}, label: false%>
+    </div>
+  </div>
+  <%= f.submit "Apply Changes after Pasting Corrections", class: "btn btn-primary btn-lg" %>
+<% end %>

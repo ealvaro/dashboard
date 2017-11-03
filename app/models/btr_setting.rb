@@ -1,0 +1,2 @@
+class BtrSetting < ReceiverSetting
+end

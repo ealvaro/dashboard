@@ -1,0 +1,104 @@
+<div>
+
+<div class="row">
+  <div class="col-xs-2">
+    <strong>Subject:</strong>
+  </div>
+  <div class="col-xs-6">
+    <div ng-switch="object.type">
+      <div ng-switch-when="ReportResponse">
+        <strong><a href="{{object.alertable_link}}">{{ object.subject }}&nbsp;</a></strong>
+      </div>
+      <div ng-switch-default>
+        <strong>{{ object.subject }}&nbsp;</strong>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <div class="text-right">
+      <a id="hide_details" class="btn btn-danger btn-sm" ng-click="hide()">Hide</a>
+      <div ng-if="object.ignored != true && object.completed != true" class="btn-group">
+        <a ng-click="ignore(object)" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-ban-circle"></span></a>
+        <a ng-click="complete(object)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-ok-circle"></span></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div ng-if="object.description" class="col-xs-2">
+    <strong>Description:</strong>
+  </div>
+  <div ng-if="object.description" class="col-xs-4">
+    {{ object.description}}&nbsp;
+  </div>
+  <div ng-if="object.requester.email" class="col-xs-2">
+    <strong>Issued By:</strong>
+  </div>
+  <div ng-if="object.requester.email" class="col-xs-4">
+    {{ object.requester.email }}&nbsp;
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div ng-switch="object.type">
+    <div ng-switch-when="ThresholdNotification">
+      <div class="col-xs-1">
+        <strong>Receiver:</strong>
+      </div>
+      <div class="col-xs-2">
+        <a href="{{object.alertable.show_url}}">{{object.alertable.uid | uid}}</a>&nbsp;
+      </div>
+    </div>
+    <div ng-switch-when="ReportResponse">
+    </div>
+    <div ng-switch-default>
+      <div class="col-xs-1">
+        <strong>Well:</strong>
+      </div>
+      <div class="col-xs-2">
+        <a href="{{object.alertable.well.show_url}}">{{object.alertable.well.name}}</a>&nbsp;
+      </div>
+      <div class="col-xs-1">
+        <strong>Job:</strong>
+      </div>
+      <div class="col-xs-2">
+        <a href="{{object.alertable.job.show_url}}">{{object.alertable.job.name}}</a>&nbsp;
+      </div>
+      <div class="col-xs-1">
+        <strong>Run:</strong>
+      </div>
+      <div class="col-xs-2">
+        <a href="{{object.alertable.run.show_url}}">{{object.alertable.run.number}}</a>&nbsp;
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-1">
+    <strong>When:</strong>
+  </div>
+  <div class="col-xs-2 text-right">
+    {{ object.created_at | date: 'medium' }}
+  </div>
+  <div class="col-xs-1 text-right">
+    <div ng-if="object.ignored == true">
+      <strong>Ignored:</strong>
+    </div>
+    <div ng-if="object.completed == true">
+      <strong>Completed:</strong>
+    </div>
+  </div>
+  <div class="col-xs-2 text-right">
+    <div ng-if="object.ignored == true">
+      {{object.ignored_at | date: 'short' }}
+    </div>
+    <div ng-if="object.completed == true">
+      {{object.completed_at | date: 'short' }}
+    </div>
+    <div ng-if="object.completed != true && object.ignored != true" style="color: red">
+      <strong>Incomplete</strong>
+    </div>
+  </div>
+</div>
+
+</div>

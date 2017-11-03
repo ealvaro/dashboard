@@ -1,0 +1,215 @@
+<div class="row">
+  <div class="col-md-4">
+    <dl class="dl-horizontal">
+      <dt><%= Tool.human_attribute_name :uid %></dt>
+      <dd><a target="_blank" ng-href="{{receiver.active_url}}">{{ receiver.uid | uid }}</a></dd>
+      <dt><%= Tool.human_attribute_name :job %></dt>
+      <dd>
+        <div ng-show="receiver.job_show_url">
+          <a ng-href="{{receiver.job_show_url}}">{{ receiver.job }}</a>
+        </div>
+        <div ng-hide="receiver.job_show_url">
+          {{ receiver.job }}
+        </div>
+      </dd>
+      <dt><%= Tool.human_attribute_name :run %></dt>
+      <dd>
+        <div ng-show="receiver.run_show_url">
+          <a ng-href="{{receiver.run_show_url}}">{{ receiver.run }}</a>
+        </div>
+        <div ng-hide="receiver.run_show_url">
+          {{ receiver.run }}
+        </div>
+      </dd>
+      <dt><%= Tool.human_attribute_name :client %></dt>
+      <dd>{{ receiver.client }}</dd>
+      <dt><%= Tool.human_attribute_name :rig %></dt>
+      <dd>{{ receiver.rig }}</dd>
+      <dt><%= Tool.human_attribute_name :well %></dt>
+      <dd>{{ receiver.well }}</dd>
+      <dt><%= Tool.human_attribute_name :team_viewer_id %></dt>
+      <dd>{{ receiver.team_viewer_id }}</dd>
+      <dt><%= Tool.human_attribute_name :team_viewer_password %></dt>
+      <dd>{{ receiver.team_viewer_password }}</dd>
+      <dt>Decode %</dt>
+      <dd>{{ receiver.decode_percentage }}</dd>
+      <dt>Version</dt>
+      <dd>{{ receiver.reporter_version }}</dd>
+      <dt><%= Tool.human_attribute_name :pump_on_time %></dt>
+      <dd>{{ receiver.pump_on_time | pumpTime }}</dd>
+      <dt><%= Tool.human_attribute_name :pump_off_time %></dt>
+      <dd>{{ receiver.pump_off_time | pumpTime}}</dd>
+      <dt><%= Tool.human_attribute_name :pump_total_time %></dt>
+      <dd>{{ receiver.pump_total_time | pumpTime }}</dd>
+      <dt><%= Tool.human_attribute_name :inc %></dt>
+      <dd>{{ receiver.inc }}</dd>
+      <dt><%= Tool.human_attribute_name :average_quality %></dt>
+      <dd>{{ receiver.average_quality }}</dd>
+      <dt><%= Tool.human_attribute_name :time_stamp %></dt>
+      <dd>{{ receiver.time_stamp | date : 'medium'}}</dd>
+      <dt><%= Tool.human_attribute_name :tfo %></dt>
+      <dd>{{ receiver.tfo }}</dd>
+      <dt><%= Tool.human_attribute_name :tf %></dt>
+      <dd>{{ receiver.tf }}</dd>
+      <dt><%= Tool.human_attribute_name :dao %></dt>
+      <dd>{{ receiver.dao }}</dd>
+      <dt><%= Tool.human_attribute_name :azm %></dt>
+      <dd>{{ receiver.azm | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gravity %></dt>
+      <dd>{{ receiver.gravity | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :magf %></dt>
+      <dd>{{ receiver.magf | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :dipa %></dt>
+      <dd>{{ receiver.dipa | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :temp %></dt>
+      <dd>{{ receiver.temp | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gama %></dt>
+      <dd>{{ receiver.gama | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gamma_shock %></dt>
+      <dd>{{ receiver.gamma_shock | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gamma_shock_axial_p %></dt>
+      <dd>{{ receiver.gamma_shock_axial_p | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gamma_shock_tran_p %></dt>
+      <dd>{{ receiver.gamma_shock_tran_p | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :atfa %></dt>
+      <dd>{{ receiver.atfa | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gtfa %></dt>
+      <dd>{{ receiver.gtfa | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :mtfa %></dt>
+      <dd>{{ receiver.mtf | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :delta_mtf %></dt>
+      <dd>{{ receiver.delta_mtfa | number: 1 }}</dd>
+      <dt><%= Tool.human_attribute_name :formation_resistance %></dt>
+      <dd>{{ receiver.formation_resistance | number: 1 }}</dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="dl-horizontal">
+      <dt><%= Tool.human_attribute_name :mx %></dt>
+      <dd>{{ receiver.mx | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :my %></dt>
+      <dd>{{ receiver.my | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :mz %></dt>
+      <dd>{{ receiver.mz | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :ax %></dt>
+      <dd>{{ receiver.ax | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :ay %></dt>
+      <dd>{{ receiver.ay | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :az %></dt>
+      <dd>{{ receiver.az | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :batv %></dt>
+      <dd>{{ receiver.batv | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :batw %></dt>
+      <dd>{{ receiver.batw }}</dd>
+      <dt><%= Tool.human_attribute_name :dipw %></dt>
+      <dd>{{ receiver.dipw }}</dd>
+      <dt><%= Tool.human_attribute_name :gravw %></dt>
+      <dd>{{ receiver.gravw }}</dd>
+      <dt><%= Tool.human_attribute_name :gv0 %></dt>
+      <dd>{{ receiver.gv0 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gv1 %></dt>
+      <dd>{{ receiver.gv1 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gv2 %></dt>
+      <dd>{{ receiver.gv2 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gv3 %></dt>
+      <dd>{{ receiver.gv3 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gv4 %></dt>
+      <dd>{{ receiver.gv4 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gv5 %></dt>
+      <dd>{{ receiver.gv5 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gv6 %></dt>
+      <dd>{{ receiver.gv6 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :gv7 %></dt>
+      <dd>{{ receiver.gv7 | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :magw %></dt>
+      <dd>{{ receiver.magw }}</dd>
+      <dt><%= Tool.human_attribute_name :tempw %></dt>
+      <dd>{{ receiver.tempw }}</dd>
+      <dt><%= Tool.human_attribute_name :dl_enabled %></dt>
+      <dd>{{ receiver.dl_enabled }}</dd>
+      <dt><%= Tool.human_attribute_name :sync_marker %></dt>
+      <dd>{{ receiver.sync_marker }}</dd>
+      <dt>SuSq</dt>
+      <dd>{{ receiver.survey_sequence }}</dd>
+      <dt>TLSq</dt>
+      <dd>{{ receiver.logging_sequence }}</dd>
+      <dt><%= Tool.human_attribute_name :confidence_level %></dt>
+      <dd>{{ receiver.confidence_level }}</dd>
+      <dt><%= Tool.human_attribute_name :pump_state %></dt>
+      <dd>{{ receiver.pump_state }}</dd>
+    </dl>
+  </div>
+  <div class="col-md-3">
+    <dl class="dl-horizontal">
+      <dt><%= Tool.human_attribute_name :block_height %></dt>
+      <dd>{{ receiver.block_height }}</dd>
+      <dt><%= Tool.human_attribute_name :hookload %></dt>
+      <dd>{{ receiver.hookload }}</dd>
+      <dt><%= Tool.human_attribute_name :pump_pressure %></dt>
+      <dd>{{ receiver.pump_pressure }}</dd>
+      <dt><%= Tool.human_attribute_name :bit_depth %></dt>
+      <dd>{{ receiver.bit_depth }}</dd>
+      <dt><%= Tool.human_attribute_name :power %></dt>
+      <dd>{{ receiver.power }}</dd>
+      <dt><%= Tool.human_attribute_name :dl_power %></dt>
+      <dd>{{ receiver.dl_power }}</dd>
+      <dt><%= Tool.human_attribute_name :battery_number %></dt>
+      <dd>{{ receiver.battery_number }}</dd>
+      <dt><%= Tool.human_attribute_name :bore_pressure %></dt>
+      <dd>{{ receiver.bore_pressure }}</dd>
+      <dt><%= Tool.human_attribute_name :annular_pressure %></dt>
+      <dd>{{ receiver.annular_pressure }}</dd>
+      <dt><%= Tool.human_attribute_name :vibration %></dt>
+      <dd>{{ receiver.vibration }}</dd>
+      <dt><%= Tool.human_attribute_name :signal %></dt>
+      <dd>{{ receiver.signal }}</dd>
+      <dt><%= Tool.human_attribute_name :mag_dec %></dt>
+      <dd>{{ receiver.mag_dec }}</dd>
+      <dt><%= Tool.human_attribute_name :s_n_ratio %></dt>
+      <dd>{{ receiver.s_n_ratio }}</dd>
+      <dt><%= Tool.human_attribute_name :noise %></dt>
+      <dd>{{ receiver.noise }}</dd>
+      <dt><%= Tool.human_attribute_name :weight_on_bit %></dt>
+      <dd>{{ receiver.weight_on_bit }}</dd>
+      <dt><%= Tool.human_attribute_name :rotary_rpm %></dt>
+      <dd>{{ receiver.rotary_rpm }}</dd>
+      <dt><%= Tool.human_attribute_name :rop %></dt>
+      <dd>{{ receiver.rop | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :voltage %></dt>
+      <dd>{{ receiver.voltage }}</dd>
+      <dt><%= Tool.human_attribute_name :inc %></dt>
+      <dd>{{ (receiver.inc | number: 2) }}</dd>
+      <dt><%= Tool.human_attribute_name :azm %></dt>
+      <dd>{{ receiver.azm }}</dd>
+      <dt><%= Tool.human_attribute_name :api %></dt>
+      <dd>{{ receiver.api }}</dd>
+      <dt><%= Tool.human_attribute_name :hole_depth %></dt>
+      <dd>{{ receiver.hole_depth | number:2 }}</dd>
+      <dt><%= Tool.human_attribute_name :grav_roll %></dt>
+      <dd>{{ (receiver.grav_roll | number: 2) }}</dd>
+      <dt><%= Tool.human_attribute_name :mag_roll %></dt>
+      <dd>{{ (receiver.mag_roll | number: 2) }}</dd>
+      <dt><%= Tool.human_attribute_name :dipa %></dt>
+      <dd>{{ receiver.dipa | number: 2 }}</dd>
+      <dt><%= Tool.human_attribute_name :survey_md %></dt>
+      <dd>{{ receiver.survey_md }}</dd>
+      <dt><%= Tool.human_attribute_name :survey_tvd %></dt>
+      <dd>{{ receiver.survey_tvd }}</dd>
+      <dt><%= Tool.human_attribute_name :survey_vs %></dt>
+      <dd>{{ receiver.survey_vs }}</dd>
+      <dt><%= Tool.human_attribute_name :temperature %></dt>
+      <dd>{{ receiver.temperature }}</dd>
+      <dt><%= Tool.human_attribute_name :pumps_on %></dt>
+      <dd>{{ receiver.pumps_on }}</dd>
+      <dt><%= Tool.human_attribute_name :on_bottom %></dt>
+      <dd>{{ receiver.on_bottom }}</dd>
+      <dt><%= Tool.human_attribute_name :slips_out %></dt>
+      <dd>{{ receiver.slips_out }}</dd>
+      <dt><%= Tool.human_attribute_name :updated_at %></dt>
+      <dd><span am-time-ago="{{ getDate( receiver, 'updated_at' ) }}"></span></dd>
+    </dl>
+  </div>
+  <div class="col-md-1 text-right">
+    <a class="btn btn-danger" ng-click="hide(receiver)">Hide</a>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<h3>Formations</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Formation</th>
+  </tr>
+  <% formations.each do |f| %>
+    <tr>
+      <td><% if f && f.name %><%= link_to f.name, f, target: '_blank' %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate formations, remote: true %>

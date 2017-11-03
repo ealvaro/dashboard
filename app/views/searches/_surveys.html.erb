@@ -1,0 +1,35 @@
+<h3>Surveys</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Job</th>
+    <th>Run</th>
+    <th>Measured Depth</th>
+    <th>Side Track</th>
+    <th>Inclination</th>
+    <th>Azimuth</th>
+    <th>Corrected</th>
+    <th>Date</th>
+    <th>Detail</th>
+  </tr>
+  <% surveys.each do |s| %>
+    <tr>
+      <td><% if s && s.job %><%= link_to s.job.name, s.job, target: '_blank' %><% end %></td>
+      <td><% if s && s.run %><%= link_to s.run.number, s.run, target: '_blank' %><% end %></td>
+      <td><% if s && s.measured_depth_in_feet %><%= link_to s.measured_depth_in_feet, s, target: '_blank' %><% end %></td>
+      <td><% if s && s.side_track %><%= s.side_track.number %><% end %></td>
+      <td><% if s && s.inclination %><%= link_to s.inclination, s, target: '_blank' %><% end %></td>
+      <td><% if s && s.azimuth %><%= link_to s.azimuth, s, target: '_blank' %><% end %></td>
+      <td><% if s && s.version_number %><%= link_to s.corrected?.to_s, s, target: '_blank' %><% end %></td>
+      <td><% if s %><%= link_to timeago_tag(s.created_at), s, target: '_blank' %><% end %></td>
+      <td>
+        <% if s %>
+          <%= link_to s do %>
+            <button class="btn btn-default"><i class="zmdi zmdi-assignment"></i></button>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate surveys, remote: true %>

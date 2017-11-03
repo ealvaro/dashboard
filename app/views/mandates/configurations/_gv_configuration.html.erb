@@ -1,0 +1,16 @@
+<h3 style="margin-top:0;">GV Configuration</h3>
+
+<% f.object.build_gv_configs.each_with_index do |gv, index| %>
+  <%= fields_for "mandate[gv_configs][]", gv, index: index do |gv_form|%>
+    <div class="row form-group padding-horizontal">
+      <div class="col-xs-3 compact">
+        <%= gv_form.text_field :value, disabled: true,
+                                       class: 'form-control no-border' %>
+      </div>
+      <div class="col-xs-9">
+        <%= gv_form.select :key, ["", "Forced Empty"]+f.object.available_gv_fields, {},
+                                 class: 'form-control no-border' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

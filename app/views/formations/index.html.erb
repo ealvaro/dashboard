@@ -1,0 +1,50 @@
+<top-bar ng-init="init('Formations')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="row vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+
+    <div class="pull-right margin-right">
+      <%= link_to new_formation_path, class: "btn btn-orange pull-right" do %>
+        <i class="zmdi zmdi-plus"></i> <%= "New #{Formation.model_name.human}" %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-4 pull-right">
+      <%= render partial: 'searches/client_info_search_form', locals: { type: 'formations' } %>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table white-grey">
+        <thead>
+        <tr>
+          <th>
+            <%= Formation.human_attribute_name :name %>
+          </th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for formation in @formations %>
+          <tr>
+            <td>
+              <%= link_to formation.name, formation_path(formation) %>
+            </td>
+            <td class="text-right">
+              <a href="<%= edit_formation_path(formation) %>" class="btn btn-default">
+                <i class="zmdi zmdi-edit"></i>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <%= paginate @formations %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<top-bar ng-init="init('Runs')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="row vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+
+    <div class="pull-right margin-right">
+      <%= link_to new_run_path( job_id: @job, well_id: @well ), class: "btn btn-orange pull-right" do %>
+        <i class="zmdi zmdi-plus"></i> <%= "New #{Run.model_name.human}" %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-4 pull-right">
+      <%= render partial: 'searches/client_info_search_form', locals: { type: 'runs' } %>
+    </div>
+  </div>
+
+  <table class="table white-grey">
+    <thead>
+    <tr>
+      <th>
+        <%= Job.model_name.human %>
+      </th>
+      <th>
+        <%= Run.model_name.human %>
+      </th>
+      <th>
+        <%= Client.model_name.human %>
+      </th>
+      <th>
+        <%= Well.model_name.human %>
+      </th>
+      <th>
+        <%= Rig.model_name.human %>
+      </th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for run in @decorated_runs %>
+      <tr>
+        <td>
+          <%= link_to run.job, job_path(run.object.job) %>
+        </td>
+        <td>
+          <%= link_to run.number, run_path(run) %>
+        </td>
+        <td>
+          <% if run.client %>
+            <%= link_to run.client, client_path(run.client_id) %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to run.well, well_path(run.well_id)  if run.well%>
+        </td>
+        <td>
+          <%= run.rig %>
+        </td>
+        <td class="text-right">
+          <a href="<%= edit_run_path(run) %>" class="btn btn-default">
+            <i class="zmdi zmdi-edit"></i>
+          </a>
+          <% if Run.deletable_by? current_user %>
+            <%= link_to run_path( run ), method: :delete, data: {confirm: "Positive you want to destroy?", disable: "destroying.."}, class: "btn btn-default" do %>
+              <i class="zmdi zmdi-delete"></i>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @runs, window: 10 %>
+</div>

@@ -1,0 +1,19 @@
+<% active_page(:report_requests) %>
+
+<div class="row">
+  <div class="page-nav col-xs-8">
+    <nav>
+      <ul class="pagination vert-margins">
+        <li class="<%= "active" if action_name == "index" %>"><%= link_to "Active", report_requests_path %></li>
+        <li class="<%= "active" if action_name == "recently_completed" %>"><%= link_to "Recently Completed", recently_completed_report_requests_path %></li>
+        <li class="<%= "active" if action_name == "all" %>"><%= link_to "All", all_report_requests_path %></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="col-xs-4 text-right margin-top">
+    <%= link_to new_report_request_path, class: "btn btn-orange" do %>
+      <i class="zmdi zmdi-plus"></i> New Report Request
+    <% end %>
+  </div>
+</div>

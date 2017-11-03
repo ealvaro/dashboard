@@ -1,0 +1,10 @@
+<top-bar ng-init="init('Jobs', 'Edit')"></top-bar>
+
+<div class="vert-margins">
+  <%= render partial: 'client_info/navbar' %>
+</div>
+<div style="clear:both"></div>
+
+<div class="container-fluid">
+  <%= render partial: 'form', locals: {job: @job, url: job_path( @job ) } %>
+</div>

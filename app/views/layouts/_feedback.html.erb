@@ -1,0 +1,44 @@
+<script type="text/javascript" src="https://erdosmiller.atlassian.net/s/cd93be5269f0616033076d712e012e0e-T/en_US7qabte/65007/80/1.4.25/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=en-US&collectorId=9a6028f0"></script>
+<script type="text/javascript" src="https://erdosmiller.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e/en_US-h3yd8m-1988229788/6252/25/1.4.7/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=52db04e5"></script>
+<script type="text/javascript">
+  function browserIsIE() {
+    return navigator.userAgent.indexOf("Trident") >= 0;
+  }
+  function browserNewerThanIE9() {
+    return /Trident\/([^;]+)/.test(navigator.userAgent) && parseFloat(RegExp["$1"]) > 5;
+  }
+  function popBugReporter() {
+    if ($('#defects_index').length) {
+      $('.bug-report-element').first().click();
+    }
+  }
+
+  window.ATL_JQ_PAGE_PROPS = $.extend(window.ATL_JQ_PAGE_PROPS, {
+    '9a6028f0': {
+      triggerFunction: function(showIssueCollector) {
+        $('.bug-report-element').click(function(e) {
+          e.preventDefault();
+          showIssueCollector();
+        })
+
+        if (browserIsIE() && browserNewerThanIE9()) {
+          setTimeout(function() {
+            popBugReporter();
+          }, 500);
+        } else {
+          $(window).load(function() {
+            popBugReporter();
+          });
+        }
+      },
+      fieldValues: {
+        customfield_11103: '<%= j current_user.try(:email)%>'
+      }
+    },
+    '52db04e5': {
+      fieldValues: {
+        email: '<%= j current_user.try(:email)%>'
+      }
+    }
+  });
+</script>

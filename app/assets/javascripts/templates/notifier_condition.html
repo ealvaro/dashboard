@@ -1,0 +1,58 @@
+<div ng-if="condition.type == 'condition'">
+  <select name="{{ update_name }}"
+          class="form-control alert-control alert-inline-control"
+          ng-model="condition.update"
+          ng-options="option.value as option.name for option in data.updateTypeSelect.options"
+          required>
+  </select>
+
+  <select name="{{ field_name }}"
+          class="form-control alert-control alert-inline-control"
+          ng-model="condition.field"
+          ng-options="option.value as option.name for option in fieldOptions()"
+          required>
+  </select>
+
+  <select name="{{ operator_name }}"
+          class="form-control alert-control alert-inline-control"
+          ng-model="condition.operator"
+          ng-options="option.value as option.name for option in operatorOptions()"
+          required>
+  </select>
+
+  <input name="{{ text_value_name }}"
+         class="form-control alert-control alert-inline-control"
+         ng-if="!showValueSelect()" type="text"
+         placeholder="{{condition.placeholder}}"
+         ng-model="condition.textValue"
+         required>
+  <select name="{{ select_value_name }}"
+          class="form-control alert-control alert-inline-control"
+          ng-if="showValueSelect()" ng-model="condition.selectValue"
+          ng-options="option.value as option.name for option in valueOptions()"
+          required>
+  </select>
+
+  <select name="{{ value_op_name }}"
+          class="form-control alert-control alert-inline-control"
+          ng-if="showValueOp()" ng-model="condition.valueOp"
+          ng-options="option.value as option.name for option in data.valueOpSelect.options"
+          required>
+  </select>
+  <button class="btn btn-default condition-btn"
+          ng-click="addCondition()"
+          tooltip="Add new condition">
+    <i class="zmdi zmdi-plus"></i>
+  </button>
+  <button class="btn btn-default condition-btn"
+          ng-click="remove()"
+          tooltip="Remove condition">
+    <i class="zmdi zmdi-delete"></i>
+  </button>
+  <button class="btn btn-default condition-btn"
+          ng-show="canAddGroups"
+          ng-click="addGrouping()"
+          tooltip="Add new grouping">
+    <i class="zmdi zmdi-playlist-plus"></i>
+  </button>
+</div>

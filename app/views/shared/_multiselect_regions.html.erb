@@ -1,0 +1,13 @@
+<div class="compact-label col-xs-12 text-left">
+  <%= f.label :regions %>
+</div>
+
+<div class="compact-label col-xs-12 text-left"
+     style="color: red;">
+  This option restricts the <%= category_label %> to ONLY the selected regions.
+  Leaving this option unselected will not restrict any regions.
+</div>
+
+<div class="col-xs-12 text-left vert-margins <%= 'compact-label' if controller_name == 'mandates' %>">
+  <%= f.input :regions, collection: Region.all.map{ |r| [r.name, r.id] }, label: false, input_html: { multiple: true, class: "multiselect_regions" } %>
+</div>

@@ -1,0 +1,12 @@
+
+<div class="col-md-12">
+  <h1 style="margin-bottom: 16px">Reset your password</h1>
+
+  <%= form_tag password_resets_path, method: :post do %>
+    <div class="form-group">
+      <%= label_tag :email, "Please send password reset instructions to:" %>
+      <%= text_field_tag :email, params[:email], class: "form-control" %>
+    </div>
+    <%= submit_tag "Send Email", class: "btn btn-primary" %>
+  <% end %>
+</div>

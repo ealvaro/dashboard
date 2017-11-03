@@ -1,0 +1,11 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'Edit <%= @report_type.try(:name) %>')"></top-bar>
+
+<div class="container-fluid">
+  <%= simple_form_for @report_type, url: admin_report_type_path(@report_type),
+                                    method: :put,
+                                    html: { class: 'form-horizontal margin-top' } do |f| %>
+    <%= render partial: "form", locals: {f: f} %>
+  <% end %>
+</div>

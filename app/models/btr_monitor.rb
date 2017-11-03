@@ -1,0 +1,2 @@
+class BtrMonitor < Receiver
+end

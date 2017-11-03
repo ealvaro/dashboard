@@ -1,0 +1,3 @@
+class RunRecordAuthorizer < BillingAuthorizer
+end
+

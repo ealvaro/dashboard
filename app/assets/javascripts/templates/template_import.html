@@ -1,0 +1,50 @@
+<div>
+
+<h1 class="page-header">Import Template</h1>
+<form>
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="dropdown">
+        <button class="btn btn-default" type="button" id="dropdown-user-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{data.filter}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdown-user-filter">
+          <li>
+            <a href="#" ng-click="data.filter = 'Active Users'">Active Users</a>
+          </li>
+          <li>
+            <a href="#" ng-click="data.filter = 'All Users'">All Users</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <h4>Available Templates</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <select ng-options="user.id as user.email for user in data.users"
+              ng-model="data.selectedUserId"
+              style="width: 100%;"
+              size="12"></select>
+    </div>
+
+    <div class="col-xs-3">
+      <select ng-options="template.id as template.name for template in data.templates"
+              ng-model="data.selectedTemplateId"
+              style="width: 100%;"
+              size="12"></select>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 10px">
+    <div class="col-xs-offset-3 col-xs-3">
+      <button class="btn btn-success" ng-click="submit()">Import Template</button>
+      <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>
+
+</div>

@@ -1,0 +1,132 @@
+<top-bar ng-init="init('Jobs', '[Job: <%= @job.name.try(:upcase) %>] [Rig: <%= @job.rig %>] [Well: <%= @job.well %>]')"></top-bar>
+
+<div class="vert-margins">
+  <%= render partial: 'client_info/navbar' %>
+
+  <div class="col-md-6 text-right">
+    <div class="btn-group">
+      <%= link_to edit_job_path( @job ), class: "btn btn-primary no-border" do %>
+        <i class="zmdi zmdi-edit"></i>
+      <% end %>
+      <% if Job.deletable_by? current_user %>
+        <%= link_to job_path( @job ), method: :delete,
+                                      data: {confirm: "Positive you want to destroy?", disable: "destroying.."},
+                                      class: "btn btn-danger no-border" do %>
+          <i class="zmdi zmdi-delete"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+
+  <% for run in @job.runs.order(number: :asc) %>
+    <div>
+      <div class="col-xs-12 compact">
+        <h3>
+          <%= Run.model_name.human + " " + run.number.to_s %>
+        </h3>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="well">
+                <h4>Hands</h4>
+                <div class="row">
+                  <!-- unique emails pls -->
+                  <% for event in run.events.where("user_email is not null").to_a.uniq{|e| e.user_email} %>
+                    <div style="margin-bottom: 0.25in" class="col-xs-6">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <strong><%= User.find_by(email: event.user_email ).try(:name) || event.user_email.try(:partition, "@").try(:first) %></strong>
+                        </div>
+                        <div class="col-xs-12">
+                          <%= event.user_email %>
+                        </div>
+                      </div>
+                    </div>
+                  <%end%>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="well">
+                <h4>Notes</h4>
+                <% for event in run.events.where("notes is not null") %>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <strong><%= event.user_email %></strong>
+                    </div>
+                    <div class="col-xs-12">
+                      <%= event.notes %>
+                    </div>
+                    <br/>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="well">
+                <h4>Electronics</h4>
+                <div class="row">
+                  <% for event in run.events.where(event_type: 'Memory - Download').order(time: :desc) %>
+                    <% if event.event_assets.count > 0 %>
+                      <div class="col-xs-4">
+                        <%= event.primary_asset_number.blank? ? "N/A" : event.primary_asset_number %>
+                        <% for asset in event.event_assets %>
+                          <%= link_to asset.name, asset.file.url %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+                <br/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% if run.report_requests.count > 0 %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="col-xs-12 well">
+            <h4>Reports</h4>
+            <table class="table table-striped">
+              <tr>
+                <th>Result</th>
+                <th>Description</th>
+                <th>Assets</th>
+                <th>When</th>
+              </tr>
+              <% for report in run.report_requests.order(created_at: :desc) %>
+                <tr>
+                  <td><%= report.succeeded? ? "Succeeded" : "Failed" %></td>
+                  <td><%= report.succeeded? ? "N/A" : report.description %></td>
+                  <td>
+                    <% for asset in report.report_request_assets %>
+                      <table>
+                        <tr>
+                          <td>
+                            <a href="<%= asset.file.url %>"><%= asset.name %></a>
+                          </td>
+                        </tr>
+                      </table>
+                    <% end %>
+                  </td>
+                  <td><%= report.created_at.to_s(:db) %></td>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,19 @@
+<% active_page(:firmware) %>
+
+<top-bar ng-init="init('Firmware', 'Edit')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="page-nav col-xs-6">
+      <nav>
+        <ul class="pagination vert-margins">
+          <%= content_tag(:li, link_to("Overview", overview_firmware_updates_path)) %>
+          <%= content_tag(:li, link_to("Create", new_firmware_update_path)) %>
+          <%= content_tag(:li, link_to("Edit", new_firmware_update_path), class: "active") %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <%= render partial: 'form', locals: {firmware_update: @firmware_update }%>
+</div>

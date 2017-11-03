@@ -1,0 +1,73 @@
+<div>
+
+<erdos-receiver-pusher-listener object="object" job-number="jobNumber" receiver-type="receiverType" receiver-data="receiver_data"></erdos-receiver-pusher-listener>
+
+<div class="row">
+  <div class="col-md-12">
+    <erdos-receiver-pulse-chart
+       ng-if="type!='em'"
+       channel="pulse_channel"
+       key="{{type}}-pulse-chart"
+       axis-label="Pressure"
+       title="Receiver Pulses"
+       show-negative="false"
+       show-threshold="true"
+       max-length="600"
+       value-scale="1"
+       high-detail="true">
+    </erdos-receiver-pulse-chart>
+    <erdos-receiver-pulse-chart
+       ng-if="type=='em'"
+       channel="pulse_channel"
+       key="{{type}}-unfiltered"
+       axis-label=""
+       title="Unfiltered Log"
+       show-negative="true"
+       show-threshold="false"
+       max-length="200"
+       value-scale="1"
+       high-detail="false">
+    </erdos-receiver-pulse-chart>
+  </div>
+</div>
+
+<div ng-if="type=='em'" class="row">
+  <div class="col-md-12">
+    <erdos-receiver-pulse-chart
+        ng-if="type=='em'"
+        channel="pulse_channel"
+        key="{{type}}-filtered"
+        axis-label=""
+        title="Filtered Log"
+        show-negative="true"
+        show-threshold="false"
+        max-length="600"
+        value-scale="5000"
+        high-detail="false">
+    </erdos-receiver-pulse-chart>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 15px">
+  <div ng-if="type=='em'">
+    <div class="radar-section">
+      <erdos-receiver-fft-chart channel="fft_channel"></erdos-receiver-fft-chart>
+      <erdos-receiver-radar-chart-em channel="radar_channel"></erdos-receiver-radar-chart-em>
+    </div>
+
+    <div class="col-xs-6 receiver-table pull-left">
+      <erdos-receiver-table-em channel="table_channel"></erdos-receiver-table-em>
+    </div>
+  </div>
+
+  <div ng-if="type!='em'">
+    <div class="radar-section">
+      <erdos-receiver-radar-chart channel="radar_channel"></erdos-receiver-radar-chart>
+    </div>
+    <div class="col-xs-6 receiver-table pull-left">
+      <erdos-receiver-table channel="table_channel"></erdos-receiver-table>
+    </div>
+  </div>
+</div>
+
+</div>

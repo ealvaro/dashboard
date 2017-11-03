@@ -1,0 +1,19 @@
+<% active_page(:surveys) %>
+
+<top-bar ng-init="init('Recent Surveys', 'Add Survey By Hand')"></top-bar>
+
+<div class="container-fluid">
+
+  <%= simple_form_for @survey, html: { class: 'form-horizontal margin-top' } do |f| %>
+    <%= render partial: 'form', locals: {f: f} %>
+    <div class="row">
+      <div class="col-xs-12 text-left vert-margins">
+        <%= f.submit "Add", class: "btn btn-orange" %>
+        <%= f.submit "Add Another", class: "btn btn-primary" %>
+        <%= link_to surveys_path do %>
+          <div class="btn btn-bisque">Cancel</div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

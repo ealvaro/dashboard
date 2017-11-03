@@ -1,0 +1,2 @@
+class RigAuthorizer < JobAuthorizer
+end

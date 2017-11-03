@@ -1,0 +1,27 @@
+<div class="dropdown">
+  <button class="btn btn-default btn-toggle" type="button" id="cog1" data-toggle="dropdown"><i class="zmdi zmdi-settings"></i></button>
+  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="cog1">
+    <li role="presentation"><a id="#details" role="menuitem" tabindex="-1" href="#" ng-click="showDetails( receiver )">Details</a></li>
+    <li role="presentation">
+      <a role="menuitem" tabindex="-1" href="#" ng-if="showCopy('BtrReceiverUpdate')" ng-click="copy('BtrReceiverUpdate')">
+        Copy TV ID for BTR Monitor PC
+      </a>
+      <a role="menuitem" tabindex="-1" href="#" ng-if="showCopy('BtrControlUpdate')" ng-click="copy('BtrControlUpdate')">
+        Copy TV ID for BTR Control PC
+      </a>
+      <a role="menuitem" tabindex="-1" href="#" ng-if="showCopy('LeamReceiverUpdate')" ng-click="copy('LeamReceiverUpdate')">
+        Copy TV ID for Leam Receiver PC
+      </a>
+      <a role="menuitem" tabindex="-1" href="#" ng-if="showCopy('EmReceiverUpdate')" ng-click="copy('EmReceiverUpdate')">
+        Copy TV ID for APS EM Receiver PC
+      </a>
+      <a role="menuitem" tabindex="-1" href="#" ng-if="showCopy('LoggerUpdate')" ng-click="copy('LoggerUpdate')">
+        Copy TV ID for Logger PC
+      </a>
+    </li>
+    <li>
+      <a href="#" ng-if="!doesFollow(job)" ng-click="follow(job)">Follow</a>
+      <a href="#" ng-if="doesFollow(job)" ng-click="unfollow(job)">Unfollow</a>
+    </li>
+  </ul>
+</div>

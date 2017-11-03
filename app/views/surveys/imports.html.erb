@@ -1,0 +1,42 @@
+<% active_page(:surveys) %>
+
+<top-bar ng-init="init('Recent Surveys', 'Survey Import Runs')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="vert-margins text-right">
+    <%= link_to "View Surveys", surveys_path, class: "btn btn-orange" %>
+    <%= link_to "Import or Apply Corrections", corrections_surveys_path, class: "btn btn-orange" %>
+    <%= link_to "Add By Hand", new_survey_path, class: "btn btn-orange" %>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table white-grey">
+        <thead>
+          <th>Imported At</th>
+          <th>Surveys Count</th>
+          <th>Job</th>
+          <th>Run</th>
+          <th>Side Track</th>
+          <th>Actions</th>
+        </thead>
+        <% @survey_import_runs.each do |run|%>
+          <tr>
+            <td><%= run.created_at.strftime("%e %b %Y %H:%M:%S%p") %></td>
+            <td><%= run.surveys.count %></td>
+            <td><%= run.surveys.first.try(:run).try(:job).try(:name)%></td>
+            <td><%= run.surveys.first.try(:run).try(:number)%></td>
+            <td><%= run.surveys.first.try(:side_track).try(:number)%></td>
+            <td>
+              <%= link_to run, method: :delete, class: "btn btn-default", tooltip: 'Undo', data: {confirm: "Delete this run and its surveys?", disable: "deleting..."} do %>
+                <i class="zmdi zmdi-undo"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+</div>

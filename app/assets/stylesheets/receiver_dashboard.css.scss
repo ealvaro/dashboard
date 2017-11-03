@@ -1,0 +1,244 @@
+$rim_color: #707070;
+$ball_color: orange;
+
+.table-label {
+  text-align: center;
+}
+
+.table-item {
+  text-align: center;
+  font-size: 14pt;
+}
+
+.label-row {
+  height: 21px;
+}
+
+.item-row {
+  height: 41px;
+}
+
+// .box-shaddow-med {
+//   box-shadow: 10px 10px 5px #888888;
+// }
+
+.light-grey {
+  background-color: white;
+  border: 0;
+}
+
+.upper-left {
+  position: absolute;
+  top: 0px;
+  left: 26px;
+}
+
+.upper-right {
+  position: absolute;
+  top: 0px;
+  right: 26px;
+}
+
+.lower-left {
+  position: absolute;
+  bottom: 26px;
+  left: 26px;
+}
+
+.lower-right {
+  position: absolute;
+  bottom: 26px;
+  right: 26px;
+}
+
+.ball {
+  position: absolute;
+  border-radius: 50%;
+  background: $ball_color;
+  width: 10pt;
+  height: 10pt;
+}
+
+#ball0 {
+  opacity: 1.0;
+}
+
+#ball1 {
+  opacity: 0.85;
+}
+
+#ball2 {
+  opacity: 0.7;
+}
+
+#ball3 {
+  opacity: 0.55;
+}
+
+#ball4 {
+  opacity: 0.4;
+}
+
+#ball5 {
+  opacity: 0.25;
+}
+
+#circle0 {
+  background: $rim_color;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  // margin-left: 75px;
+  margin-left: 40px;
+  margin-top: 15px;
+}
+
+#circle_inner0 {
+  position: absolute;
+  background: white;
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+#circle1 {
+  position: absolute;
+  background: $rim_color;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#circle_inner1 {
+  position: absolute;
+  background: white;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+#circle2 {
+  position: absolute;
+  background: $rim_color;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#circle_inner2 {
+  position: absolute;
+  background: white;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+#circle3 {
+  position: absolute;
+  background: $rim_color;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#circle_inner3 {
+  position: absolute;
+  background: white;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+#circle4 {
+  position: absolute;
+  background: $rim_color;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#circle_inner4 {
+  position: absolute;
+  background: white;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+#circle5 {
+  position: absolute;
+  background: $rim_color;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#circle_inner5 {
+  position: absolute;
+  background: $rim_color;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+#circle6 {
+  position: absolute;
+  background: $rim_color;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#circle_inner6 {
+  position: absolute;
+  background: $rim_color;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.panel {
+  border: 0;
+}
+
+#stripChart {
+  border: 0;
+}
+
+.radar-chart {
+  left: 0;
+  padding-top: 3.7em;
+  position: absolute;
+}
+
+.radar-section {
+  width: 375px;
+  margin-left: 1em;
+  float: left;
+}

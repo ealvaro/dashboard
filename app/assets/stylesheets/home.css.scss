@@ -1,0 +1,233 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+  color: #777;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+}
+
+table.firmware-list td {
+  width: 16%;
+}
+table.firmware-list td.summary{
+  width: 32%;
+}
+
+.confirm {
+  margin: 3em;
+}
+.btn.yes-no {
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  margin: 1em 2em;
+}
+.atlwdg-trigger {
+  opacity: 0 !important;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    width: 220px;
+  }
+  .dl-horizontal dd {
+    margin-left: 240px;
+  }
+
+  .dl-horizontal-thin dt {
+    width: 60px;
+  }
+  .dl-horizontal-thin dd {
+    margin-left: 80px;
+  }
+}
+.row.no-gutter [class*='col-']:not(:first-child),.row.no-gutter
+[class*='col-']:not(:last-child) {
+  padding-right:0;
+  padding-left:0;
+}
+
+.small-warning-text {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FF0000;
+}
+
+.mandate_regions {
+  margin-bottom: 0;
+}
+
+.firmware_update_regions {
+  margin-bottom: 0;
+}
+
+.checkbox_header label {
+  font-size: 16px;
+}
+
+.top-bar {
+  background: url('bg.png');
+  height: 66px;
+  -webkit-transition: width .25s ease-out;
+          transition: width .25s ease-out;
+  color: #fff;
+  width: 100%;
+  top: 0;
+  margin-top: -81px;
+}
+
+.pulseChart {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.fftChart {
+  background-color: white;
+  border-radius: 4px;
+}
+
+.col-1 {
+  width: 12%;
+  float: left;
+}
+
+.flat-select {
+  border: none;
+  background-color: white;
+}
+
+.vert-margins {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.vert-margins-half {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.no-border {
+  border: none;
+}
+
+.page-nav {
+  .pagination {
+    .active {
+      a {
+        background-color: #1F3D7B;
+        border-color: #1F3D7B;
+      }
+    }
+  }
+}
+
+.margin-right {
+  margin-right: 1em;
+}
+
+.margin-top {
+  margin-top: 1em !important;
+}
+
+.margin-top-half {
+  margin-top: 0.5em !important;
+}
+
+.margin-bottom {
+  margin-bottom: 1em;
+}
+
+.margin-left {
+  margin-left: 1em;
+}
+
+.margin-none {
+  margin: 0;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.compact {
+  padding: 0;
+  margin: 0;
+}
+
+.compact-label {
+  margin: 0;
+  padding: 0;
+  padding-top: 0.5em;
+}
+
+.plain-link {
+  border: none;
+  color: rgb(100, 100, 100);
+  text-decoration: none;
+}
+
+.grey-text {
+  color: grey;
+}
+
+.pagination {
+  .active {
+    a {
+      background-color: #1F3D7B;
+      border-color: #1F3D7B;
+    }
+  }
+  a {
+    color: #1F3D7B;
+  }
+}
+
+.rounded-border {
+  border-radius: 5px !important;
+}
+
+.custom-form-control {
+  @extend .form-control;
+  display: inline;
+  width: 30%;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.primary-blue-bg {
+  background: url('bg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.primary-bisque-bg {
+  background-color: rgb(176, 169, 140);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.white-font {
+  color: white !important;
+}
+
+.padding-right-half {
+  padding-right: 0.5em;
+}
+
+.padding-right {
+  padding-right: 1em;
+}
+
+.padding-left {
+  padding-left: 1em;
+}
+
+.padding-horizontal {
+  padding-left: 1em;
+  padding-right: 1em;
+}

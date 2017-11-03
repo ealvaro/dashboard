@@ -1,0 +1,60 @@
+<div>
+
+<div ng-init="initDamages()" style="margin-top: 30pt">
+  <h4><%= Run.model_name.human  + " #" %> {{ run.number }}</h4>
+</div>
+<table style="width: 100%">
+  <tr>
+    <td><b><%= Run.human_attribute_name :motor_bend %></b></td>
+    <td><input ng-model="run.motor_bend_as_billed"></td>
+    <td><b><%= Run.human_attribute_name :mud_type %></b></td>
+    <td><select ng-model="run.mud_type_as_billed" ng-options="mud_type for mud_type in invoice.mud_types"></select></td>
+    <td><b><%= Run.human_attribute_name :circulating_hrs %></b></td>
+    <td><input ng-model="run.circulating_hrs_as_billed"></td>
+  </tr>
+  <tr>
+    <td><b><%= Run.human_attribute_name :rpm %></b></td>
+    <td><input ng-model="run.rpm_as_billed"></td>
+    <td><b><%= Run.human_attribute_name :sand %></b></td>
+    <td><input ng-model="run.sand_as_billed"></td>
+    <td><b><%= Run.human_attribute_name :rotating_hours %></b></td>
+    <td><input ng-model="run.rotating_hours_as_billed"></td>
+  </tr>
+  <tr>
+    <td><b><%= Run.human_attribute_name :max_temperature %></b></td>
+    <td><input ng-model="run.max_temperature_as_billed"></td>
+    <td><b><%= Run.human_attribute_name :chlorides %></b></td>
+    <td><input ng-model="run.chlorides_as_billed"></td>
+    <td><b><%= Run.human_attribute_name :sliding_hours %></b></td>
+    <td><input ng-model="run.sliding_hours_as_billed"></td>
+  </tr>
+  <tr>
+    <td><b><%= Run.human_attribute_name :max_shock %></b></td>
+    <td><input ng-model="run.max_shock_as_billed"></td>
+    <td></td>
+    <td></td>
+    <td><b>Total Hours</b></td>
+    <td>{{ run.dd_hours_as_billed }}</td>
+  </tr>
+  <tr>
+    <td><b><%= Run.human_attribute_name :max_vibe %></b></td>
+    <td><input ng-model="run.max_vibe_as_billed"></td>
+    <td></td>
+    <td></td>
+    <td><b><%= Run.human_attribute_name :agitator_distance %></b></td>
+    <td><input ng-model="run.agitator_distance_as_billed"></td>
+  </tr>
+  <tr>
+    <td><b><%= Run.human_attribute_name :shock_warnings %></b></td>
+    <td><input ng-model="run.shock_warnings_as_billed"></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<br/>
+<run-records run="run"></run-records>
+<run-damages run="run" invoice="invoice"></run-damages>
+
+</div>

@@ -1,0 +1,58 @@
+<div class="row margin-top">
+  <div class="col-xs-12 text-right">
+    <%= link_to new_admin_report_type_document_path(@report_type), class: "btn btn-orange" do %>
+      <i class="zmdi zmdi-plus"></i> New Document
+    <% end %>
+  </div>
+  <div class="col-xs-12">
+    <strong>Required Documents</strong>
+  </div>
+  <div class="col-xs-12">
+    <table class="table table-condensed white-grey">
+      <thead>
+        <tr>
+          <th><%= Document.human_attribute_name :name %></th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for doc in @report_type.documents.active %>
+          <tr>
+            <td><%= doc.name %></td>
+            <td class="text-right">
+              <a href="<%= edit_admin_document_path(doc) %>"
+                 class="btn btn-default">
+                <i class="zmdi zmdi-edit"></i>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-12">
+    <strong>Historical Documents</strong>
+  </div>
+  <div class="col-xs-12">
+    <table class="table table-condensed white-grey">
+      <thead>
+        <tr>
+          <th><%= Document.human_attribute_name :name %></th>
+          <th class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for doc in @report_type.documents.inactive %>
+          <tr>
+            <td><%= doc.name %></td>
+            <td class="text-right">
+              <a href="<%= edit_admin_document_path(doc) %>" class="btn btn-default">
+                <i class="zmdi zmdi-edit"></i>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

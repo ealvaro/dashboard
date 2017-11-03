@@ -1,0 +1,12 @@
+<div class="form-group" ng-if="group.type == 'grouping'">
+  <span class="col-1 bold">Match</span>
+  <select name="{{ name }}"
+    class="form-control alert-control alert-match-control match-input"
+    ng-model="group.boolean"
+    ng-options="option.value as option.name for option in options"
+    required>
+  </select> on the following rules:
+  <div ng-show="showRequiredText()">
+    <span class="alert-required help-block">must be filled in</span>
+  </div>
+</div>

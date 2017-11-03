@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-5">
+    <dl class="dl-horizontal">
+      <dt><%= Tool.human_attribute_name :status %></dt>
+      <dd>{{ tool.cache.status }}</dd>
+      <dt><%= Tool.human_attribute_name :board_serial_number %></dt>
+      <dd>{{ tool.cache.board_serial_number }}</dd>
+      <dt><%= Tool.human_attribute_name :primary_asset_number %></dt>
+      <dd>{{ tool.cache.primary_asset_number }}</dd>
+      <dt><%= Tool.human_attribute_name :secondary_asset_numbers %></dt>
+      <dd>{{ tool.cache.secondary_asset_numbers }}</dd>
+      <dt><%= Tool.human_attribute_name :chassis_serial_number %></dt>
+      <dd>{{ tool.cache.chassis_serial_number}}</dd>
+      <dt><%= Tool.human_attribute_name :event_assets %></dt>
+      <dd>
+        <ul class="list-unstyled" style="margin-bottom: 0" ng-repeat="asset in tool.cache.event_assets">
+          <li><a href="{{asset.file.url}}">{{ asset.name }}</a></li>
+        </ul>
+      </dd>
+      <dt><%= Tool.human_attribute_name :memory_usage_level %></dt>
+      <dd>{{ tool.cache.memory_usage_level }}</dd>
+      <dt><%= Tool.human_attribute_name :user_email %></dt>
+      <dd>{{ tool.cache.user_email}}</dd>
+      <dt><%= Tool.human_attribute_name :region %></dt>
+      <dd>{{ tool.cache.region}}</dd>
+      <dt><%= Tool.human_attribute_name :notes %></dt>
+      <dd>{{ tool.cache.notes}}</dd>
+      <dt><%= Tool.human_attribute_name :job_number %></dt>
+      <dd>{{ tool.cache.job_number}}</dd>
+      <dt><%= Tool.human_attribute_name :run_number %></dt>
+      <dd>{{ tool.cache.run_number}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-5">
+    <dl class="dl-horizontal">
+      <dt><%= Tool.human_attribute_name :reporter_context %></dt>
+      <dd>{{ tool.cache.reporter_context | reporterContextFilter}}</dd>
+      <dt><%= Tool.human_attribute_name :reporter_version %></dt>
+      <dd>{{ tool.cache.reporter_version}}</dd>
+      <dt><%= Tool.human_attribute_name :name %></dt>
+      <dd>{{ tool.cache.tool_type_name}}</dd>
+      <dt><%= Tool.human_attribute_name :uid %></dt>
+      <dd>{{ tool.uid | uid}}</dd>
+      <dt><%= Tool.human_attribute_name :hardware_version %></dt>
+      <dd>{{ tool.cache.hardware_version}}</dd>
+      <dt><%= Tool.human_attribute_name :board_firmware_version %></dt>
+      <dd>{{ tool.cache.board_firmware_version }}</dd>
+      <dt><%= Tool.human_attribute_name :max_temperature %></dt>
+      <dd>{{ tool.cache.max_temperature}}</dd>
+      <dt><%= Tool.human_attribute_name :max_shock %></dt>
+      <dd>{{ tool.cache.max_shock}}</dd>
+      <dt><%= Tool.human_attribute_name :last_connected %></dt>
+      <dd>{{ parseDate( tool.cache.created_at ) | amDateFormat:'YYYY-MM-DD HH:mm:ss a'}}</dd>
+      <dt><%= Tool.human_attribute_name :team_viewer_id %></dt>
+      <dd>{{ tool.cache.team_viewer_id}}</dd>
+      <dt><%= Tool.human_attribute_name :team_viewer_password %></dt>
+      <dd>{{ tool.cache.team_viewer_password}}</dd>
+      <dt ng-if="isReceiver(tool)">Total Service Time</dt>
+      <dd ng-if="isReceiver(tool)">{{ tool.total_service_time | pumpTime }}</dd>
+    </dl>
+  </div>
+  <div ng-if="!show" class="col-md-2 text-right">
+    <a id="hide_details" class="btn btn-danger" ng-click="hide()">Hide</a>
+  </div>
+</div>

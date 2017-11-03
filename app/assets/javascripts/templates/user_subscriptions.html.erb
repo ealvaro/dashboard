@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6">
+      <table class="table white-grey">
+        <thead>
+          <tr>
+            <th>Active Jobs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="job in jobs">
+            <td>{{job}}
+              <button class="btn btn-success pull-right" style="font-size: .5em;" ng-click="follow(job)">
+                <i class="zmdi zmdi-plus" style="font-size: 1.7em;"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-6">
+      <table class="table white-grey">
+        <thead>
+          <tr>
+            <th>Subscribed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="job in follows">
+            <td>{{job}}
+              <button class="btn btn-danger pull-right" style="font-size: .5em;" ng-click="unfollow(job)">
+                <i class="zmdi zmdi-minus" style="font-size: 1.7em;"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

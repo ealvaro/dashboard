@@ -1,0 +1,7 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'Edit Region')"></top-bar>
+
+<div class="container-fluid">
+  <%= render partial: 'form', locals: {region: @region} %>
+</div>

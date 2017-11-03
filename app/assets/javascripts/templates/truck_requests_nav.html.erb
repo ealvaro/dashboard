@@ -1,0 +1,14 @@
+<div class="page-nav col-xs-6">
+  <nav>
+    <ul class="pagination vert-margins">
+      <li ng-class="{ active: tab == 'active' }"
+          ng-click="changeTab('active')">
+        <a href="#">Active Requests</a>
+      </li>
+      <li ng-class="{ active: tab == 'serviced' }"
+          ng-click="changeTab('serviced')">
+        <a href="#">Serviced Requests</a>
+      </li>
+    </ul>
+  </nav>
+</div>

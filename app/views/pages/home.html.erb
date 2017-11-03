@@ -1,0 +1,15 @@
+<top-bar ng-init="init('Leam Fleet Tracking')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Alerts</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= render partial: 'notifications/index', locals: {job_number: "", header_view: "full_headers"} %>
+    </div>
+  </div>
+</div>

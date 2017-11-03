@@ -1,0 +1,12 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div ng-controller="RunRecordsController" ng-init="init('<%= @json %>')">
+  <div class="col-xs-8"></div>
+  <erdos-table objects="run_records"
+               cols="5"
+               headers="headers"
+               klass="'RunRecord'"
+               loading="loading"
+               search-text="searchText"
+               export-column-keys="exportColumnKeys"></erdos-table>
+</div>

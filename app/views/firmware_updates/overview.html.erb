@@ -1,0 +1,63 @@
+<% active_page(:firmware) %>
+
+<top-bar ng-init="init('Firmware Overview')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="page-nav col-xs-6">
+      <nav>
+        <ul class="pagination compact margin-top">
+          <%= content_tag(:li, link_to("Overview", overview_firmware_updates_path), class: "active") %>
+          <%= content_tag(:li, link_to("Create", new_firmware_update_path)) %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <% if @firmware_updates.any? %>
+    <% @firmware_updates.each do |tool_type, records| %>
+      <h2><%= tool_type %></h2>
+      <table class="table white-grey firmware-list">
+        <thead>
+          <th>Firmware Version</th>
+          <th>Summary</th>
+          <th>Date Uploaded</th>
+          <th>Context</th>
+          <th>Min HW Version</th>
+          <th>Updated By</th>
+          <th>Updated At</th>
+          <th>Actions</th>
+        </thead>
+        <% records.each do |update| %>
+          <tr>
+            <td><%= update.version %></td>
+            <td class="summary" data-container="body" data-toggle="popover"
+              data-placement="auto right" data-content="<%= update.summary if update.summary.length > 50%>">
+              <%= truncate update.summary, length: 50%>
+            </td>
+            <td><%= timeago_tag update.created_at, nojs: true, limit: 10.days.ago %></td>
+            <td><%= update.contexts.join(",") %></td>
+            <td><%= update.hardware_version%></td>
+            <td><%= update.last_edit_by.try(:email)%></td>
+            <td><%= timeago_tag update.updated_at, nojs: true, limit: 10.days.ago %></td>
+            <td>
+              <%= link_to update.binary.url, class: 'plain-link', style: 'font-size: 1.5em;', tooltip: 'Download' do %>
+                <i class="zmdi zmdi-cloud-download"></i>
+              <% end %>
+              <%= link_to [:edit, update], class: 'plain-link', style: 'font-size: 1.5em;', tooltip: 'Edit' do %>
+                <i class="zmdi zmdi-edit"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <% if @type.present? %>
+        <%= paginate records %>
+      <% else %>
+        <%= link_to "View Older #{tool_type} Versions", "/firmware_updates/overview?type=#{tool_type}", class: 'btn btn-orange' %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p class="lead">No Registered Updates</p>
+  <% end %>
+</div>

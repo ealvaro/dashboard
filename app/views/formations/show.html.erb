@@ -1,0 +1,20 @@
+<top-bar ng-init="init('Wells', '<%= @formation.name.try(:capitalize) %>')"></top-bar>
+
+<div class="row">
+  <div class="col-xs-12 vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <dl class="dl-horizontal">
+        <dt><%= Formation.human_attribute_name :name %></dt>
+        <dd><%= @formation.name %></dd>
+        <dt><%= Formation.human_attribute_name :multiplier %></dt>
+        <dd><%= @formation.multiplier %></dd>
+      </dl>
+    </div>
+  </div>
+</div>

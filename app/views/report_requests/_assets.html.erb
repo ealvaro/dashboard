@@ -1,0 +1,10 @@
+<% assets = rr.assets(current_user.can? :view_debug) %>
+<% if assets.length > 0 %>
+<li class="list-unstyled" style="margin-bottom: 0">
+  <% for asset in assets %>
+  <ul class="list-unstyled" style="margin-bottom: 0">
+    <a href="<%= asset.file.url %>"><%= asset.name %></a>
+  </ul>
+  <% end %>
+</li>
+<% end %>

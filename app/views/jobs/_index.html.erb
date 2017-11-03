@@ -1,0 +1,30 @@
+<table class="table grey-white">
+  <tr>
+    <th>
+      <%= Job.model_name.human %>
+    </th>
+    <th>
+      <%= Client.model_name.human %>
+    </th>
+    <th></th>
+  </tr>
+  <% for job in @decorated_jobs %>
+    <tr>
+      <td>
+        <%= link_to job.name, job_path(job) %>
+      </td>
+      <td>
+        <% if job.client %>
+          <%= link_to job.client, client_path(job.object.client) %>
+        <% end %>
+      </td>
+      <td class="text-right">
+        <a href="<%= edit_job_path(job) %>" class="btn btn-default">
+          <i class="zmdi zmdi-edit"></i>
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate @jobs %>

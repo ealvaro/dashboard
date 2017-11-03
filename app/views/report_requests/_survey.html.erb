@@ -1,0 +1,32 @@
+<div class="row report-requests-survey">
+  <div class="col-xs-6">
+    <%= f.label :measured_depth %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input :measured_depth, label: false,
+                                 input_html: { "ng-model" => "data.measured_depth",
+                                               class: 'flat-select' } %>
+  </div>
+</div>
+
+<div class="row report-requests-survey">
+  <div class="col-xs-6">
+    <%= f.label :inc %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input :inc, label: false,
+                      input_html: { "ng-model" => "data.inc",
+                                    class: 'flat-select' } %>
+  </div>
+</div>
+
+<div class="row report-requests-survey">
+  <div class="col-xs-6">
+    <%= f.label :azm %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input :azm, label: false,
+                      input_html: { "ng-model" => "data.azm",
+                                    class: 'flat-select' } %>
+  </div>
+</div>

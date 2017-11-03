@@ -1,0 +1,83 @@
+<div>
+
+<div class="pull-right margin-right vert-margins"
+     ng-if="uid == undefined">
+  <paginated-search ng-submit="search()"></paginated-search>
+</div>
+<div class="pull-right margin-right vert-margins"
+     ng-init="init()"
+     ng-if="uid == undefined">
+  <div ng-show="exportable()">
+    <button class="btn btn-orange"
+            ng-click="export()">
+      <i class="zmdi zmdi-download"></i> CSV
+    </button>
+  </div>
+</div>
+
+<div class="col-xs-12">
+  <table class="table white-grey">
+    <thead>
+    <tr ng-if="!loading">
+      <th ng-class="header.css_class" ng-repeat="header in headers">
+        <div ng-if="header.ordered">
+          <a ng-click="setOrderBy( header.key )">{{header.label}}</a>
+        </div>
+        <div ng-if="!header.ordered">{{header.label}}</div>
+      </th>
+      <th ng-if="headers && !noActions" class="text-right">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-if="loading">
+      <td colspan="{{cols}}" ng-if="loading">
+        <div class="progress progress-striped active">
+          <div class="progress-bar" style="width: 100%">
+          </div>
+        </div>
+        <small>loading...</small>
+      </td>
+    </tr>
+    <tr ng-repeat="object in exportObjects = objects">
+      <td ng-class="header.css_class" ng-if="!object.details" ng-repeat="header in headers">
+        <erdos-table-data object="object" url="{{header.url}}" key="header.key" klass="klass"></erdos-table-data>
+      </td>
+      <td ng-if="!object.details && !noActions" class="text-right">
+        <object-cog object="object" objects="objects"></object-cog>
+      </td>
+      <td ng-if="object.details" colspan="{{cols}}">
+        <event-details event="object" events="objects"></event-details>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-xs-10"
+     ng-if="uid == undefined">
+  <nav>
+    <ul class="pagination">
+      <li ng-if="currentPage != 1">
+        <a href="#" aria-label="First" ng-click="firstPage()">
+          <span aria-hidden="true">First</span>
+        </a>
+      </li>
+      <li ng-if="currentPage != 1">
+        <a href="#" aria-label="Previous" ng-click="previousPage()">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li ng-if="currentPage != pages || pages == 0">
+        <a href="#" aria-label="Next" ng-click="nextPage()">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li ng-if="currentPage != pages || pages == 0">
+        <a href="#" aria-label="Last" ng-click="lastPage()">
+          <span aria-hidden="true">Last</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+</div>

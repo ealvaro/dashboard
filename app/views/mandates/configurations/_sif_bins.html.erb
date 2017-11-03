@@ -1,0 +1,32 @@
+<div class="row">
+  <h3 style="margin-top:0;">SIF Bins (Max 5)</h3>
+</div>
+
+<div class="row">
+  <% [:sif_bin_0_max5, :sif_bin_1_max5, :sif_bin_2_max5, :sif_bin_3_max5].each do |key| %>
+    <div class="col-xs-4 compact-label margin-top-half">
+      <%= f.label key, DualGammaMandate.human_attribute_name(key),
+                       class: 'text-left' %>
+    </div>
+    <div class="col-xs-2 margin-top-half">
+      <%= f.input_field key, class: 'no-border' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <h3>SIF Bins (Max 30)</h3>
+</div>
+
+<div class="row">
+  <% (0..28).each do |bin| %>
+    <% key = "sif_bin_#{bin}_max30".to_sym %>
+    <div class="col-xs-4 compact-label margin-top-half">
+      <%= f.label key, DualGammaMandate.human_attribute_name(key),
+                       class: 'text-left' %>
+    </div>
+    <div class="col-xs-2 margin-top-half">
+      <%= f.input_field key, class: 'no-border' %>
+    </div>
+  <% end %>
+</div>

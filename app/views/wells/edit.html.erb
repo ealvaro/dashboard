@@ -1,0 +1,9 @@
+<top-bar ng-init="init('Wells', 'Edit Well')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row vert-margins">
+  <%= render partial: 'client_info/navbar' %>
+  </div>
+
+  <%= render partial: 'form', locals: {well: @well, url: well_path( @well ) } %>
+</div>

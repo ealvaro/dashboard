@@ -1,0 +1,29 @@
+<% active_page(:tools) %>
+
+<div ng-controller="ToolsController">
+  <top-bar ng-init="init('Fleet Management', subtitle)"></top-bar>
+
+  <div class="container-fluid">
+    <div class="page-nav pull-left vert-margins margin-right">
+      <nav>
+        <ul class="pagination compact" role="tablist">
+          <li class="active"><a href="#tools" role="tab" data-toggle="tab" ng-click="showTab('tools')">Tool List</a></li>
+          <li ><a href="#memories" role="tab" data-toggle="tab" ng-click="showTab('memories')">Memories</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="tools">
+        <div ng-if="show_tools">
+          <tools></tools>
+        </div>
+      </div>
+      <div class="tab-pane" id="memories">
+        <div ng-if="show_memories">
+          <memories></memories>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

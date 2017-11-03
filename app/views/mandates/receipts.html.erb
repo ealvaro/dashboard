@@ -1,0 +1,36 @@
+<% active_page(:config_management) %>
+
+<top-bar ng-init="init('Mandates', 'Receipts')"></top-bar>
+
+<div class="container-fluid">
+
+  <h4>Receipts for Mandate <%= link_to @mandate.public_token, [:edit, @mandate.becomes(Mandate)] %></h4>
+
+  <div class="col-xs-12 compact">
+    <% if @receipts.any? %>
+      <table class="table white-grey">
+        <tr>
+          <th>Mandate Token</th>
+          <th>TimeStamp</th>
+          <th>Tool Serial</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% @receipts.each do |receipt| %>
+          <tr>
+            <td><%= receipt.mandate_token%></td>
+            <td><%= receipt.timestamp_utc%></td>
+            <td><%= receipt.tool_serial%></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <div class="alert alert-warning"
+           style="width: 100%">
+        No Receipts Received
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "Back", mandates_path, class: "btn btn-bisque margin-top" %>
+</div>

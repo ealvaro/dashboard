@@ -1,0 +1,4 @@
+<%= form_tag("/tools/#{@tool.uid}/merge_tools", method: "post") do %>
+  <%= @tool.uid %> should be a part of <%= select_tag "into_tool", options_from_collection_for_select(@tools, "uid", "uid") %>
+  <%= submit_tag("Merge") %>
+<% end %>

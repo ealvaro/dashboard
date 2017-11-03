@@ -1,0 +1,66 @@
+ @keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+ }
+ @-webkit-keyframes blink {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+ }
+ .blink {
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;
+ }
+
+.alert-indent {
+  padding-left: 40px;
+}
+
+.alert-inline-control {
+  display: inline-block;
+  width: 15%;
+}
+
+.alert-match-control {
+  display: inline-block;
+  width: 6em;
+}
+
+form.submitted input.ng-invalid
+{
+  border-color: #843534;
+}
+
+form.submitted .ng-invalid input.form-control:focus
+{
+  border-color: #843534;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 6px #CE8483;
+}
+
+.alert-required {
+  color: #A94442;
+}
+
+.alert-ellipsis {
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  float: left;
+  width: 500px;
+}
+
+.alert {
+  margin-bottom: 0;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  width: calc(100% - 90px);
+  float: right;
+}
+
+.alert-unfold {
+  @extend .alert;
+  width: calc(100% - 260px);
+}

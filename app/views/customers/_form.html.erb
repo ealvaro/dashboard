@@ -1,0 +1,5 @@
+<%= simple_form_for customer, url: url do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.submit class: "btn btn-primary btn-large", data: {disable_with: "saving..."} %>
+<% end %>

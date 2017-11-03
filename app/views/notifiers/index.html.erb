@@ -1,0 +1,83 @@
+<div ng-controller="NotifiersController"
+     ng-init="init(<%= current_user.can_update?(RigGroup) %>,
+                   <%= current_user.can_delete?(RigGroup) %>,
+                   <%= current_user.id %>)">
+
+  <top-bar ng-init="init('notifiers')"></top-bar>
+
+  <div class="container-fluid"
+       style="padding-top: 15px">
+    <ul class="nav nav-tabs active-white">
+      <li ng-class="{active: tab == 'Global'}">
+        <a ng-click="changeTab('Global')" href="#">Global</a>
+      </li>
+      <li ng-class="{active: tab == 'Group'}">
+        <a ng-click="changeTab('Group')" href="#">Groups</a>
+      </li>
+      <li ng-class="{active: tab == 'Rig'}">
+        <a ng-click="changeTab('Rig')" href="#">Rigs</a>
+      </li>
+      <li ng-class="{active: tab == 'User Template'}">
+        <a ng-click="changeTab('User Template')" href="#">User Templates</a>
+      </li>
+
+      <% if current_user.can_create?(RigGroup) %>
+        <a class="pull-right"
+           ng-click="newGroupClicked(); newClicked()"
+           ng-if="tab == 'Group'"
+           ng-show="!new"
+           style="margin-left: 0.5em;">
+          <button class="btn btn-orange">
+            <i class="zmdi zmdi-plus"></i>Add New Rig Group
+          </button>
+        </a>
+      <% end %>
+
+      <% if current_user.can_create?(Notifier) %>
+        <button class="btn btn-orange pull-right"
+                ng-click="newClicked(); createNotifier();"
+                ng-show="!new"
+                style="margin-left: 0.5em;">
+          <i class="zmdi zmdi-plus"></i>New {{newAlertText}} Alert
+        </button>
+      <% end %>
+
+      <a class="pull-right"
+         href="#"
+         ng-if="tab == 'User Template'"
+         ng-show="!new"
+         style="margin-left: 0.5em;"
+         ng-click="newClicked(); createTemplate();">
+        <button class="btn btn-orange">
+          <i class="zmdi zmdi-plus"></i>New Template
+        </button>
+      </a>
+
+      <a class="pull-right"
+         href="#"
+         ng-if="tab == 'User Template'"
+         ng-show="!new"
+         style="margin-left: 0.5em;"
+         ng-click="importTemplateClicked()">
+        <button class="btn btn-orange">
+          Import Template From User
+        </button>
+      </a>
+
+    </ul>
+    <div class="tab-content">
+      <div ng-if="new">
+        <notifier-form ng-if="newNotifier"
+                       class="notifier-form"></notifier-form>
+        <template-form ng-if="newTemplate"
+                      ng-init="init()"></template-form>
+        <rig-group-form ng-if="newGroup"></rig-group-form>
+      </div>
+      <div ng-if="!new">
+        <template-import ng-if="importTemplate"
+                         ng-init="init()"></template-import>
+        <notifier-table ng-if="!importTemplate"></notifier-table>
+      </div>
+    </div>
+  </div>
+</div>

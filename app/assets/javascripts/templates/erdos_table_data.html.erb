@@ -1,0 +1,147 @@
+<div ng-switch="key">
+  <div ng-switch-when="roles" class="white-space-normal text-left">{{object.roles.join(", ")}}</div>
+  <div ng-switch-when="time"><span am-time-ago="{{ getDate( object, 'time' ) }}"></span></div>
+  <div ng-switch-when="time_stamp">{{ object.time_stamp | date: 'short' }}</div>
+  <div ng-switch-when="updated_at"><span am-time-ago="{{ getDate( object, 'updated_at' ) }}"></span></div>
+  <div ng-switch-when="reporter_context">{{ object.reporter_context | reporterContextFilter }}</div>
+  <div ng-switch-when="pump_on_time">{{ object.pump_on_time | pumpTime }}</div>
+  <div ng-switch-when="pump_off_time">{{ object.pump_off_time | pumpTime }}</div>
+  <div ng-switch-when="pump_total_time">{{ object.pump_total_time | pumpTime }}</div>
+  <div ng-switch-when="rop">{{ object.rop | number:2 }}</div>
+  <div ng-switch-when="gravity">{{ (object.gravity | number:2) }}</div>
+  <div ng-switch-when="grav_roll">{{ (object.grav_roll | number:2) }}</div>
+  <div ng-switch-when="mag_roll">{{ (object.mag_roll | number:2) }}</div>
+  <div ng-switch-when="magf">{{ (object.magf | number:2) }}</div>
+  <div ng-switch-when="inc">{{ (object.inc | number:2) }}</div>
+  <div ng-switch-when="temperature">{{ (object.temperature | number:2) }}</div>
+  <div ng-switch-when="dipa">{{ (object.dipa | number:2) }}</div>
+  <div ng-switch-when="azm">{{ (object.azm | number:2) }}</div>
+  <div ng-switch-when="gama">{{ (object.gama | number:2) }}</div>
+  <div ng-switch-when="gamma_shock">{{ (object.gamma_shock | number:2) }}</div>
+  <div ng-switch-when="gamma_shock_axial_p">{{ (object.gamma_shock_axial_p | number:2) }}</div>
+  <div ng-switch-when="gamma_shock_tran_p">{{ (object.gamma_shock_tran_p | number:2) }}</div>
+  <div ng-switch-when="atfa">{{ (object.atfa | number:2) }}</div>
+  <div ng-switch-when="gtfa">{{ (object.gtfa | number:2) }}</div>
+  <div ng-switch-when="mtfa">{{ (object.mtfa | number:2) }}</div>
+  <div ng-switch-when="delta mtf">{{ (object.delta_mtf | number:1) }}</div>
+  <div ng-switch-when="formation_resistance">{{ (object.formation_resistance | number:1) }}</div>
+  <div ng-switch-when="mx">{{ (object.mx | number:2) }}</div>
+  <div ng-switch-when="my">{{ (object.my | number:2) }}</div>
+  <div ng-switch-when="mz">{{ (object.mz | number:2) }}</div>
+  <div ng-switch-when="ax">{{ (object.ax | number:2) }}</div>
+  <div ng-switch-when="ay">{{ (object.ay | number:2) }}</div>
+  <div ng-switch-when="az">{{ (object.az | number:2) }}</div>
+  <div ng-switch-when="batv">{{ (object.batv | number:2) }}</div>
+  <div ng-switch-when="bat2">{{ (object.bat2 | truthy) }}</div>
+  <div ng-switch-when="batw">{{ (object.batw | truthy) }}</div>
+  <div ng-switch-when="dipw">{{ (object.dipw | truthy) }}</div>
+  <div ng-switch-when="magw">{{ (object.magw | truthy) }}</div>
+  <div ng-switch-when="gravw">{{ (object.gravw | truthy) }}</div>
+  <div ng-switch-when="tempw">{{ (object.tempw | truthy) }}</div>
+  <div ng-switch-when="dl_enabled">{{ (object.dl_enabled | truthy) }}</div>
+  <div ng-switch-when="pump_state">{{ (object.pump_state | uppercase) }}</div>
+  <div ng-switch-when="gv0">{{ (object.gv0 | number:2) }}</div>
+  <div ng-switch-when="gv1">{{ (object.gv1 | number:2) }}</div>
+  <div ng-switch-when="gv2">{{ (object.gv2 | number:2) }}</div>
+  <div ng-switch-when="gv3">{{ (object.gv3 | number:2) }}</div>
+  <div ng-switch-when="gv4">{{ (object.gv4 | number:2) }}</div>
+  <div ng-switch-when="gv5">{{ (object.gv5 | number:2) }}</div>
+  <div ng-switch-when="gv6">{{ (object.gv6 | number:2) }}</div>
+  <div ng-switch-when="gv7">{{ (object.gv7 | number:2) }}</div>
+  <div ng-switch-when="average_quality">{{ (object.average_quality | number:2) }}</div>
+  <div ng-switch-when="hole_depth">{{ object.hole_depth | number:2 }}</div>
+  <div ng-switch-when="bit_depth">{{ object.bit_depth | number:2 }}</div>
+  <div ng-switch-when="power">{{ object.power | number:2 }}</div>
+  <div ng-switch-when="dl_power">{{ object.dl_power | number:1 }}</div>
+  <div ng-switch-when="annular_pressure">{{ object.annular_pressure | number:1 }}</div>
+  <div ng-switch-when="bore_pressure">{{ object.bore_pressure | number:1 }}</div>
+  <div ng-switch-when="battery_number">{{ object.battery_number | number:0 }}</div>
+  <div ng-switch-when="frequency">{{ object.frequency | number:2 }}</div>
+  <div ng-switch-when="signal">{{ object.signal | number:2 }}</div>
+  <div ng-switch-when="mag_dec">{{ object.mag_dec | number:2 }}</div>
+  <div ng-switch-when="s_n_ratio">{{ object.s_n_ratio | number:2 }}</div>
+  <div ng-switch-when="noise">{{ (object.noise | number:2) }}</div>
+  <div ng-switch-when="weight_on_bit">{{ object.weight_on_bit | number:2 }}</div>
+  <div ng-switch-when="hookload">{{ object.hookload | number:2 }}</div>
+  <div ng-switch-when="api">{{ object.api | number:2 }}</div>
+  <div ng-switch-when="survey_md">{{ object.survey_md | number:2 }}</div>
+  <div ng-switch-when="survey_tvd">{{ object.survey_tvd | number:2 }}</div>
+  <div ng-switch-when="survey_vs">{{ object.survey_vs | number:2 }}</div>
+  <div ng-switch-when="cache.reporter_context">{{ object.cache.reporter_context | reporterContextFilter }}</div>
+  <div ng-switch-when="created_at"><span am-time-ago="{{ getDate( object, 'created_at' ) }}"></span></div>
+  <div ng-switch-when="cache.created_at"><span am-time-ago="{{ getDate( object.cache, 'created_at' ) }}"></span></div>
+  <div ng-switch-when="event_assets">
+    <ul class="list-unstyled" style="margin-bottom: 0" ng-repeat="asset in object[key]">
+      <li><a ng-click="downloadAsset(asset)">{{ asset.name }}</a></li>
+    </ul>
+  </div>
+  <div ng-switch-when="cache.event_assets">
+    <ul class="list-unstyled" style="margin-bottom: 0" ng-repeat="asset in object.cache.event_assets">
+      <li><a ng-click="downloadAsset(asset)">{{ asset.name }}</a></li>
+    </ul>
+  </div>
+  <div ng-switch-when="memory_usage_level"><fillbar attribute="object[key]"></fillbar></div>
+  <div ng-switch-when="cache.memory_usage_level"><fillbar attribute="object.cache.memory_usage_level"></fillbar></div>
+  <div ng-switch-when="tool_type.name">{{ getValue() | abbreviationFilter }}</div>
+  <div ng-switch-when="tool_type_name">{{ getValue() | abbreviationFilter }}</div>
+  <div ng-switch-when="event_type">{{ getValue() | abbreviationFilter }}</div>
+  <div ng-switch-when="total">{{ getValue() / 100.0 | currency }}</div>
+  <div ng-switch-when="uid">
+    <div ng-switch="klass">
+      <div ng-switch-when="Receiver">
+        <a target="_blank" ng-href="{{object.active_url}}">{{ object[key] | uid }}</a>
+      </div>
+      <div ng-switch-default>
+        {{ getValue() | uid }}
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="job">
+    <div ng-switch="klass">
+      <div ng-switch-when="Receiver">
+        <a target="_blank" ng-href="{{object.active_url}}">{{ object.name }}</a>
+      </div>
+      <div ng-switch-default>
+        <div ng-if="url">
+          <a ng-href="{{getUrl()}}">{{getValue()}}</a>
+        </div>
+        <div ng-if="!url">
+          {{getValue()}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="number">
+    <div ng-switch="klass">
+      <div ng-switch-when="Invoice">
+        <div ng-switch="object.status">
+          <div ng-switch-when="complete">
+            <a ng-href="{{object.show_url}}">{{ object.number }}</a>
+          </div>
+          <div ng-switch-when="draft">
+            <a ng-href="{{object.edit_url}}">{{ object.number }}</a>
+          </div>
+        </div>
+      </div>
+      <div ng-switch-default>
+        <div ng-if="url">
+          <a ng-href="{{getUrl()}}">{{getValue()}}</a>
+        </div>
+        <div ng-if="!url">
+          {{getValue()}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-switch-when="run_numbers">
+    {{object.run_numbers}}
+  </div>
+  <div ng-switch-default>
+    <div ng-if="url">
+      <a ng-href="{{getUrl()}}">{{getValue()}}</a>
+    </div>
+    <div ng-if="!url">
+      {{getValue()}}
+    </div>
+  </div>
+</div>

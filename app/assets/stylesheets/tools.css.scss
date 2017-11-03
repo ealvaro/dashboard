@@ -1,0 +1,28 @@
+#tool-event-history-header {
+  h1, h3 {
+    display: inline-block;
+  }
+
+  .checkbox {
+    display: inline-block;
+    margin-top: 5px !important;
+    margin-right: 10px;
+  }
+  h1 {
+    margin-right: 16px;
+  }
+  h3 {
+    margin-left: 16px;
+  }
+
+}
+
+.pagination {
+  a {
+    cursor: pointer;
+  }
+}
+
+.top-margin {
+  margin-top: 6pt
+}

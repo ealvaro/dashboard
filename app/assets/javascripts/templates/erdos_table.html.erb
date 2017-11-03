@@ -1,0 +1,113 @@
+<div>
+
+  <div class="col-xs-6 pull-right vert-margins">
+    <erdos-search search-text="searchText"></erdos-search>
+    <button class="btn btn-orange pull-right margin-right"
+            ng-click="export()"
+            ng-show="exportable()">
+      <i class="zmdi zmdi-download"></i> CSV
+    </button>
+  </div>
+
+  <div class="col-xs-12">
+    <table class="table white-grey margin-none">
+      <thead>
+      <tr ng-if="!loading">
+        <th ng-class="header.css_class" ng-repeat="header in headers">
+          <div ng-if="header.ordered" class="text-center">
+            <a href="#" ng-click="setOrderBy( header.key )">{{header.label}}</a>
+          </div>
+          <div ng-if="!header.ordered" class="text-center">{{header.label}}</div>
+        </th>
+        <th ng-if="headers && !noActions" class="text-center">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-if="loading">
+        <td colspan="{{cols}}" ng-show="loading">
+          <div class="progress progress-striped active">
+            <div class="progress-bar" style="width: 100%">
+            </div>
+          </div>
+          <small>loading...</small>
+        </td>
+      </tr>
+      <tr ng-class="{'alerting-job': object.has_active_alert, 'pumps-off': object.pumps_off}" ng-repeat="object in ((exportObjects = (objects | filter:searchText | orderBy:orderBy:reverse) | paginate:currentPage:perPage))">
+        <td ng-if="!object.details" ng-repeat="header in headers" style="color: black;">
+          <erdos-table-data object="object" url="{{header.url}}" key="header.key" klass="klass"></erdos-table-data>
+        </td>
+        <td ng-if="!object.details && !noActions" class="text-center">
+          <div ng-switch="klass">
+            <div ng-switch-when="Tool">
+              <tool-cog object="object" objects="objects" current-user="currentUser"></tool-cog>
+            </div>
+            <div ng-switch-when="Client">
+              <client-cog object="object"></client-cog>
+            </div>
+            <div ng-switch-when="Job">
+              <billing-cog object="object"></billing-cog>
+            </div>
+            <div ng-switch-when="Run">
+              <billing-cog object="object"></billing-cog>
+            </div>
+            <div ng-switch-when="Well">
+              <billing-cog object="object"></billing-cog>
+            </div>
+            <div ng-switch-when="RunRecord">
+              <a href="{{object.show_url}}" class="btn btn-default">View</a>
+            </div>
+            <div ng-switch-when="Formation">
+              <a href="{{object.edit_url}}" class="btn btn-default">Edit</a>
+            </div>
+            <div ng-switch-when="User">
+              <user-cog user="object" users="objects"></user-cog>
+            </div>
+            <div ng-switch-when="Receiver">
+              <receiver-cog receiver="object" follows="follows"></receiver-cog>
+            </div>
+            <div ng-switch-default>
+              <object-cog object="object" objects="objects"></object-cog>
+            </div>
+          </div>
+        </td>
+        <td ng-if="object.details" colspan="{{cols}}">
+          <div ng-switch="klass">
+            <div ng-switch-when="Event">
+              <event-details event="object" events="objects"></event-details>
+            </div>
+            <div ng-switch-when="Tool">
+              <tool-details tool="object"></tool-details>
+            </div>
+            <div ng-switch-when="Receiver">
+              <receiver-details receiver="object"></receiver-details>
+            </div>
+            <div ng-switch-when="Install">
+              <install-details install="object" installs="objects"></install-details>
+            </div>
+            <div ng-switch-when="Alert">
+              <alert-details object="object"></alert-details>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-10">
+    <pagination total-items="exportObjects.length" ng-model="currentPage" items-per-page="perPage" max-size="10"></pagination>
+  </div>
+  <div class="col-xs-2"
+       style="margin-top:20px;">
+    <select class="flat-select pull-right"
+            ng-model="perPage"
+            style="width: 140px; height: 34px">
+      <option value="10">10 per page</option>
+      <option value="20">20 per page</option>
+      <option value="30">30 per page</option>
+      <option value="40">40 per page</option>
+      <option value="50">50 per page</option>
+      <option value="100">100 per page</option>
+    </select>
+  </div>
+
+</div>

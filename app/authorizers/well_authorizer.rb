@@ -1,0 +1,2 @@
+class WellAuthorizer < JobAuthorizer
+end

@@ -1,0 +1,87 @@
+<% active_page(:jobs) %>
+
+<div ng-app="erdos"
+     ng-controller="ReceiverDashboardController"
+     ng-init="init('<%= j @job_json %>', '<%= j @updates_json %>')">
+
+  <top-bar ng-init="init('active_job')"></top-bar>
+
+  <div class="container-fluid">
+
+    <div class="row" style="margin-top: 10px">
+      <div class="col-xs-12">
+        <a href="<%= job_path(@job) %>" target="_blank" class="pull-right">
+          <button class="btn btn-orange" style="margin-right: 7px;">
+            Job Summary
+          </button>
+        </a>
+        <a href="<%= show_receiver_settings_path(@job) %>" target="_blank" class="pull-right">
+          <button class="btn btn-orange" style="margin-right: 7px;">
+            MWD Settings
+          </button>
+        </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div ng-show="btrEnabled" class="col-md-12">
+        <h3 style="margin-bottom: 0;">BTR Monitor Receiver</h3>
+        <receiver-dashboard-display channels="channels" show-headers="'false'" type="'btr'" object="receiver" job-number="<%= @job.name.upcase %>" receiver-type="btr-receiver"></receiver-dashboard-display>
+      </div>
+    </div>
+
+    <div class="row">
+      <div ng-show="btrControlEnabled" class="col-md-12">
+        <h3 style="margin-bottom: 0;">BTR Control Receiver</h3>
+        <receiver-dashboard-display channels="channels" show-headers="'false'" type="'btr-control'" object="receiver" job-number="<%= @job.name.upcase %>" receiver-type="btr-control"></receiver-dashboard-display>
+      </div>
+    </div>
+
+    <div class="row">
+      <div ng-show="leamEnabled" class="col-md-12">
+        <h3 style="margin-bottom: 0;">Leam Receiver</h3>
+        <receiver-dashboard-display channels="channels" show-headers="'true'" type="'leam'" object="receiver" job-number="<%= @job.name.upcase %>" receiver-type="leam-receiver"></receiver-dashboard-display>
+      </div>
+    </div>
+
+    <div class="row">
+      <div ng-show="emEnabled" class="col-md-12">
+        <h3 style="margin-bottom: 0;">APS EM Receiver</h3>
+        <receiver-dashboard-display channels="channels" show-headers="'true'" type="'em'" object="receiver" job-number="<%= @job.name.upcase %>" receiver-type="em-receiver"></receiver-dashboard-display>
+      </div>
+    </div>
+
+    <div class="row" style="height: 1em;" ng-if="!leamEnabled && !btrEnabled && !emEnabled && !btrControlEnabled"></div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'notifications/index',
+                   locals: {job_number: @job.name, header_view: "full_headers"} %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <erdos-receiver-logging-table job-number="'<%= @job.name.downcase %>'" job-id="'<%= @job.id %>'"></erdos-receiver-logging-table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <gamma-dashboard-display job-number="'<%= @job.name.downcase %>'" job-id="<%= @job.id %>"></gamma-dashboard-display>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <%= render partial: 'notifiers/table', locals: { notifiers: @notifiers, show_buttons: true } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12" style="padding-left: 0">
+        <job-info job="job"></job-info>
+      </div>
+    </div>
+  </div>
+</div>

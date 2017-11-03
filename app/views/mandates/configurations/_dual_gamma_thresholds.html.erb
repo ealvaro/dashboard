@@ -1,0 +1,13 @@
+<h3 style="margin-top:0;">Thresholds</h3>
+<% f.object.class.available_threshold_fields.each do |key| %>
+
+  <div class="row form-group padding-horizontal">
+    <div class="col-xs-6 compact-label">
+      <%= f.label key, class: 'text-left' %>
+    </div>
+    <div class="col-xs-6">
+      <%= f.input_field key, class: 'no-border' %>
+    </div>
+  </div>
+
+<% end %>

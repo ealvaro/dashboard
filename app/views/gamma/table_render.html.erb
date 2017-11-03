@@ -1,0 +1,14 @@
+<thead>
+  <tr>
+    <th>Measured Depth</th>
+    <th>Counts per Second</th>
+  </tr>
+</thead>
+<tbody>
+  <% @gammas.each do |gamma| %>
+  <tr>
+    <td><%= number_with_precision gamma.measured_depth, precision: 2 %></td>
+    <td><%= number_with_precision gamma.count, precision: 2 %></td>
+  </tr>
+  <% end %>
+</tbody>

@@ -1,0 +1,9 @@
+<% if @event.user_email || @event.region || @event.job_number || @event.run_number || @event.client_name || @event.rig_name %>
+    Last User Info:<br />
+    <% if @event.user_email && user_email %>&nbsp;&nbsp;&nbsp;&nbsp;Email: <%= @event.user_email %><br /><% end %>
+    <% if @event.region %>&nbsp;&nbsp;&nbsp;&nbsp;Region: <%= @event.region %><br /><% end %>
+    <% if @event.job_number %>&nbsp;&nbsp;&nbsp;&nbsp;Job Number: <%= @event.job_number %><br /><% end %>
+    <% if @event.run_number %>&nbsp;&nbsp;&nbsp;&nbsp;Run Number: <%= @event.run_number %><br /><% end %>
+    <% if @event.client_name %>&nbsp;&nbsp;&nbsp;&nbsp;Client: <%= @event.client_name %><br /><% end %>
+    <% if @event.rig_name %>&nbsp;&nbsp;&nbsp;&nbsp;Rig: <%= @event.rig_name %><% end %>
+<% end %>

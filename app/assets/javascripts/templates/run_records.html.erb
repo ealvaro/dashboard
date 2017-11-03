@@ -1,0 +1,25 @@
+<div>
+
+<div>
+  <h5><%= RunRecord.model_name.human.pluralize %></h5>
+</div>
+<table class="table table-condensed">
+  <tr bgcolor="#CFCFCF">
+    <th>
+      <%= Tool.human_attribute_name :product_line %>
+    </th>
+    <th>
+      <%= Tool.human_attribute_name :resource_group %>
+    </th>
+    <th>
+      <%= Tool.human_attribute_name :serial_number %>
+    </th>
+  </tr>
+  <tr ng-repeat="tool in tools">
+    <td>{{ tool.tool_type.name }}</td>
+    <td>{{ tool.tool_type.description }}</td>
+    <td>{{ tool.serial_number }}</td>
+  </tr>
+</table>
+
+</div>

@@ -1,0 +1,42 @@
+<top-bar ng-init="init('Histograms', '<%= @tool.tool_type.name %> <%=@tool.uid_display %>')"></top-bar>
+
+<div class="container-fluid margin-top"
+     ng-controller="HistogramsController"
+     ng-init="init('<%= @tool.to_json %>', '<%= @histograms.to_json %>', '<%= @jobs.to_json %>', '<%= @runs.to_json %>')">
+
+  <div class="row">
+    <div class="col-md-6">
+      <ul class="nav nav-tabs active-white">
+        <li ng-repeat="type in data.types"
+            ng-class="{active: tab == type}">
+          <a ng-click="changeTab(type)" href="#">{{type}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6 text-right">
+      <select ng-model="data.job"
+              ng-change="filterJob()"
+              class="flat-select">
+        <option value="">Filter Job</option>
+        <option ng-repeat="job in data.jobs"
+                value="{{job}}">{{job.name}}
+        </option>
+      </select>
+      <select ng-model="data.run"
+              ng-change="filterRun()"
+              class="flat-select"
+              ng-if="data.job">
+        <option value="">Filter Run</option>
+        <option ng-repeat="run in runs"
+                value="{{run}}">{{run.number}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-xs-12"
+       style="background-color: white;">
+    <histogram-chart ng-init="init()"></histogram-chart>
+  </div>
+</div>

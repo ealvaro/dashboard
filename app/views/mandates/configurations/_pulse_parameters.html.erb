@@ -1,0 +1,12 @@
+<h3 style="margin-top:0;">Pulse Parameters</h3>
+
+<% (@mandate.class.pulse_params).each do |sym| %>
+  <div class="row form-group padding-horizontal">
+    <div class="col-xs-6 compact-label">
+      <%= f.label sym %>
+    </div>
+    <div class="col-xs-6">
+      <%= f.input_field sym, class: 'no-border' %>
+    </div>
+  </div>
+<% end %>

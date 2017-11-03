@@ -1,0 +1,57 @@
+<% active_page(:software) %>
+
+<top-bar ng-init="init('Software Overview')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="page-nav col-xs-6">
+      <nav>
+        <ul class="pagination vert-margins">
+          <%= content_tag(:li, link_to("Overview", overview_software_index_path), class: "active") %>
+          <%= content_tag(:li, link_to("Upload", new_software_path)) %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <% if @software.none? %>
+    <div class="alert alert-warning">No Software Records Found</div>
+  <% end %>
+
+  <% @software.group_by(&:name).each do |name, records| %>
+    <% records.sort_by { |r| r.version }.reverse.take(1).each do |software| %>
+      <h2><%= name%></h2>
+
+      <p class="summary" data-container="body" data-toggle="popover"
+        data-placement="auto" data-content="<%= software.summary if software.summary.length > 140%>">
+        <%= truncate software.summary, length: 140%>
+      </p>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="col-lg-2 compact">
+            <strong>
+              <%= link_to software.binary.url, class: 'btn btn-orange' do %>
+                <i class="zmdi zmdi-download"></i>
+                <%= "Latest Version: #{software.version}" %>
+              <% end %>
+            </strong>
+          </div>
+          <div class="col-lg-2 margin-top-half">
+            <%= link_to "Previous Versions", previous_software_index_path(software_type_id: software.software_type.id) %>
+          </div>
+          <div class="col-lg-2 margin-top-half bold">
+            Permalink Latest:
+          </div>
+          <div class="col-lg-3">
+            <input type="text"
+                   value="<%= latest_software_url(software_type: software.software_type.name)%>"
+                   readonly='readonly'
+                   style="cursor: pointer; background-color: white;"
+                   class="flat-select rounded-border form-control">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

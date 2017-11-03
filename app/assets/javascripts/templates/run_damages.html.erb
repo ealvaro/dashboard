@@ -1,0 +1,72 @@
+<div>
+
+<div class="row">
+  <div class="col-xs-11">
+    <h5><%= RunRecord.human_attribute_name :damages_as_billed %></h5>
+  </div>
+  <div class="col-xs-1 text-right">
+    <a ng-if="addCustom == undefined" ng-click="startAddCustom()" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
+  </div>
+</div>
+<div class="row" ng-if="addCustom != undefined">
+  <div class="col-xs-12">
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <label class="sr-only" for="amount">Amount</label>
+        <input id="amount" type="text" ng-model="addCustom.amount" placeholder="Amount">
+        <p style="color: red">{{addCustom.errors.amount}}</p>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="description">Description</label>
+        <input id="description" type="text" ng-model="addCustom.description" placeholder="Description">
+        <p style="color: red">{{addCustom.errors.description}}</p>
+      </div>
+      <button class="btn btn-default bt-xs" ng-click="addNewValue()">Add New</button>
+    </form>
+  </div>
+</div>
+<table class="table table-condensed">
+  <thead>
+    <tr bgcolor="#CFCFCF">
+      <th style="width: 50%"><%= Run.human_attribute_name :description %> </th>
+      <th style="width: 15%">Calculated Amount</th>
+      <th><%= Tool.human_attribute_name :amount %></th>
+      <th class="text-right" style="width: 20%">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="(key,damage) in damages_as_billed | runDamageFilter">
+      <td >{{ damage.description }}</td>
+      <td colspan="1"><div ng-if="key.indexOf('custom') != 0">{{ afterMultiplier(damage.original_amount_in_cents) / 100.0 | currency }}</div></td>
+      <td colspan="1">
+        <div ng-if="damage.decimal_amount == undefined">
+          <div ng-if="damage.altered">
+            <strong>
+              {{ afterMultiplier(damage.amount) / 100.0 | currency }}
+            </strong>
+          </div>
+          <div ng-if="!damage.altered">
+            {{ afterMultiplier(damage.amount) / 100.0 | currency }}
+          </div>
+        </div>
+        <div ng-if="damage.decimal_amount != undefined">
+          {{invoice.multiplier_as_billed}} x <input ng-model="damage.decimal_amount">
+        </div>
+      </td>
+      <td class="text-right">
+        <a ng-if="key.indexOf('custom') == 0" class="btn btn-danger" ng-click="deleteDamage(key)"><span class="glyphicon glyphicon-trash"></span></a>
+        <a ng-if="damage.original_amount_in_cents == damage.amount && damage.altered" class="btn btn-danger" ng-click="reset(damage)"><i class="fa fa-link"></i></a>
+        <a ng-if="damage.original_amount_in_cents && damage.original_amount_in_cents != damage.amount" class="btn btn-danger" ng-click="reset(damage)"><span class="glyphicon glyphicon-refresh"></span></a>
+        <a ng-if="damage.decimal_amount == undefined" class="btn btn-primary" ng-click="damage.decimal_amount = damage.amount / 100.0"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a ng-if="damage.decimal_amount != undefined" class="btn btn-success" ng-click="updateDamage(damage)"><span class="glyphicon glyphicon-ok"></span></a>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td bgcolor="#CFCFCF"><b>Run Subtotal</b></td>
+      <td colspan="2">{{ run.damages_as_billed.subtotal / 100.0 | currency }}</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>

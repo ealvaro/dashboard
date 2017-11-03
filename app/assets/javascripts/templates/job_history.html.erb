@@ -1,0 +1,18 @@
+<div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <h1>{{job.name}} <small>{{job.client.name}}</small></h1>
+  </div>
+  <div class="col-xs-3 text-right">
+    <h3 style="margin-top: 0px; padding-top: 35px"><small>Rig:</small> {{ rigName() || "N/A" }}</h3>
+  </div>
+  <div class="col-xs-3 text-right">
+    <h3 style="margin-top: 0px; padding-top: 35px"><small>Well: </small> {{ wellName() || "N/A" }}</h3>
+  </div>
+</div>
+<div ng-repeat="run in job.runs | orderBy: 'number'">
+  <run-history run="run"></run-history>
+</div>
+
+</div>

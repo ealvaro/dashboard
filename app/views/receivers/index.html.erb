@@ -1,0 +1,20 @@
+<% active_page(:receivers) %>
+
+<top-bar ng-init="init('Active Jobs')"></top-bar>
+
+<div class="container-fluid">
+  <div ng-controller="ReceiversController">
+    <div ng-if="tab == 'Active'">
+      <receivers objects="objects" loading="loading"></receivers>
+    </div>
+    <div ng-if="tab == 'All'">
+      <div class="row" style="margin-top: 12pt">
+        <div class="col-xs-12">
+          <div ng-if="job.name">
+            <job-history job="job"></job-history>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

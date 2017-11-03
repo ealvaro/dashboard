@@ -1,0 +1,80 @@
+<% active_page(:report_requests) %>
+
+<top-bar ng-init="init('Report Requests', '[Job: <%= @report_request.job.name %>] [Run: <%= @run %>]')"></top-bar>
+
+<div class="container-fluid">
+  <%= simple_form_for @report_request do |f| %>
+
+    <div class="row" id="show_report_request_survey">
+      <div class="col-xs-6">
+        <h3>Survey</h3>
+      </div>
+    </div>
+
+    <%= render partial: "survey", locals: {f: f} %>
+
+    <div class="row">
+      <div class="col-xs-6">
+        <h3>Reports</h3>
+      </div>
+    </div>
+
+    <%= render partial: "reports", locals: {f: f, headers: @headers, scales: @scales, report_request: @report_request} %>
+
+    <br/>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <%= f.label :requested_by_id %>
+      </div>
+      <div class="col-xs-3">
+        <%= @report_request.requested_by.try(:email) %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="float optional control-label">Requested at</label>
+      </div>
+      <div class="col-xs-3">
+        <%= timeago_tag @report_request.created_at, nojs: true, limit: 10.days.ago %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <%= f.label :status %>
+      </div>
+      <div class="col-xs-3">
+        <td><%= @report_request.status %></td>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="float optional control-label">Description</label>
+      </div>
+      <div class="col-xs-3">
+        <%= @report_request.failed? ? @report_request.description : "N/A" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <%= f.label :software_installation_id %>
+      </div>
+      <div class="col-xs-3">
+        <td><%= @report_request.software_installation_id %></td>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <label class="float optional control-label">Assets</label>
+      </div>
+      <div class="col-xs-3">
+        <%= render partial: 'assets', locals: {rr: @report_request} %>
+      </div>
+    </div>
+  <% end %>
+</div>

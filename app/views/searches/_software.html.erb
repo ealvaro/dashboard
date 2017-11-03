@@ -1,0 +1,17 @@
+<h3>Software</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Type</th>
+    <th>Summary</th>
+    <th>Lastest Version</th>
+  </tr>
+  <% software.each do |s| %>
+    <tr>
+      <td><% if s && s.software_type %><%= s.software_type.name %><% end %></td>
+      <td><% if s && s.summary %><%= truncate s.summary, length: 50 %><% end %></td>
+      <td><% if s && s.binary %><%= link_to s.version, s.binary.url, target: '_blank' %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate software, remote: true %>

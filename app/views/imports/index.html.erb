@@ -1,0 +1,16 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<div ng-controller="ImportsController" ng-init="init('<%= j @imports_json %>')">
+  <div class="col-xs-8">
+    <%= link_to "New #{Import.model_name.human}", new_import_path, class: "btn btn-default"%>
+  </div>
+
+  <erdos-table objects="imports"
+               cols="4"
+               headers="headers"
+               klass="'Import'"
+               loading="loading"
+               search-text="searchText"
+               no-actions="true"
+               export-column-keys="exportColumnKeys"></erdos-table>
+</div>

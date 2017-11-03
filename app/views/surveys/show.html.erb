@@ -1,0 +1,60 @@
+<% active_page(:surveys) %>
+
+<top-bar ng-init="init('Survey', 'Details')"></top-bar>
+
+<div class="container-fluid">
+  <%= simple_form_for @survey, url: apply_survey_path(@survey), html: { class: 'form-horizontal margin-top' } do |f| %>
+    <%= render partial: 'form', locals: {f: f}%>
+    <div class="row">
+      <div class="col-xs-12 text-left vert-margins">
+        <%= f.submit "Apply Edits", class: "btn btn-orange"%>
+        <%= link_to "Ignore Survey", ignore_survey_path(@survey), method: :post, class: "btn btn-blue"%>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <table class="table grey-white">
+        <thead>
+          <tr>
+            <th>When</th>
+            <th>Change</th>
+            <th>User</th>
+            <th>Job</th>
+            <th>Side&nbsp;Track</th>
+            <th>Inclination</th>
+            <th>Azimuth</th>
+            <th>DipA</th>
+            <th>gx</th>
+            <th>gy</th>
+            <th>gz</th>
+            <th>hx</th>
+            <th>hy</th>
+            <th>hz</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @survey.versions.each do |s| %>
+            <tr>
+              <td><%= distance_of_time_in_words Time.now, s.created_at %> ago</td>
+              <td><%= s.change_type %></td>
+              <td><%= s.user.try(:email) %></td>
+              <td><%= s.job.name %></td>
+              <td><%= s.side_track.try(:number) %></td>
+              <td><%= s.inclination %></td>
+              <td><%= s.azimuth %></td>
+              <td><%= s.dip_angle %></td>
+              <td><%= s.gx %></td>
+              <td><%= s.gy %></td>
+              <td><%= s.gz %></td>
+              <td><%= s.hx %></td>
+              <td><%= s.hy %></td>
+              <td><%= s.hz %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

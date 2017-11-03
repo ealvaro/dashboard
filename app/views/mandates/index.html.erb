@@ -1,0 +1,58 @@
+<% active_page(:config_management) %>
+
+<top-bar ng-init="init('Fleet Management', 'Configuration Mandates')"></top-bar>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-xs-12 vert-margins">
+      <%= form_tag new_mandate_path, method: :get do %>
+        <div class="pull-right">
+          <%= submit_tag "New Mandate", class: "btn btn-orange" %>
+        </div>
+        <div class="col-xs-3 pull-right">
+          <%= collection_select nil, :klass, Mandate.all_mandate_types, :to_s, :tool_type_klass, {prompt: true}, {class: "form-control", required: true}%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table white-grey">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Contexts</th>
+        <th>Token</th>
+        <th>Name</th>
+        <th>TimeStamp</th>
+        <th>Occurences</th>
+        <th>Tool IDs</th>
+        <th>Priority</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @mandates.each do |mandate| %>
+      <tr>
+        <td><%= mandate.type%></td>
+        <td><%= mandate.contexts.select(&:present?).join(", ")%></td>
+        <td><%= mandate.public_token%></td>
+        <td><%= mandate.name %></td>
+        <td><%= mandate.created_at%> CST</td>
+        <td><%= pretty_occurences mandate%></td>
+        <td><%= mandate.for_tool_ids%></td>
+        <td><%= mandate.priority%></td>
+        <td>
+          <%= link_to "Receipts", [:receipts, mandate.becomes(Mandate)], class: "btn btn-default"%>
+          <%= link_to edit_mandate_path(mandate), class:"btn btn-default" do %>
+            <i class="zmdi zmdi-edit"></i>
+          <% end %>
+          <%= link_to mandate_path(mandate), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-default" do %>
+            <i class="zmdi zmdi-delete"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

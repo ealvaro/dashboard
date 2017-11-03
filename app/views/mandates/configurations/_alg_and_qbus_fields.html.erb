@@ -1,0 +1,30 @@
+<h3 style="margin-top:0;">qBus Parameters</h3>
+<div class="row form-group padding-horizontal">
+  <div class="col-xs-6 compact-label">
+    <%= f.label :tolteq_survey, class: 'text-left' %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input_field :tolteq_survey, collection: [["Disabled", "disabled"], ["Enabled", "enabled"]],
+                                      include_blank: false,
+                                      class: 'no-border' %>
+  </div>
+</div>
+
+<div class="row form-group padding-horizontal">
+  <div class="col-xs-6 compact-label">
+    <%= f.label :gamma_np, class: 'text-left' %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input_field :gamma_np, collection: [["Disabled", "disabled"], ["Enabled", "enabled"]],
+                                 include_blank: false,
+                                 class: 'no-border' %>
+  </div>
+</div>
+<div class="row form-group padding-horizontal">
+  <div class="col-xs-6 compact-label">
+    <%= f.label :qbus_sleep_time, class: 'text-left' %>
+  </div>
+  <div class="col-xs-6">
+    <%= f.input_field :qbus_sleep_time, class: 'no-border' %>
+  </div>
+</div>

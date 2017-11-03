@@ -1,0 +1,42 @@
+<top-bar ng-init="init('Report Requests', 'All')"></top-bar>
+
+<div class="container-fluid">
+  <%= render partial: 'navbar' %>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table white-grey">
+        <thead>
+        <th>Job</th>
+        <th>Requested By</th>
+        <th>Requested At</th>
+        <th>Status</th>
+        <th>Description</th>
+        <th>Installation ID</th>
+        <th>Assets</th>
+        <th>Detail</th>
+        </thead>
+        <tbody>
+        <% for rr in @report_requests %>
+          <tr>
+            <td><a target="_blank" ng-href="<%= job_path(rr.job) %>"><%= rr.job.name %></a></td>
+            <td><%= rr.requested_by.try(:email) %></td>
+            <td><%= timeago_tag rr.created_at, nojs: true, limit: 10.days.ago %></td>
+            <td><%= rr.status %></td>
+            <td><%= rr.failed? ? rr.description : "N/A" %></td>
+            <td><%= rr.software_installation_id %></td>
+            <td><%= render partial: 'assets', locals: {rr: rr} %></td>
+            <td>
+              <a target="_blank" ng-href="<%= report_request_path(rr) %>">
+                <button class="btn btn-default"><i class="zmdi zmdi-assignment"></i></button>
+              </a>
+            </td>
+          </tr>
+        <% end  %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-10">
+    </div>
+  </div>
+</div>

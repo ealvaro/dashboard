@@ -1,0 +1,46 @@
+<div class="dropdown">
+    <button class="btn btn-default btn-toggle" type="button" id="tool_cog1" data-toggle="dropdown">
+        <i class="zmdi zmdi-settings"></i>
+    </button>
+    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="tool_cog1">
+        <li role="presentation"><a id="details_button" role="menuitem" tabindex="-1" ng-click="showDetails()">Details</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="/tools/{{tool.id}}/histograms">Histograms</a></li>
+        <li role="presentation"><a target="_blank" role="menuitem" tabindex="-1" ng-href="{{ tool.tool_events_url }}">Events</a></li>
+        <li role="presentation" ng-show="tool.destroy_url"><a role="menuitem" tabindex="-1" ng-click="deleteTool()">Delete</a></li>
+        <li ng-show="canMerge()" role="presentation" class="divider"></li>
+        <li ng-show="canMerge()" role="presentation"><a role="menuitem" tabindex="-1" ng-click="launchMerge()">Merge Into...</a>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation" class="dropdown-header">Mark As:</li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" ng-click="setStatus(tool, 'Status - In Service')">
+                <span ng-show="isStatus('Status - In Service')" class="glyphicon glyphicon-ok"></span> In Service
+            </a>
+        </li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" ng-click="setStatus(tool, 'Status - In Development')">
+                <span ng-show="isStatus('Status - In Development')" class="glyphicon glyphicon-ok"></span> In Development
+            </a>
+        </li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" ng-click="setStatus(tool, 'Status - In Repair')">
+                <span ng-show="isStatus('Status - In Repair')" class="glyphicon glyphicon-ok"></span> In Repair
+            </a>
+        </li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" ng-click="setStatus(tool, 'Status - Retired - Preemptive Replacement')">
+                <span ng-show="isStatus('Status - Retired - Preemptive Replacement')" class="glyphicon glyphicon-ok"></span> Retired: Preemptive Replacement
+            </a>
+        </li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" ng-click="setStatus(tool, 'Status - Retired - Down-hole Failure')">
+                <span ng-show="isStatus('Status - Retired - Down-hole Failure')" class="glyphicon glyphicon-ok"></span> Retired: Down-hole Failure
+            </a>
+        </li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" ng-click="setStatus(tool, 'Status - Retired - Shop Damage')">
+                <span ng-show="isStatus('Status - Retired - Shop Damage')" class="glyphicon glyphicon-ok"></span> Retired: Shop Damage
+            </a>
+        </li>
+    </ul>
+</div>

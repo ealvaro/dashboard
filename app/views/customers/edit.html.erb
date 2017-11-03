@@ -1,0 +1,3 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+
+<%= render partial: 'form', locals: {customer: @customer, url: client_customer_path( @client, @customer ) } %>

@@ -1,0 +1,85 @@
+<%= simple_form_for [firmware_update], html: { class: 'form-horizontal margin-top' } do |f| %>
+  <div class="form-group">
+    <%= f.label :tool_type, class: 'col-xs-2 text-left' %>
+    <div class="col-xs-4">
+      <%= f.input_field :tool_type, collection: ToolType.erdos_miller.map(&:name), class: 'no-border' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :version, "Firmware Version", class: 'col-xs-2 text-left' %>
+    <div class="col-xs-4">
+      <%= f.input_field :version, class: 'no-border'%>
+    </div>
+    <div class="compact-label thin">
+      major.minor.patch (all required)
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :hardware_version, "Required HW Version", class: 'col-xs-2 text-left' %>
+    <div class="col-xs-4">
+      <%= f.input_field :hardware_version, class: 'no-border'%>
+    </div>
+    <div class="compact-label thin">
+      major.minor.patch (all required)
+    </div>
+  </div>
+
+  <div class="form-group col-xs-12">
+    <%= f.label :contexts, class: 'text-left' %>
+    <%= f.input_field :contexts, as: :check_boxes, collection: ["Admin", "Service", "Field"], class: 'no-border' %>
+  </div>
+
+  <div class="row">
+    <%= f.label :for_serial_numbers, "Serial Numbers", class: 'col-xs-2 text-left' %>
+    <div class="col-xs-4">
+      <%= f.input_field :for_serial_numbers, as: :text, rows: 7, class: 'no-border' %>
+    </div>
+    <div class="col-xs-6 compact-label thin">
+      i.e. MPUSI-007, 005P-021, 007-022
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= render partial: 'shared/multiselect_regions', locals: {f: f, category_label: firmware_update.class.model_name.human} %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= f.label :summary, class: 'col-xs-2 text-left' %>
+    <div class="col-xs-4">
+      <%= f.input_field :summary, as: :text, rows: 7, class: 'no-border' %>
+    </div>
+  </div>
+
+    <div class="form-group vert-margins">
+      <%= f.label :binary, "Firmware Binary", class: 'col-xs-2 text-left' %>
+      <div class="col-xs-4">
+        <%= f.input_field :binary, class: 'no-border'%>
+        <%= f.input :binary_cache, as: :hidden %>
+        <% if f.object.binary? %>
+          <span class="fa-stack fa-lg ">
+            <i class="fa fa-square-o fa-stack-2x"></i>
+            <i class="fa fa-wrench fa-stack-1x"></i>
+           </span>
+           <% if f.object.persisted? %>
+             <%= link_to f.object["binary"], f.object.binary.url%>
+           <% else %>
+             <%= File.basename(f.object.binary.to_s) %>
+           <% end %>
+           Uploaded<br/>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6 text-right">
+        <%= link_to "Delete", [:confirm_delete, f.object], class: "btn btn-danger" if f.object.persisted? %>
+        <%= link_to "Cancel", overview_firmware_updates_path, class: "btn btn-bisque" %>
+        <%= f.submit "Save", class: "btn btn-orange" %>
+      </div>
+    </div>
+  </div>
+<% end %>

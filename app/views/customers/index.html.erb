@@ -1,0 +1,26 @@
+<%= render partial: 'billing_dashboard/navbar' %>
+<p class="pull-right text-right">
+  <%= #link_to "New ", new_client_customer_path, class: "btn btn-default"%>
+</p>
+
+<table class="table table-zebra">
+  <thead>
+    <tr>
+      <th><%= Customer.human_attribute_name :name %></th>
+      <th><%= Customer.human_attribute_name :email %></th>
+      <th style="text-align: right;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |object| %>
+      <tr>
+        <td><%= object.name %></td>
+        <td><%= object.email %></td>
+        <td style="text-align: right;">
+          <%= link_to "View", [ @client, object], class: "btn btn-default"%>
+          <%= link_to "Edit", [:edit, @client, object], class: "btn btn-default"%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

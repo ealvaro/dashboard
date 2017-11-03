@@ -1,0 +1,19 @@
+<h3>Runs</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Run</th>
+    <th>Job</th>
+    <th>Client</th>
+    <th>Well</th>
+  </tr>
+  <% runs.each do |r| %>
+    <tr>
+      <td><% if r && r.number %><%= link_to r.number, r, target: '_blank' %><% end %></td>
+      <td><% if r.job && r.job.name %><%= link_to r.job.name, r.job, target: '_blank' %><% end %></td>
+      <td><% if (r.job && r.job.client) && r.job.client.name %><%= link_to r.job.client.name, r.job.client, target: '_blank' %><% end %></td>
+      <td><% if r.well && r.well.name %><%= link_to r.well.name, r.well, target: '_blank' %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate runs, remote: true %>

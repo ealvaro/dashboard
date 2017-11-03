@@ -1,0 +1,160 @@
+<div ng-controller="JobsController"
+     ng-init="init()">
+
+  <top-bar ng-init="init('All Jobs')"></top-bar>
+
+  <div class="container-fluid">
+
+    <div class="row vert-margins">
+
+      <%= render 'client_info/navbar' %>
+
+      <div class="pull-right margin-right">
+        <button class="btn btn-orange pull-right"
+                ng-click="newJob()">
+          <i class="zmdi zmdi-plus"></i> New Job
+        </button>
+      </div>
+
+      <div class="col-xs-4 pull-right">
+        <form class="form-inline pull-right"
+              ng-submit="searchJobs(keyword)">
+          <div class="form-group">
+              <input class="form-control no-border pull-right"
+                     ng-model="keyword"
+                     placeholder="Search">
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <table class="table white-grey"
+           ng-if="!loading">
+      <thead>
+        <tr>
+          <th>Job</th>
+          <th>Client</th>
+          <th colspan="2">Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-if="new">
+          <td>
+            <input type="text"
+                   ng-model="job.name">
+          </td>
+          <td colspan="2">
+            <select ng-model="job.client_id">
+              <option value=""></option>
+              <option ng-repeat="client in clients" value="{{client.id}}">{{client.name}}</option>
+            </select>
+          </td>
+          <td class="pull-right">
+            <a class="btn btn-success"
+               ng-click="saveJob(job)"
+               tooltip="Save">
+              <i class="zmdi zmdi-save"></i>
+            </a>
+            <a class="btn btn-danger"
+               ng-click="cancel()"
+               tooltip="Cancel">
+              <i class="zmdi zmdi-close"></i>
+            </a>
+          </td>
+        </tr>
+        <tr ng-repeat="job in jobs">
+          <td>
+            <a href="jobs/{{job.id}}"
+               ng-if="!(editing == job.id)">
+              {{job.name}}
+            </a>
+            <input type="text"
+                   ng-if="editing == job.id"
+                   ng-model="job.name">
+          </td>
+          <td>
+            <a href="clients/{{job.client_id}}"
+               ng-if="!(editing == job.id)">
+              {{job.client}}
+            </a>
+            <select ng-model="job.client_id"
+                    ng-if="editing == job.id">
+              <option value="job.client_id">{{job.client}}</option>
+              <option ng-repeat="client in clients"
+                      ng-show="client.id != job.client_id"
+                      value="{{client.id}}">{{client.name}}</option>
+            </select>
+          </td>
+          <td>
+            {{job.activity}}
+            <a href="#"
+               ng-click="changeActivity(job)">
+              <i class="zmdi zmdi-refresh"></i>
+            </a>
+          </td>
+          <td class="pull-right">
+            <a class="btn btn-default"
+               ng-click="editJob(job)"
+               ng-if="!(editing == job.id)"
+               tooltip="Edit">
+              <i class="zmdi zmdi-edit"></i>
+            </a>
+            <a class="btn btn-success"
+               ng-click="saveJob(job)"
+               ng-if="editing == job.id"
+               tooltip="Save">
+              <i class="zmdi zmdi-save"></i>
+            </a>
+            <a class="btn btn-default"
+               ng-click="deleteJob(job)"
+               ng-if="!(editing == job.id)"
+               tooltip="Delete">
+              <i class="zmdi zmdi-delete"></i>
+            </a>
+            <a class="btn btn-danger"
+               ng-click="cancel()"
+               ng-if="editing == job.id"
+               tooltip="Cancel">
+              <i class="zmdi zmdi-close"></i>
+            </a>
+            <a class="btn btn-default"
+               ng-click="markActive()"
+               ng-if="(editing == job.id)">
+              <i class="zmdi zmdi-delete"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table grey-white"
+           ng-if="loading">
+      <tbody>
+        <tr>
+          <td>Loading...</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav>
+      <ul class="pagination"
+          style="margin-top: 0;">
+        <li ng-class="{ disabled: page === 1 }">
+          <a href="#"
+             ng-click="previousPage()"
+             aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="disabled"><a href="#">{{page}}</a></li>
+        <li ng-class="{ disabled: page === pages || pages == 0}">
+          <a href="#"
+             ng-click="nextPage()"
+             aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

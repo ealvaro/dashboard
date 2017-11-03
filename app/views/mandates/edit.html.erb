@@ -1,0 +1,9 @@
+<% active_page(:config_management) %>
+
+<top-bar ng-init="init('Configuration Mandate', 'Edit')"></top-bar>
+
+<div class="container-fluid margin-top">
+  <%= simple_form_for @mandate, url: mandate_path(@mandate), html: { id: "mandate-form" }, as: :mandate do |f| %>
+    <%= render partial: 'form', locals: {f: f, mandate: @mandate} %>
+  <% end %>
+</div>

@@ -1,0 +1,91 @@
+<div>
+
+<erdos-receiver-pusher-listener objects="objects"></erdos-receiver-pusher-listener>
+
+<div class="big-text">
+  <div class="row">
+    <div class="col-xs-12 vert-margins">
+      <div class="col-xs-2 col-lg-1 compact">Filter By:</div>
+
+      <div class="col-xs-2 compact">
+        <span class="badge col-xs-2"
+              style="margin-top:0.5em;">
+          {{showJobs.length}}
+        </span>
+        <div class="dropdown col-xs-10">
+          <button class="btn btn-default grey-text col-xs-12 flat-select"
+                  id="jobFilter"
+                  data-toggle="dropdown"
+                  aria-expanded="true">
+            <span class="pull-left">{{filterText || 'Job'}}</span>
+              <span class="caret pull-right" style="margin-top:0.5em;"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" ng-repeat="object in jobs"><a ng-click="toggleJobFilter(object)" role="menuitem" tabindex="-1" href="#">{{object}}&nbsp;<span ng-show="showJobs.indexOf(object) > -1" class="glyphicon glyphicon-ok"></span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-xs-2 compact">
+        <span class="badge col-xs-2"
+              style="margin-top:0.5em;">
+          {{showClients.length}}
+        </span>
+        <div class="dropdown col-xs-10">
+          <button class="btn btn-default grey-text col-xs-12 flat-select"
+                  id="clientFilter"
+                  data-toggle="dropdown"
+                  aria-expanded="true">
+            <span class="pull-left">Client</span>
+            <span class="caret pull-right" style="margin-top:0.5em;"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" ng-repeat="object in clients"><a ng-click="toggleClientFilter(object)" role="menuitem" tabindex="-1" href="#">{{object}}&nbsp;<span ng-show="showClients.indexOf(object) > -1" class="glyphicon glyphicon-ok"></span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-xs-2 compact">
+        <span class="badge col-xs-2"
+              style="margin-top:0.5em;">
+          {{showRigs.length}}
+        </span>
+        <div class="dropdown col-xs-10">
+          <button class="btn btn-default grey-text col-xs-12 flat-select"
+                  id="rigFilter"
+                  data-toggle="dropdown"
+                  aria-expanded="true">
+            <span class="pull-left">Rig</span>
+            <span class="caret pull-right" style="margin-top:0.5em;"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" ng-repeat="object in rigs"><a ng-click="toggleRigFilter(object)" role="menuitem" tabindex="-1" href="#">{{object}}&nbsp;<span ng-show="showRigs.indexOf(object) > -1" class="glyphicon glyphicon-ok"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <react-component name="EmReceiverTable" props="{objects: filtered, headers: headers, loading: loading}"/>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+  <br/>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h3>Alerts</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <notification-display job-numbers="showJobs"></notification-display>
+    </div>
+  </div>
+</div>
+
+</div>

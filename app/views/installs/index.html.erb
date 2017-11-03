@@ -1,0 +1,23 @@
+<% active_page(:install_tracking) %>
+
+<top-bar ng-init="init('Installation Reporting')"></top-bar>
+
+<div ng-controller="InstallsController" ng-init="init()" class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6" style="margin-top: 1.6em;">
+      <ul class="nav nav-tabs active-grey">
+        <li ng-class="{'active': filterType == type }" ng-repeat="type in types">
+          <a href="#" ng-click="setFilterType( type )">
+            <span class="badge">{{ typeCount( type ) }}</span>  {{ type }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <erdos-table objects="filteredObjects"
+                 cols="16"
+                 headers="headers"
+                 search-text="searchText"
+                 klass="'Install'"
+                 export-column-keys="exportColumnKeys"></erdos-table>
+  </div>
+</div>

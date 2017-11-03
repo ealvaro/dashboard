@@ -1,0 +1,25 @@
+<h3>Events</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Event Type</th>
+    <th>Job</th>
+    <th>Board Serial #</th>
+    <th>Asset Number</th>
+    <th>Email</th>
+    <th>Max Temp</th>
+    <th>Time</th>
+  </tr>
+  <% events.each do |e| %>
+    <tr>
+      <td><% if e && e.event_type %><%= link_to e.event_type, e, target: '_blank' %><% end %></td>
+      <td><% if e.job && e.job.name %><%= link_to e.job.name, e.job, target: '_blank' %><% end %></td>
+      <td><% if e && e.board_serial_number && e.tool %><%= link_to e.board_serial_number, e.tool, target: '_blank' %><% end %></td>
+      <td><% if e && e.primary_asset_number && e.tool %><%= link_to e.primary_asset_number, e.tool, target: '_blank' %><% end %></td>
+      <td><% if e.user_email %><%= e.user_email %><% end %></td>
+      <td><% if e && e.max_temperature %><%= e.max_temperature %><% end %></td>
+      <td><% if e && e.time %><%= time_ago_in_words e.time %> ago<% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate events, remote: true %>

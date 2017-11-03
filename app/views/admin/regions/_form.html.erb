@@ -1,0 +1,30 @@
+<%= simple_form_for [:admin, region], html: { class: 'form-horizontal margin-top' } do |f| %>
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <%= f.label :id, class: 'text-left' %>
+        </div>
+        <div class="col-xs-8">
+          <%= f.input_field :id, class: 'no-border', disabled: true %>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-xs-4">
+          <%= f.label :name, class: 'text-left' %>
+        </div>
+        <div class="col-xs-8">
+          <%= f.input_field :name, class: 'no-border' %>
+        </div>
+      </div>
+
+      <%= f.button :button, class: "btn btn-orange margin-top pull-left",
+                            data: {disable_with: "saving..."} do %>
+        <i class="zmdi zmdi-save"></i>
+      <% end %>
+      <%= f.input :active, :wrapper => :checkbox,
+                           wrapper_html: { class: 'pull-left margin-top margin-left' } %>
+    </div>
+  </div>
+<% end %>

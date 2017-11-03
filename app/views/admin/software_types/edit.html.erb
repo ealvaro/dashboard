@@ -1,0 +1,7 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'Edit Software Type')"></top-bar>
+
+<div class="container-fluid">
+  <%= render partial: 'form', locals: {software_type: @software_type} %>
+</div>

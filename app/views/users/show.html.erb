@@ -1,0 +1,24 @@
+<% active_page(:users) %>
+
+<div ng-controller="UsersController" ng-init="init('<%= j @user_json %>')">
+  <var-top-bar heading="'Profile'", subtitle="tab"></var-top-bar>
+
+  <div class="container-fluid">
+    <div class="row">
+      <profile-nav></profile-nav>
+    </div>
+
+    <div class="row" ng-if="tab == 'Subscriptions'">
+      <user-subscriptions jobs = "activeJobs"
+                          user="user">
+      </user-subscriptions>
+    </div>
+
+    <div class="row" ng-if="tab == 'Headers'">
+      <profile-headers ></profile-headers>
+    </div>
+    <div class="row" ng-if="tab == 'Account'">
+      <profile-account></profile-account>
+    </div>
+  </div>
+</div>

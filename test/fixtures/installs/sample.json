@@ -1,0 +1,15 @@
+{
+  "install": {
+              "application_name": "the-app",
+              "version": "2.1.0",
+              "team_viewer_id": "abc123",
+              "team_viewer_password": "fakepass",
+              "dell_service_number": "snarky",
+              "user_email": "fake@fake.com",
+              "region": "region1",
+              "reporter_context": "Admin",
+              "job_number": "OK-123456",
+              "run_number": "1",
+              "computer_category": "Logging"
+             }
+}

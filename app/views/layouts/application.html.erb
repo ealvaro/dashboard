@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>       <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="erdos"> <![endif]-->
+<!--[if IE 7]>          <html class="no-js lt-ie9 lt-ie8" ng-app="erdos"> <![endif]-->
+<!--[if IE 8]>          <html class="ie8 no-js lt-ie9 lt-ie10" ng-app="erdos"> <![endif]-->
+<!--[if IE 9]>          <html class="no-js lt-ie10" lang="en" ng-app="erdos"> <![endif]-->
+<!--[if gt IE 10]><!--> <html class="no-js before-run" ng-app="erdos"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+    <meta name="auth-token" content="<%= ENV["auth_token"]%>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
+
+    <title>Tracker</title>
+    <%= stylesheet_link_tag    "application", media: "all"%>
+    <%= javascript_include_tag :modernizr %>
+
+    <!-- HTML5 shims and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/g/html5shiv@3.7.3,es5.shim@4.2.0(es5-shim.min.js+es5-sham.min.js),respond@1.4.2" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= javascript_include_tag "application"%>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <!-- pusher was not being picked up by IE <= 10 -->
+    <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
+    <%= csrf_meta_tags %>
+
+    <%= render partial: 'layouts/feedback' %>
+  </head>
+
+  <body data-pusher-key='<%=ENV["PUSHER_KEY"] %>'
+        ng-controller="ApplicationController"
+        ng-init="init('<%= current_user.try(:id) %>')"
+        ng-class="{ 'site-menubar-fold': !expanded, 'site-menubar-unfold': expanded }"
+        data-auto-menubar="false">
+    <% if user_signed_in?%>
+
+    <nav class="site-navbar navbar navbar-default navbar-fixed-top" role="navigation" style="width: 90px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-target="#site-navbar-search"
+                    data-toggle="collapse">
+                <span class="sr-only">Toggle Search</span>
+                <i class="icon zmdi-search"></i>
+            </button>
+            <div class="navbar-brand navbar-brand-center">
+                <div>
+                    <button data-toggle="menubar" type="button" ng-click="expand()">
+                        <i class="icon hamburger">
+                            <span class="sr-only">Toggle menubar</span>
+                            <span class="hamburger-bar"></span>
+                        </i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ========= Navbar Base Info ======== -->
+            <!-- ========= Navbar Collapsed Search ======== -->
+            <div class="collapse navbar-search-overlap" id="site-navbar-search">
+                <form role="search">
+                    <div class="form-group">
+                        <div class="input-search">
+                            <i class="input-search-icon zmdi-search"></i>
+                            <input type="text" class="form-control" name="site-search">
+                            <button type="button" class="input-search-close icon wb-close" data-target="#site-navbar-search"
+                                    data-toggle="collapse" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </nav>
+    <!-- ========= Navigation ======== -->
+    <div class="site-menubar">
+      <div class="site-menu-logo">
+        <%= link_to root_path do %>
+          <%= image_tag "logo.png" %>
+        <% end %>
+      </div>
+      <div class="site-menubar-body scrollable mCustomScrollbar" data-mcs-theme="minimal">
+          <ul class="site-menu">
+              <li class="site-menu-item menu-search">
+                  <a>
+                      <form role="search" action="<%= root_url %>searches" data-remote="true" id="global-search">
+                          <input id="site-menu-search" type="text" name="keywords" id="keywords"/>
+                      </form>
+                      <i class="site-menu-icon zmdi-search" ng-click="expand()"></i>
+                  </a>
+              </li>
+              <% if current_user %>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Receiver) %>
+                    <%= link_to receivers_path do %>
+                      <i class="site-menu-icon zmdi-portable-wifi-changes"></i>
+                      <span class="site-menu-title">Active Jobs</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Job) %>
+                    <%= link_to jobs_path do %>
+                      <i class="site-menu-icon zmdi-account-calendar"></i>
+                      <span class="site-menu-title">All Jobs</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Notifier) %>
+                    <%= link_to notifiers_path do %>
+                      <i class="site-menu-icon zmdi-notifications"></i>
+                      <span class="site-menu-title">Alerts</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Survey) %>
+                    <%= link_to surveys_path do %>
+                      <i class="site-menu-icon zmdi-view-list"></i>
+                      <span class="site-menu-title">Surveys</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(ReportRequest) %>
+                    <%= link_to report_requests_path do %>
+                      <i class="site-menu-icon zmdi-file"></i>
+                      <span class="site-menu-title">Reports</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Mandate) %>
+                    <%= link_to mandates_path do %>
+                      <i class="site-menu-icon zmdi-settings-square"></i>
+                      <span class="site-menu-title long-title">Fleet<br>Configuration</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Tool) %>
+                    <div class="nav-icon">
+                      <%= link_to tools_path do %>
+                        <i class="site-menu-icon zmdi-gps-dot"></i>
+                        <span class="site-menu-title long-title">Fleet<br>Tracking</span>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Install) %>
+                    <%= link_to installs_path do %>
+                      <i class="site-menu-icon zmdi-input-antenna"></i>
+                      <span class="site-menu-title">Installations</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <% if false %>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(BillingDashboard) %>
+                    <%= link_to invoices_path do %>
+                      <i class="site-menu-icon zmdi-receipt"></i>
+                      <span class="site-menu-title">Billing</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <% end %>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(FirmwareUpdate) %>
+                    <%= link_to overview_firmware_updates_path do %>
+                      <i class="site-menu-icon zmdi-memory"></i>
+                      <span class="site-menu-title">Firmware</span>
+                     <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if current_user.can_read?(Software) %>
+                    <%= link_to overview_software_index_path do %>
+                      <i class="site-menu-icon zmdi-tv-list"></i>
+                      <span class="site-menu-title">Software</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <% if true %>
+                    <%= link_to truck_requests_path do %>
+                      <i class="site-menu-icon zmdi-truck"></i>
+                      <span class="site-menu-title long-title">Truck<br>Requests</span>
+                    <% end %>
+                  <% end %>
+                </li>
+                <li class="site-menu-item">
+                  <%= link_to user_path(current_user) do %>
+                    <i class="site-menu-icon zmdi-account"></i>
+                    <span class="site-menu-title">Profile</span>
+                  <% end %>
+                </li>
+                <li class="site-menu-item dropup admin-dashboard" ng-click="!expanded && expandForMenu()">
+                  <% if current_user.can_read?(AdminDashboard) %>
+                    <a href="#" data-toggle="dropdown">
+                      <i class="site-menu-icon zmdi-accounts-add"></i>
+                      <span class="site-menu-title">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" id="admin-popup-menu">
+                      <li><%= link_to "Manage " + User.model_name.human.pluralize, admin_users_path %></li>
+                      <li><%= link_to "Manage " + SoftwareType.model_name.human.pluralize, admin_software_types_path %></li>
+                      <li><%= link_to Region.model_name.human.pluralize, admin_regions_path %></li>
+                      <li><%= link_to "Manage " + ReportType.model_name.human.pluralize, admin_report_types_path %></li>
+                    </ul>
+                  <% end %>
+                </li>
+              <% end %>
+          </ul>
+        </div>
+        <div class="site-menubar-footer">
+          <%= link_to sign_out_path, method: :delete, data: {toggle: "tooltip", placement: 'top'}, title: "Logout" do %>
+            <i class="icon zmdi-power"></i>
+          <% end %>
+          <% if current_user.can_read?(SupportForm) %>
+            <%= link_to 'http://lmsrv1.com/failureanalysis.html', id: "feedback-button",
+                                                                  data: { toggle: "tooltip",
+                                                                          placement: 'top'},
+                                                                  title: "Support" do %>
+              <i class="icon zmdi-headset-mic"></i>
+            <% end %>
+          <% end %>
+          <%= render partial: 'defects/defect_link' %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert-warning alert-dismissable" ng-class="{ alert: !expanded, 'alert-unfold': expanded }">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="alert-info alert-dismissable" ng-class="{ alert: !expanded, 'alert-unfold': expanded }">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="alert-danger alert-dismissable" ng-class="{ alert: !expanded, 'alert-unfold': expanded }">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+
+    <div class="page-content">
+
+      <div id="main-content">
+        <%= yield %>
+      </div>
+
+    </div><!-- /.container -->
+
+<!--     <footer class="footer" role="contentinfo">
+      <div class="container">
+        <p>Copyright 2015 &copy;</p>
+      </div>
+    </footer> -->
+
+  </body>
+</html>

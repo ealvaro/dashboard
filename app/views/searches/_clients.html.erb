@@ -1,0 +1,13 @@
+<h3>Clients</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Client</th>
+  </tr>
+  <% clients.each do |c| %>
+    <tr>
+      <td><% if c && c.name %><%= link_to c.name, c, target: '_blank' %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate clients, remote: true %>

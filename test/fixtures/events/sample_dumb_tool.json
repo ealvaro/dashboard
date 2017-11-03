@@ -1,0 +1,13 @@
+{
+  "event_type_id": 19,
+  "uid": "04d68abd",
+  "time": 1395173704,
+  "reporter_type": 2,
+  "user_email": "example@example.com",
+  "notes": "optional",
+  "assets": {
+    "main": "filename-version.hex",
+    "version1": "filename-version-1.hex",
+    "version2": "filename-version-2.hex"
+  }
+}

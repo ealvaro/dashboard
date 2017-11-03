@@ -1,0 +1,36 @@
+<div class="row">
+  <h4 style="margin-top:0;">Thresholds</h4>
+</div>
+
+<div style="margin-left:-15px;">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Threshold</th>
+        <th>High G Analog</th>
+        <th>Analog (Dual)</th>
+        <th>Digital (Dual)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td nowrap="true" style="padding-top: 10px; padding-left:0;">Strongly On</td>
+        <% %i(flow_switch_threshold_strongly_on_high flow_switch_threshold_strongly_on_analog flow_switch_threshold_strongly_on_digital).each do |strong| %>
+          <td style='padding-right:0;'><%= f.input_field strong, class: 'no-border' %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <td nowrap="true" style="padding-top: 10px; padding-left:0;">Weakly On</td>
+        <% %i(flow_switch_threshold_weakly_on_high flow_switch_threshold_weakly_on_analog flow_switch_threshold_weakly_on_digital).each do |weak| %>
+          <td style='padding-right:0;'><%= f.input_field weak, class: 'no-border' %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <td nowrap="true" style="padding-top: 10px; padding-left:0;">Off</td>
+        <% %i(flow_switch_threshold_off_high flow_switch_threshold_off_analog flow_switch_threshold_off_digital).each do |off| %>
+          <td style='padding-right:0;'><%= f.input_field off, class: 'no-border' %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>

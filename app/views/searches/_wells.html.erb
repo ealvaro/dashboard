@@ -1,0 +1,13 @@
+<h3>Wells</h3>
+<table class="table grey-white">
+  <tr>
+    <th>Well</th>
+  </tr>
+  <% wells.each do |w| %>
+    <tr>
+      <td><% if w && w.name %><%= link_to w.name, w, target: '_blank' %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= paginate wells, remote: true %>

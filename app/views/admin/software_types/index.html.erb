@@ -1,0 +1,32 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', 'Software Types')"></top-bar>
+
+<div class="container-fluid">
+  <%= link_to new_admin_software_type_path, class: "btn btn-orange vert-margins" do %>
+    <i class="zmdi zmdi-plus"></i> New Software Type
+  <% end %>
+
+  <table class="table grey-white">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @software_types.each do |software_type| %>
+        <tr>
+          <td><%= software_type.name %></td>
+          <td class="text-right">
+            <%= link_to [:edit, :admin, software_type] do %>
+              <button class="btn btn-default">
+                <i class="zmdi zmdi-edit"></i>
+              </button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

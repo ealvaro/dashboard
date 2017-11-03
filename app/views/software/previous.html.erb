@@ -1,0 +1,67 @@
+<% active_page(:software) %>
+
+<top-bar ng-init="init('Software', '<%= @software.first.name %> Versions')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="page-nav col-xs-6">
+      <nav>
+        <ul class="pagination vert-margins">
+          <%= content_tag(:li, link_to("Overview", overview_software_index_path)) %>
+          <%= content_tag(:li, link_to("Upload", new_software_path)) %>
+          <%= content_tag(:li, link_to("Previous", new_software_path), class: "active") %>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <table class="table white-grey">
+    <thead>
+      <tr>
+        <th>Version</th>
+        <th>Release Date</th>
+        <th>Change Log</th>
+        <th>Actions</th>
+        <th>File Url</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @software.sort_by{|a| OrderedVersion.new(a.version)}.reverse.each do |software| %>
+        <tr>
+          <td>
+            <%= software.version %>
+          </td>
+          <td><%= software.created_at.strftime("%m/%d/%Y")%></td>
+          <td>
+            <%= software.summary %>
+          </td>
+          <td width="120">
+            <%= link_to software.binary.url, class: "btn btn-orange",
+                                             tooltip: 'Download' do %>
+              <i class="zmdi zmdi-download"></i>
+            <% end %>
+            <%= link_to edit_software_path(software), class:"btn btn-primary",
+                                                      tooltip: 'Edit' do %>
+              <i class="zmdi zmdi-edit"></i>
+            <% end %>
+            <% if current_user.can_delete?(Software) %>
+              <%= link_to software_path(software), method: :delete,
+                                                   confirm: "Removing #{software.name} #{software.version}: are you sure?",
+                                                   class:"btn btn-danger",
+                                                   tooltip: 'Delete' do %>
+                <i class="zmdi zmdi-delete"></i>
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <input type="text"
+                   value="<%= software.binary.url %>"
+                   readonly='readonly'
+                   style="cursor: pointer;"
+                   class="rounded-border flat-select" />
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

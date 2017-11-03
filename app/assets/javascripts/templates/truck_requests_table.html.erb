@@ -1,0 +1,133 @@
+<table ng-if="!loading"
+       class="table white-grey">
+  <thead class="grey">
+    <tr>
+      <th ng-repeat="header in headers">{{header}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat-start="truckRequest in truckRequests">
+      <td>{{truckRequest.priority}}</td>
+      <td>{{truckRequest.created_at | date: 'medium' }}</td>
+      <td>{{truckRequest.region_name}}</td>
+      <td>{{truckRequest.job_number}}</td>
+      <td>{{truckRequest.user_email}}</td>
+      <td>
+        <span data-toggle="tooltip"
+              data-placement="top"
+              title="{{truckRequest.motors}}">
+          {{truncate(truckRequest.motors)}}
+        </span>
+      </td>
+      <td>
+        <span data-toggle="tooltip"
+              data-placement="top"
+              title="{{truckRequest.mwd_tools}}">
+          {{truncate(truckRequest.mwd_tools)}}
+        </span>
+      </td>
+      <td>
+        <span data-toggle="tooltip"
+              data-placement="top"
+              title="{{truckRequest.surface_equipment}}">
+          {{truncate(truckRequest.surface_equipment)}}
+        </span>
+      </td>
+      <td>
+        <span data-toggle="tooltip"
+              data-placement="top"
+              title="{{truckRequest.backhaul}}">
+          {{truncate(truckRequest.backhaul)}}
+        </span>
+      </td>
+      <td>
+        <span data-toggle="tooltip"
+              data-placement="top"
+              title="{{truckRequest.notes}}">
+          {{truncate(truckRequest.notes)}}
+        </span>
+      </td>
+      <td>
+        <span data-toggle="tooltip"
+              data-placement="top"
+              title="{{parseTime(last(truckRequest.status_list).time) | date: 'medium'}}">
+          {{last(truckRequest.status_list).context}}
+        </span>
+      </td>
+      <td>
+        <div class="dropdown">
+          <a data-toggle="dropdown" href="#">
+            <button class="btn btn-default">
+              <i class="icon zmdi-settings"></i>
+            </button>
+          </a>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <li role="presentation"
+                ng-class="{disabled: last(truckRequest.status_list).context == 'Acknowledged'}">
+              <a role="menuitem"
+                 ng-click="mark(truckRequest.id, 'acknowledged')"
+                 tabindex="-1"
+                 href="#">Mark Acknowledged</a>
+            </li>
+            <li role="presentation"
+                ng-class="{disabled: last(truckRequest.status_list).context == 'Ordered'}">
+              <a role="menuitem"
+                 ng-click="mark(truckRequest.id, 'ordered')"
+                 tabindex="0"
+                 href="#">Mark Ordered</a>
+            </li>
+            <li role="presentation"
+                ng-class="{disabled: last(truckRequest.status_list).context == 'Shipped'}">
+              <a role="menuitem"
+                 ng-click="mark(truckRequest.id, 'shipped')"
+                 tabindex="1"
+                 href="#">Mark Shipped</a>
+            </li>
+            <li>
+              <a role="menuitem"
+                 ng-click="showDetails(truckRequest)"
+                 tabindex="1"
+                 href="#">Status History</a>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <tr ng-repeat-end ng-if="truckRequest.details.selected">
+      <td colspan="{{headers.length}}">
+        <span class="pull-right">
+          <button class="btn btn-orange"
+                  ng-click="hideDetails(truckRequest)">
+            <i class="zmdi zmdi-close"></i>
+          </button>
+        </span>
+        <span ng-repeat="status in truckRequest.details.statuses">
+          <span class="col-xs-4">
+            <b>Time:</b> {{parseTime(status.time) | date: 'medium'}}
+          </span>
+          <span class="col-xs-2">
+            <b>Status:</b> {{status.context}}
+          </span>
+          <span class="col-xs-4">
+            <b>Notes:</b> {{status.notes}}
+          </span>
+          <br>
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table ng-if="loading"
+       class="table white-grey">
+  <thead class="grey">
+    <tr>
+      <th ng-repeat="header in headers">{{header}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="{{headers.length}}">Loading...</td>
+    </tr>
+  </tbody>
+</table>

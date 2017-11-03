@@ -1,0 +1,50 @@
+<div>
+  <div class="row">
+    <div class="col-xs-12 vert-margins">
+      <div class="col-xs-1 thin compact-label">Name </div>
+      <div class="col-xs-4">
+        <input type="text"
+               ng-model="rigGroup.name"
+               class="form-control">
+      </div>
+      <button ng-click="submit()"
+              class="btn btn-orange col-xs-1 col-xs-offset-6">
+        <i class="zmdi zmdi-save"> Save</i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <table class="table grey-white">
+        <tr><th>{{rigTab}} Rigs
+          <select ng-model="tab"
+                  ng-change="changeRigTab(tab)"
+                  class="no-border">
+            <option value="Active">Active</option>
+            <option value="All">All</option>
+          </select>
+        </th></tr>
+        <tr ng-repeat="rig in rigs">
+          <td>{{rig.name}}
+            <i class="zmdi zmdi-plus pull-right"
+               style="font-size: 1.7em;"
+               ng-click="add(rig)"></i>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-6">
+      <table class="table grey-white">
+        <tr><th>Rigs in group</th></tr>
+        <tr ng-repeat="rig in groupRigs">
+          <td>{{rig.name}}
+            <i class="zmdi zmdi-delete pull-right"
+               style="font-size: 1.7em;"
+               ng-click="remove(rig)"></i>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

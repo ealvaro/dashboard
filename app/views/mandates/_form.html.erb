@@ -1,0 +1,87 @@
+<div style="margin-left:-90px;">
+  <% if f.object.errors.any? %>
+    <ul class="alert alert-danger list-unstyled"
+        style="margin-bottom:1em;">
+      <% f.object.errors.full_messages.each do |e| %>
+        <%= content_tag :li, e, class: "" %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div class="col-xs-6">
+  <div class="row form-group padding-right">
+    <%= f.label :occurences, class: 'col-xs-3 text-left compact-label' %>
+    <div class="col-xs-9">
+      <%= f.input_field :occurences, class: 'no-border',
+                                     as: :select,
+                                     collection: [['Once',1],['Always',-1]],
+                                     label_method: :first,
+                                     value_method: :last %>
+    </div>
+  </div>
+  <div class="row form-group padding-right">
+    <%= f.label :for_tool_ids, class: 'col-xs-3 text-left compact-label' %>
+    <div class="col-xs-9">
+      <%= f.input_field :for_tool_ids, class: 'no-border',
+                                       style: 'height: 100px' %>
+    </div>
+  </div>
+  <div class="row form-group padding-right">
+    <div class="col-xs-3 compact-label">
+      <%= f.label :name, class: 'text-left' %>
+    </div>
+    <div class="col-xs-9">
+      <%= f.input_field :name, class: 'no-border' %>
+    </div>
+  </div>
+  <div class="row form-group padding-right">
+    <div class="col-xs-3 compact-label">
+      <%= f.label :contexts, class: 'text-left' %>
+    </div>
+    <div class="col-xs-9">
+      <%= f.input_field :contexts, class: 'no-border',
+                        as: :check_boxes,
+                        collection: ["Admin", "Service", "Field"] %>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-6 compact pull-right">
+  <div class="row form-group">
+    <%= f.label :priority, class: 'col-xs-3 text-left compact-label' %>
+    <div class="col-xs-9">
+      <%= f.input_field :priority, class: 'no-border',
+                                   collection: 1..10 %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :optional, class: 'col-xs-3 text-left compact-label' %>
+    <div class="col-xs-9">
+      <%= f.input_field :optional, class: 'no-border',
+                                   as: :select,
+                                   collection: [['Yes', true],['No', false]],
+                                   include_blank: false %>
+    </div>
+  </div>
+  <div class="row form-group">
+    <%= f.label :expiration, "Expires At", class: 'col-xs-3 text-left compact-label' %>
+    <div class="col-xs-9">
+      <%= f.text_field :expiration, class: 'no-border date datetimepicker form-control',
+                                    id: 'datetimepicker1' %>
+    </div>
+  </div>
+  <div class="row">
+    <%= render partial: 'shared/multiselect_regions', locals: {f: f, category_label: mandate.class.model_name.human} %>
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+<div class="row">
+  <%= render partial: @klass.to_s.underscore, locals: {f: f} %>
+</div>
+
+<div class="text-right move-down">
+  <%= f.submit "Apply", class: "btn btn-orange"%>
+  <%= link_to "Cancel", mandates_path, class: "btn btn-bisque" %>
+</div>

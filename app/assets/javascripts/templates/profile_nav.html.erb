@@ -1,0 +1,14 @@
+<div class="page-nav col-xs-10">
+  <nav>
+    <ul class="pagination vert-margins">
+      <li ng-class="{active: tab == 'Subscriptions'}"><a ng-click="setTab('Subscriptions')" href="#">Subscriptions</a></li>
+      <li ng-class="{active: tab == 'Headers'}"><a ng-click="setTab('Headers')" href="#">Headers</a></li>
+      <li ng-class="{active: tab == 'Account'}"><a ng-click="setTab('Account')" href="#">Account</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="col-xs-2 text-right vert-margins" ng-if="tab != 'Subscriptions'">
+  <a class="btn btn-orange" ng-click="save()" href="#">
+    <i class="zmdi zmdi-save"></i> Update
+  </a>
+</div>

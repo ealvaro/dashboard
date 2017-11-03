@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-xs-2 vert-margins"
+       style="margin-top: 15px;"
+       ng-if="uid == undefined">
+    <div class="dropdown">
+      <button class="btn btn-default flat-select"
+              id="dropdownMenu1"
+              data-toggle="dropdown">
+        <span class="badge"
+              style="background-color: grey;">
+          {{results}}
+        </span>
+         Options <span class="caret"></span>
+      </button>
+
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation" class="dropdown-header">Filter By Tool Type</li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="setType('All')" href="#">All</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="setType('Dual Gamma')" href="#">Dual Gamma</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="setType('Pulser Driver')" href="#">Pulser Driver</a></li>
+      </ul>
+    </div>
+  </div>
+  <recent-events-table objects="events"
+               cols="16"
+               headers="headers"
+               klass="'Event'"
+               loading="loading"
+               pages="pages"
+               results="results"
+               search-text="searchText"
+               type="type"
+               uid="uid"
+               export-column-keys="exportColumnKeys"></recent-events-table>
+</div>

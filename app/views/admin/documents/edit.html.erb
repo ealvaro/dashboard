@@ -1,0 +1,11 @@
+<% active_page(:admin) %>
+
+<top-bar ng-init="init('Admin', '<%= @document.name %>')"></top-bar>
+
+<div class="container-fluid">
+  <%= simple_form_for @document, url: admin_document_path(@document),
+                                 method: :put,
+                                 html: { class: 'form-horizontal margin-top' } do |f| %>
+    <%= render partial: "form", locals: {f: f} %>
+  <% end %>
+</div>

@@ -1,0 +1,43 @@
+<h3 class="col-xs-12">My Current Permissions</h3>
+
+<div class="col-xs-12">
+  <h4>Portal</h4>
+</div>
+<div class="col-xs-12">
+  <div class="col-xs-2 compact" ng-repeat="role in user.portal_roles">{{role}} </div>
+</div>
+
+<div class="col-xs-12">
+  <h4>LConfig</h4>
+</div>
+<div class="col-xs-12">
+  <div class="col-xs-2 compact" ng-repeat="role in user.lconfig_roles">{{role}} </div>
+</div>
+
+<h3 class="col-xs-12 margin-top">Change Password</h3>
+
+<div class="col-md-6">
+  <div class="col-md-3 compact-label">
+    Password
+  </div>
+  <div class="col-md-6">
+    <input class="flat-select rounded-border form-control"
+           type="password"
+           ng-model="user.password">
+    <div style="color: red"
+         ng-if="user.errors['password']"
+         ng-repeat="error in user.errors['password']">{{error}}</div>
+  </div>
+  <div style="clear:both"></div>
+  <div class="col-md-3 margin-top compact-label">
+    Confirm Password
+  </div>
+  <div class="col-md-6 margin-top">
+    <input class="flat-select rounded-border form-control"
+           type="password"
+           ng-model="user.password_confirmation">
+    <div style="color: red"
+         ng-if="user.errors['password_confirmation']"
+         ng-repeat="error in user.errors['password_confirmation']">{{error}}</div>
+  </div>
+</div>

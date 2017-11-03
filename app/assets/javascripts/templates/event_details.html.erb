@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-xs-10"><h3><strong>Event Information</strong></h3></div>
+  <div class="col-md-5">
+    <dl class="dl-horizontal">
+      <dt><%= Event.human_attribute_name :board_serial_number %></dt>
+      <dd>{{ event.board_serial_number }}</dd>
+      <dt><%= Event.human_attribute_name :primary_asset_number %></dt>
+      <dd>{{ event.primary_asset_number }}</dd>
+      <dt><%= Event.human_attribute_name :chassis_serial_number %></dt>
+      <dd>{{ event.chassis_serial_number}}</dd>
+      <dt><%= Event.human_attribute_name :secondary_asset_numbers %></dt>
+      <dd>{{ event.secondary_asset }}</dd>
+      <dt><%= Event.human_attribute_name :assets %></dt>
+      <dd>
+        <ul class="list-unstyled" style="margin-bottom: 0" ng-repeat="asset in event.event_assets">
+          <li><a href="{{asset.url}}">{{ asset.name }}</a></li>
+        </ul>
+      </dd>
+      <dt><%= Event.human_attribute_name :memory_usage_level %></dt>
+      <dd>{{ getMemoryUsageLevel(event) }}</dd>
+      <dt><%= Event.human_attribute_name :user_email %></dt>
+      <dd>{{ event.user_email}}</dd>
+      <dt><%= Event.human_attribute_name :region %></dt>
+      <dd>{{ event.region}}</dd>
+      <dt><%= Event.human_attribute_name :job_number %></dt>
+      <dd>{{ event.job_number}}</dd>
+      <dt><%= Event.human_attribute_name :run_number %></dt>
+      <dd>{{ event.run_number}}</dd>
+      <dt><%= Event.human_attribute_name :event_type %></dt>
+      <dd>{{ event.event_type}}</dd>
+      <dt><%= Event.human_attribute_name :reporter_type %></dt>
+      <dd>{{ event.reporter_type}}</dd>
+      <dt><%= Event.human_attribute_name :crossover %></dt>
+      <dd>{{ event.tags.crossover || false}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-5">
+    <dl class="dl-horizontal">
+      <dt><%= Event.human_attribute_name :software_installation_id %></dt>
+      <dd>{{ event.software_installation_id}}</dd>
+      <dt><%= Event.human_attribute_name :reporter_context %></dt>
+      <dd>{{ event.reporter_context}}</dd>
+      <dt><%= Event.human_attribute_name :reporter_version %></dt>
+      <dd>{{ event.reporter_version}}</dd>
+      <dt><%= Event.human_attribute_name :hardware_version %></dt>
+      <dd>{{ event.hardware_version}}</dd>
+      <dt><%= Event.human_attribute_name :board_firmware_version %></dt>
+      <dd>{{ event.board_firmware_version }}</dd>
+      <dt><%= Event.human_attribute_name :last_connected %></dt>
+      <dd>{{ parseDate( event.created_at ) | amDateFormat:'YYYY-MM-DD HH:mm:ss a'}}</dd>
+      <dt><%= Event.human_attribute_name :max_temperature %></dt>
+      <dd>{{ event.max_temperature}}</dd>
+      <dt><%= Event.human_attribute_name :max_shock %></dt>
+      <dd>{{ event.max_shock}}</dd>
+      <dt><%= Event.human_attribute_name :notes %></dt>
+      <dd>{{ event.notes}}</dd>
+      <dt><%= Event.human_attribute_name :created_at %></dt>
+      <dd>{{ event.created_at | amDateFormat:'YYYY-MM-DD HH:mm:ss a'}}</dd>
+      <dt><%= Event.human_attribute_name :time %></dt>
+      <dd>{{ event.time | amDateFormat:'YYYY-MM-DD HH:mm:ss a'}}</dd>
+      <dt><%= Event.human_attribute_name :software_installation_id %></dt>
+      <dd>{{ event.software_installation_id}}</dd>
+      <dt><%= Event.human_attribute_name :team_viewer_id %></dt>
+      <dd>{{ event.team_viewer_id}}</dd>
+      <dt><%= Event.human_attribute_name :team_viewer_password %></dt>
+      <dd>{{ event.team_viewer_password}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-2 text-right">
+    <a class="btn btn-danger" ng-show="events.length > 0" ng-click="hide(event)">Hide</a>
+  </div>
+  <div ng-if="hasConfigs" class="col-xs-12"><h3><strong>Configurations</strong></h3></div>
+  <div ng-repeat="(key, value) in gvConfigsOneDigit" class="col-xs-5">
+    <dl class="dl-horizontal" style="margin-bottom: 0;">
+      <div >
+        <dt>{{key | humanize}}</dt>
+        <dd>{{value}}</dd>
+      </div>
+    </dl>
+  </div>
+  <div ng-repeat="(key, value) in gvConfigsTwoDigit" class="col-xs-5">
+    <dl class="dl-horizontal" style="margin-bottom: 0;">
+      <div >
+        <dt>{{key | humanize}}</dt>
+        <dd>{{value}}</dd>
+      </div>
+    </dl>
+  </div>
+  <div ng-repeat="(key, value) in configs" class="col-xs-5">
+    <dl class="dl-horizontal" style="margin-bottom: 0;">
+      <div >
+        <dt>{{key | humanize}}</dt>
+        <dd>{{value}}</dd>
+      </div>
+    </dl>
+  </div>
+  <div ng-repeat="(key, value) in sifConfigsOneDigit" class="col-xs-5">
+    <dl class="dl-horizontal" style="margin-bottom: 0;">
+      <div >
+        <dt>{{key | humanize}}</dt>
+        <dd>{{value}}</dd>
+      </div>
+    </dl>
+  </div>
+  <div ng-repeat="(key, value) in sifConfigsTwoDigit" class="col-xs-5">
+    <dl class="dl-horizontal" style="margin-bottom: 0;">
+      <div >
+        <dt>{{key | humanize}}</dt>
+        <dd>{{value}}</dd>
+      </div>
+    </dl>
+  </div>
+</div>

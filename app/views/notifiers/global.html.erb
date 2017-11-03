@@ -1,0 +1,26 @@
+<% active_page(:alerts) %>
+
+<%= render partial: 'header' %>
+
+<div class="container-fluid" style="padding-top: 15px">
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="nav nav-tabs active-white" >
+        <%= render partial: 'navbar' %>
+
+        <% if current_user.can_create?(Notifier) %>
+          <a class="pull-right" target="_blank" href="/notifiers/new">
+            <button class="btn btn-orange">
+              <i class="zmdi zmdi-plus"></i>Add New Global Alert
+            </button>
+          </a>
+        <% end %>
+      </ul>
+
+      <div class="tab-content">
+        <%= render partial: 'table',
+            locals: {notifiers: @notifiers, show_buttons: false} %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<% active_page(:jobs) %>
+
+<div class="container-fluid">
+  <h2>MWD Settings for <%= @job.name.upcase %></h2>
+  <% for type, label in @types %>
+    <% setting = @receiver_settings.select{ |rs| rs.type == type}.first %>
+    <div style="margin-top: 10px">
+      <a class="btn btn-orange" role="button" data-toggle="collapse"
+         href="#<%= type %>" aria-expanded="false"
+         aria-controls="<%= type %>">
+        Show <%= label %> Settings
+      </a>
+      <% if setting.present? %>
+        Updated <%= time_ago_in_words setting.updated_at %> ago
+      <% else %>
+        No settings found
+      <% end %>
+      <div class="collapse" id="<%= type %>">
+        <% if setting.present? %>
+          <%= render partial: 'receiver_settings', locals: {setting: setting } %>
+        <% else %>
+          -
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

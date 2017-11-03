@@ -1,0 +1,2 @@
+class LrxSlaveSetting < ReceiverSetting
+end

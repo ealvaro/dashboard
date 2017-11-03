@@ -1,0 +1,9 @@
+<top-bar ng-init="init('Clients', 'New Client')"></top-bar>
+
+<div class="container-fluid">
+  <div class="row vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+  </div>
+
+  <%= render partial: 'form', locals: {client: @client, url: clients_url( @client, action: :create ) } %>
+</div>

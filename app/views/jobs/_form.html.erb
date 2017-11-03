@@ -1,0 +1,27 @@
+<%= simple_form_for job, url: url do |f| %>
+  <div class="col-md-6 margin-top">
+    <div class="row form-group">
+      <div class="col-md-3 compact-label">
+        <%= f.label :name, class: 'text-left' %>
+      </div>
+      <div class="col-md-9">
+        <%= f.input_field :name, class: 'no-border' %>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-3 compact-label">
+        <%= f.label :client, class: 'text-left' %>
+      </div>
+      <div class="col-md-9">
+        <%= f.association :client, label: false,
+                                   input_html: { class: 'no-border' } %>
+      </div>
+    </div>
+
+    <%= link_to 'Cancel', jobs_path,
+                          class: 'btn btn-bisque',
+                          style: 'margin-left: -15px;' %>
+    <%= f.submit class: "btn btn-orange", data: {disable_with: "saving..."} %>
+  </div>
+<% end %>

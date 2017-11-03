@@ -1,0 +1,49 @@
+<div class="top-bar container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div ng-switch="heading">
+
+          <h2 ng-switch-when="notifiers">
+            Alert Tracking System
+              <small ng-if="newNotifier"
+                     style="color: white;">
+                | {{title}}
+              </small>
+          </h2>
+
+          <div class="row info-panel"
+               ng-switch-when="active_job">
+            <div class="col-xs-2">
+              <span class="block">Job</span>
+              <span>{{jobNumber.toUpperCase()}}</span>
+            </div>
+            <div class="col-xs-3">
+              <span class="block">Client</span>
+              <span>{{client}}</span>
+            </div>
+            <div class="col-xs-3">
+              <span class="block">Well</span>
+              <span>{{well}}</span>
+            </div>
+            <div class="col-xs-3">
+              <span class="block">Rig</span>
+              <span>{{rig}}</span>
+            </div>
+            <div class="col-xs-1">
+              <i class="red-text zmdi zmdi-alert-triangle" ng-if="alerts"></i>
+            </div>
+          </div>
+
+          <h2 ng-switch-default>
+            {{heading}}
+            <small ng-if="subtitle"
+                   style="color: white;">
+              | {{subtitle}}
+            </small>
+          </h2>
+
+        </div>
+      </div>
+    </div>
+  </div>

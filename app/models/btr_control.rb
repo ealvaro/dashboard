@@ -1,0 +1,2 @@
+class BtrControl < Receiver
+end

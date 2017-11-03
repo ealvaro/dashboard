@@ -1,0 +1,65 @@
+<top-bar ng-init="init('Clients', '<%= @client.name.try(:capitalize) %>')"></top-bar>
+
+<div class="row">
+  <div class="col-xs-12 vert-margins">
+    <%= render partial: 'client_info/navbar' %>
+
+    <div class="btn-group pull-right margin-right">
+      <%= link_to edit_client_path( @client ), class: "btn btn-primary" do %>
+        <i class="zmdi zmdi-edit"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-xs-12 thumbnail">
+        <% %i(address_street address_city address_state zip_code country).each do |field| %>
+          <% unless @client.send( field ).blank? %>
+            <div class="col-xs-3">
+              <strong><%= Client.human_attribute_name( field ) %></strong>
+            </div>
+            <div class="col-xs-3">
+              <%= @client.send(field) %>
+            </div>
+          <% end %>
+        <% end %>
+        <% %i(updated_at created_at).each do |field| %>
+          <% unless( @client.send( field ).blank? || !current_user.has_role?( :superuser ) )%>
+            <div class="col-xs-3">
+              <strong><%= Client.human_attribute_name( field ) %></strong>
+            </div>
+            <div class="col-xs-3">
+              <%= @client.send(field).to_s(:db) %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <h2><%= Job.model_name.human.pluralize %></h2>
+    </div>
+    <div class="col-xs-12">
+      <table class="table grey-white">
+        <tr>
+          <th><%= Job.model_name.human %></th>
+          <th></th>
+        </tr>
+        <% for job in @client.jobs.order(name: :asc) %>
+          <tr>
+            <td>
+              <%= link_to job.name, job_path(job) %>
+            </td>
+            <td class="text-right">
+              <a href="<%= edit_job_path(job) %>" class="btn btn-default">
+                <i class="zmdi zmdi-edit"></i>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

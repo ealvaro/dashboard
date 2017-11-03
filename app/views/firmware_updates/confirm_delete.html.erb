@@ -1,0 +1,17 @@
+<% active_page(:firmware) %>
+<ul class="nav nav-pills">
+  <%= content_tag(:li, link_to("Overview", overview_firmware_updates_path)) %>
+  <%= content_tag(:li, link_to("Create", new_firmware_update_path)) %>
+  <%= content_tag(:li, link_to("Edit", new_firmware_update_path), class: "active") %>
+</ul>
+
+
+<div class="confirm">
+  <p class="text-center lead">Are you sure you want to remove this firmware from service?</p>
+  <div class="text-center">
+    <%= link_to "Yes", @firmware_update, method: :delete, class: "btn btn-large btn-danger yes-no"%>
+    <%= link_to "No", [:edit, @firmware_update], class: "btn btn-large btn-success yes-no"%>
+  </p>
+
+</div>
+
