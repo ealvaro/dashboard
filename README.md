@@ -14,7 +14,7 @@ Stack
 * no background jobs
 * Stores files on S3
 * postgresql on the backend
-* hosted on heroku
+* hosted on heroku (http://tracker-wolf.herokuapp.com)
 
 Notes
 -----
