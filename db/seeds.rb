@@ -24,8 +24,15 @@ User.create name: 'Josh', email:'joshua.wolfe@erdosmiller.com', password: 'fakep
 User.create name: 'Ashley Herron', email:'ashley.herron@erdosmiller.com', password: 'em1mosfet', password_confirmation: 'em1mosfet', roles: Role.all
 User.create name: 'Paul', email:'paul.nesbitt@erdosmiller.com', password: '123', password_confirmation: '123', roles: Role.all
 User.create name: 'Matt', email:'matthew.miller@erdosmiller.com', password: '123456', password_confirmation: '123456', roles: Role.all
+User.create name: 'Alvaro Escobar', email:'alvaro.escobar@erdosmiller.com', password: '123456', password_confirmation: '123456', roles: Role.all
+Rig.create name: 'EMRig'
+Rig.create name: 'Patterson 124'
+Client.create name: 'American Energy'
+Job.create name: 'AH-151020'
+
 
 dpc = DefaultPricingScheme.new()
+
 dpc.max_temperature = { '311' => { 'amount' => 30000_00, 'description' => "Temperature over 311" }, '319' => { 'amount' => 55000_00, 'description' => "Temperature over 319" } }
 dpc.max_shock = { '6.0' => { 'amount' => 30000_00, 'description' => "Shock over 6" }, '9.0' => { 'amount' => 55000_00, 'description' => "Shock over 9" } }
 dpc.max_vibe = { '6.0' => { 'amount' => 30000_00, 'description' => "Vibe over 6" }, '9.0' => { 'amount' => 55000_00, 'description' => "Vibe over 9" } }

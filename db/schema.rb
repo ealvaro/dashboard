@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20160201173940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
-  enable_extension "pg_stat_statements"
 
   create_table "alerts", force: true do |t|
     t.string   "alertable_type"
@@ -360,7 +359,6 @@ ActiveRecord::Schema.define(version: 20160201173940) do
     t.integer  "sif_bin_1_max5"
     t.integer  "sif_bin_2_max5"
     t.integer  "sif_bin_3_max5"
-    t.integer  "sif_bin_4_max5"
     t.integer  "sif_bin_0_max30"
     t.integer  "sif_bin_1_max30"
     t.integer  "sif_bin_2_max30"
@@ -390,7 +388,6 @@ ActiveRecord::Schema.define(version: 20160201173940) do
     t.integer  "sif_bin_26_max30"
     t.integer  "sif_bin_27_max30"
     t.integer  "sif_bin_28_max30"
-    t.integer  "sif_bin_29_max30"
     t.integer  "qbus_sleep_time"
     t.float    "ref_temp"
     t.float    "logging_period_in_secs"
@@ -680,7 +677,6 @@ ActiveRecord::Schema.define(version: 20160201173940) do
     t.integer  "well_id"
     t.integer  "rig_id"
     t.datetime "occurred"
-    t.integer  "number"
     t.integer  "invoice_id"
     t.integer  "max_temperature_as_billed"
     t.float    "item_start_hrs_as_billed"
@@ -704,6 +700,7 @@ ActiveRecord::Schema.define(version: 20160201173940) do
     t.json     "damages"
     t.float    "mwd_hours_as_billed"
     t.float    "dd_hours_as_billed"
+    t.integer  "number"
     t.float    "max_shock_as_billed"
     t.float    "max_vibe_as_billed"
     t.integer  "shock_warnings_as_billed"
@@ -847,7 +844,7 @@ ActiveRecord::Schema.define(version: 20160201173940) do
     t.string   "backhaul"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.hstore   "status_history",      default: [], array: true
+    t.hstore   "status_history",      default: "{}", array: true
     t.json     "status",              default: {}
     t.string   "notes"
   end
@@ -937,9 +934,10 @@ ActiveRecord::Schema.define(version: 20160201173940) do
     t.boolean  "bat2"
     t.float    "low_pulse_threshold"
     t.datetime "published_at"
-    t.float    "average_pulse"
     t.float    "power"
     t.float    "frequency"
+    t.json     "filtered_waveform_data"
+    t.float    "average_pulse"
     t.integer  "battery_number"
     t.float    "annular_pressure"
     t.float    "bore_pressure"

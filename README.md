@@ -1,8 +1,7 @@
 Dashboard
 =======
 
-Dashboard is a web application that tracks software installations and updates from
-tools out in the field.
+Dashboard is a web application that tracks real-time updates and software installations from tools out in the field.
 
 
 Stack
@@ -32,12 +31,12 @@ Getting Started
 ---------------
 
 0. Clone
+0. gem install bundler
 0. cp .env.sample to .env and fill out
 0. cp database.yml.sample to database.yml
-0. use ruby 2.2.2
-0. bundle
+0. use ruby 2.2.2 (or have `rvm` installed and it will pick the right ruby version)
+0. `bundle install`
 0. `spring rake db:create db:migrate db:seed`
-0. `spring rake` to load all tests
 
 Api Call Examples
 -----------------
