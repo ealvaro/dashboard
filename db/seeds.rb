@@ -25,11 +25,17 @@ User.create name: 'Ashley Herron', email:'ashley.herron@erdosmiller.com', passwo
 User.create name: 'Paul', email:'paul.nesbitt@erdosmiller.com', password: '123', password_confirmation: '123', roles: Role.all
 User.create name: 'Matt', email:'matthew.miller@erdosmiller.com', password: '123456', password_confirmation: '123456', roles: Role.all
 User.create name: 'Alvaro Escobar', email:'alvaro.escobar@erdosmiller.com', password: '123456', password_confirmation: '123456', roles: Role.all
-Rig.create name: 'EMRig'
+r = Rig.create name: 'EMRig'
 Rig.create name: 'Patterson 124'
-Client.create name: 'American Energy'
-Job.create name: 'AH-151020'
-
+c = Client.create name: 'American Energy'
+j = Job.create name: 'AH-151020', client: c, cache: {"recent_updates":{"BtrReceiverUpdate":[],"LeamReceiverUpdate":[2808494,2808496,2808497,2827147],"LoggerUpdate":[],"EmReceiverUpdate":[]}}
+w = Well.create name: 'Area 51'
+Well.create name: 'Cyclone 33'
+rn = Run.create job: j, well: w, rig: r
+Gamma.create run: rn, measured_depth: 10, count: 98, edited_count: 98
+Gamma.create run: rn, measured_depth: 20, count: 19, edited_count: 19
+Gamma.create run: rn, measured_depth: 30, count: 21, edited_count: 20
+Receiver.create uid: '4fa39d7057b2fac8'
 
 dpc = DefaultPricingScheme.new()
 
