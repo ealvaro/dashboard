@@ -36,6 +36,7 @@ Gamma.create run: rn, measured_depth: 10, count: 98, edited_count: 98
 Gamma.create run: rn, measured_depth: 20, count: 19, edited_count: 19
 Gamma.create run: rn, measured_depth: 30, count: 21, edited_count: 20
 Receiver.create uid: '4fa39d7057b2fac8'
+Formation.create name: 'big ole'
 
 dpc = DefaultPricingScheme.new()
 
