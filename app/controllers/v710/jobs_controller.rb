@@ -65,13 +65,13 @@ class V710::JobsController < ApplicationController
 
   def test_receiver_btr
     @job = Job.find(params[:id])
-    TestReceiver.new(@job).publish_notify(true)
+    TestReceiver.new(@job).publish_notify("btr")
     render json: { message: "BTR test events sent" }
   end
 
   def test_receiver_leam
     @job = Job.find(params[:id])
-    TestReceiver.new(@job).publish_notify(false)
+    TestReceiver.new(@job).publish_notify("leam")
     render json: { message: "Leam receiver test events sent" }
   end
 end
