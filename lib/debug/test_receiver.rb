@@ -15,7 +15,7 @@ class TestReceiver
     end
   end
 
-  def publish_notify(receiver_prefix, type = "core", version = "760")
+  def publish_notify(receiver_prefix, type = "core", version = "730")
     # receiver_prefix: leam, btr, em
     # type: core, fft, pulse
     # version: 730, 731, 744, 760

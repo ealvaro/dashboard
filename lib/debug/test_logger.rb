@@ -7,9 +7,15 @@ class TestLogger
     @job = job
   end
 
+  def url
+    if Rails.env.development?
+      "http://localhost:3000/v730/logger_updates"
+    else
+      "http://tracker-wolf.herokuapp.com/v730/logger_updates"
+    end
+  end
+
   def publish_notify
-    url = "http://localhost:3000/v730/logger_updates" if Rails.env.development?
-    url ||= "http://tracker-wolf.herokuapp.com/v730/logger_updates" unless Rails.env.development?
     call_api(url, new_data)
   end
 
